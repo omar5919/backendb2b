@@ -51,7 +51,5 @@ public class SeguridadRest extends  JPACustomRest<cliente, Integer>{
 			HttpHeaders headers = this.returnErrorHeaders(e);
 			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
 		}
-
 	}
-
 }
