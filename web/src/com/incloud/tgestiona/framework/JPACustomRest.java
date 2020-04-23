@@ -74,7 +74,7 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	public T Save(T entity) {
 		return mainrepository.save(entity);
 	}
-	
+
 	private Iterable<T> findAll() {
 		CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
 		CriteriaQuery<T> criteriaQuery = cb.createQuery(type);
@@ -94,7 +94,7 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<T> query = builder.createQuery(type);
 		Root<T> root = query.from(type);
-		query.select(root).where(builder.like(root.<String>get(attributeName), "%"+text ));
+		query.select(root).where(builder.like(root.<String>get(attributeName), "%" + text));
 		TypedQuery<T> q = entityManager.createQuery(query);
 		Stream<T> listaStream = q.getResultStream();
 		return listaStream.collect(Collectors.toList());
@@ -311,6 +311,22 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 					.orElse(new ResponseEntity<>(HttpStatus.NO_CONTENT));
 		} catch (Exception e) {
 			throw new RuntimeException(getMensageErrorExceptionDebug(e));
+		}
+	}
+
+	/************************/
+	/* Instancia de Bean */
+	/************************/
+	// protected abstract T createInstance();
+
+	private T createInstance() {
+		System.out.println("new Instancia");
+		try {
+			Type sooper = getClass().getGenericSuperclass();
+			Type t = ((ParameterizedType) sooper).getActualTypeArguments()[0];
+			return (T) (Class.forName(t.toString()).newInstance());
+		} catch (Exception e) {
+			return null;
 		}
 	}
 
