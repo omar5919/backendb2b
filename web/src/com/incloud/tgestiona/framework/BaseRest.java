@@ -4,7 +4,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
-public abstract class BaseRest {
+import com.incloud.tgestiona.util.MessagesUtils;
+
+public abstract class BaseRest extends MessagesUtils  {
 
 	protected boolean devuelveRuntimeException = true;
 	private final String CONSTANTE_SEPARADOR = " / ";

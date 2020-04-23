@@ -12,6 +12,7 @@ import org.hibernate.service.spi.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -30,6 +31,10 @@ public abstract class Auditoria {
 	private final String mensajeOK = "OK";
 	private final int MAXIMO_CARACTERES_SALIDA = 3950;
 
+	
+    @Autowired
+    private MessageSource messageSource;
+    
 	@Autowired
 	private AppProcesoLogServiceImpl appProcesoLogService;
 
@@ -140,6 +145,7 @@ public abstract class Auditoria {
 		} catch (ServiceException ex) {
 
 			logger.error("Log logVentaExecutionTime - service exception 03");
+			
 			// if(ex.getArgs() == null){
 			// errorMensaje = messageSource.getMessage(ex.getKeyMessage(), new
 			// Object[]{},null);
