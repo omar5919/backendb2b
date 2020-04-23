@@ -37,6 +37,7 @@ public class SeguridadRest extends  JPACustomRest<Usuarios, Integer>{
 			throws Exception {
 		log.info(String.format("usuario ---> %s", u.getUsuario()));
 		log.info(String.format("clave ---> %s", u.getClave()));
+		log.info(String.format("clave ---> %s", u.getClave()));
 		
 
 		try {
