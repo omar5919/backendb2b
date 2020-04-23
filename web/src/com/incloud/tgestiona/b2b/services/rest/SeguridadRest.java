@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.incloud.tgestiona.b2b.model.Usuarios;
-import com.incloud.tgestiona.b2b.model.isis.cliente;
 import com.incloud.tgestiona.b2b.servicesImpl.SeguridadServiceImpl;
 import com.incloud.tgestiona.framework.JPACustomRest;
 
@@ -24,7 +23,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/seguridad")
-public class SeguridadRest extends  JPACustomRest<cliente, Integer>{
+public class SeguridadRest extends  JPACustomRest<Usuarios, Integer>{
 
 	private final Logger log = LoggerFactory.getLogger(OfertaRest.class);
 
@@ -38,6 +37,9 @@ public class SeguridadRest extends  JPACustomRest<cliente, Integer>{
 			throws Exception {
 		log.info(String.format("usuario ---> %s", u.getUsuario()));
 		log.info(String.format("clave ---> %s", u.getClave()));
+		log.info(String.format("clave ---> %s", u.getClave()));
+		log.info(String.format("clave ---> %s", u.getClave()));
+		
 
 		try {
 			return Optional.ofNullable(seguridadService.findByCredenciales(u.getUsuario(), u.getClave()))

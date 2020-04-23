@@ -11,4 +11,6 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 @RequestMapping("/api/estadoRest")
 public class EstadoRest extends JPACustomRest<Estado, Integer> {
 
+
+
 }

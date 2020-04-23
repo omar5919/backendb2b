@@ -10,4 +10,5 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 @RequestMapping("/api/tipoCircuito")
 public class TipoCircuitoRest extends JPACustomRest<TipoCircuito, Integer> {
 
+
 }

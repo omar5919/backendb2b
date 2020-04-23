@@ -10,4 +10,5 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 @RequestMapping("/api/condicicionEquipoRest")
 public class CondicicionEquipoRest extends JPACustomRest<CondicicionEquipo, Integer> {
 
+
 }

@@ -10,4 +10,5 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 @RequestMapping("/api/moneda")
 public class MonedaRest extends JPACustomRest<Moneda, Integer> {
 
+
 }

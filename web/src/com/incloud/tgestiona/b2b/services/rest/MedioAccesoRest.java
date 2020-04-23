@@ -10,7 +10,6 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 @RestController
 @RequestMapping("/api/medioAcceso")
 public  class MedioAccesoRest extends JPACustomRest<MedioAcceso, Integer>  {
-	 
 
 
 }

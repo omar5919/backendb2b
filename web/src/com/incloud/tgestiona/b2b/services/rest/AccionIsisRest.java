@@ -8,6 +8,6 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 
 @RestController
 @RequestMapping("/api/accionIsis")
-public class AccionIsisRest extends JPACustomRest<AccionIsis, Integer> {
+public abstract class AccionIsisRest extends JPACustomRest<AccionIsis, Integer> {
 
 }

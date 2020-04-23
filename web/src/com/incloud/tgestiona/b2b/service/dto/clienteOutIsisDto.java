@@ -7,7 +7,7 @@ import lombok.ToString;
 @Data
 @ToString
 @EqualsAndHashCode
-public class clienteIsisDto {
+public class clienteOutIsisDto {
 
 	private String msg;
 	private long totalRecord;

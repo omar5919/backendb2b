@@ -11,7 +11,6 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 @RestController
 @RequestMapping("/api/complejidad")
 public  class ComplejidadRest extends JPACustomRest<Complejidad, Integer> {
-
 	
 
 }

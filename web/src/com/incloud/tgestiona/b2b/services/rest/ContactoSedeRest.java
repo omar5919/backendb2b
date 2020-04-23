@@ -10,4 +10,5 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 @RequestMapping("/api/contactoSede")
 public class ContactoSedeRest extends JPACustomRest<ContactoSede, Integer> {
 
+
 }

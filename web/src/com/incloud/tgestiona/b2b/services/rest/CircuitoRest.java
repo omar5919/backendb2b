@@ -10,5 +10,7 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 @RequestMapping("/api/circuito")
 public  class CircuitoRest extends JPACustomRest<Circuito, Integer> {
 
+ 
+
 	
 }

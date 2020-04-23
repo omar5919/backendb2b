@@ -74,7 +74,7 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	public T Save(T entity) {
 		return mainrepository.save(entity);
 	}
-	
+
 	private Iterable<T> findAll() {
 		CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
 		CriteriaQuery<T> criteriaQuery = cb.createQuery(type);
@@ -94,7 +94,7 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<T> query = builder.createQuery(type);
 		Root<T> root = query.from(type);
-		query.select(root).where(builder.like(root.<String>get(attributeName), "%"+text ));
+		query.select(root).where(builder.like(root.<String>get(attributeName), "%" + text));
 		TypedQuery<T> q = entityManager.createQuery(query);
 		Stream<T> listaStream = q.getResultStream();
 		return listaStream.collect(Collectors.toList());
@@ -197,20 +197,21 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	/**
 	 * Find by Id
 	 */
-	/*
-	 * @ApiOperation(value = "Busca registro de tipo <T> en base al id enviado",
-	 * produces = "application/json")
-	 * 
-	 * @GetMapping(value = "/findById/{id}", produces = APPLICATION_JSON_VALUE)
-	 * public ResponseEntity<T> findById(@PathVariable I id) throws
-	 * URISyntaxException { try { return
-	 * Optional.ofNullable(findOne(id).get()).map(bean -> new ResponseEntity<>(bean,
-	 * HttpStatus.OK)) .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND)); } catch
-	 * (Exception e) { if (this.devuelveRuntimeException) { throw new
-	 * RuntimeException(getMensageErrorExceptionDebug(e)); } HttpHeaders headers =
-	 * this.devuelveErrorHeaders(e); return new ResponseEntity<>(headers,
-	 * HttpStatus.BAD_REQUEST); } }
-	 */
+
+	@ApiOperation(value = "Busca registro de tipo <T> en base al id enviado", produces = "application/json")
+	@GetMapping(value = "/findById/{id}", produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<T> findById(@PathVariable I id) throws URISyntaxException {
+		try {
+			return Optional.ofNullable(findOne(id).get()).map(bean -> new ResponseEntity<>(bean, HttpStatus.OK))
+					.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+		} catch (Exception e) {
+			if (this.devuelveRuntimeException) {
+				throw new RuntimeException(getMensageErrorExceptionDebug(e));
+			}
+			HttpHeaders headers = this.devuelveErrorHeaders(e);
+			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
+		}
+	}
 
 	@ApiOperation(value = "Devuelve lista de registros en base al Campo y su valor (Left Contains)", produces = "application/json")
 	@GetMapping(value = "/findByFieldLeftContainsText/{attributeName}/{valor}", produces = APPLICATION_JSON_VALUE)
@@ -261,7 +262,7 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	@DeleteMapping(value = "/deleteById/{id}", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> delete(@PathVariable I id) throws URISyntaxException {
 		try {
-			this.delete(id);
+			mainrepository.deleteById(id);
 			return ResponseEntity.ok().build();
 		} catch (Exception e) {
 			if (this.devuelveRuntimeException) {
@@ -278,8 +279,7 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	@DeleteMapping(value = "/deleteAll", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<T> deleteAll() throws URISyntaxException {
 		try {
-			this.mainrepository.deleteAll();
-			this.mainrepository.flush();
+			mainrepository.deleteAll();
 			return ResponseEntity.ok().build();
 		} catch (Exception e) {
 			if (this.devuelveRuntimeException) {
@@ -311,6 +311,22 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 					.orElse(new ResponseEntity<>(HttpStatus.NO_CONTENT));
 		} catch (Exception e) {
 			throw new RuntimeException(getMensageErrorExceptionDebug(e));
+		}
+	}
+
+	/************************/
+	/* new instance of Bean */
+	/************************/
+	// protected abstract T createInstance();
+
+	private T createInstance() {
+		System.out.println("new Instancia");
+		try {
+			Type sooper = getClass().getGenericSuperclass();
+			Type t = ((ParameterizedType) sooper).getActualTypeArguments()[0];
+			return (T) (Class.forName(t.toString()).newInstance());
+		} catch (Exception e) {
+			return null;
 		}
 	}
 
