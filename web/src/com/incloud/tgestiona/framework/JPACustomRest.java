@@ -197,20 +197,21 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	/**
 	 * Find by Id
 	 */
-	/*
-	 * @ApiOperation(value = "Busca registro de tipo <T> en base al id enviado",
-	 * produces = "application/json")
-	 * 
-	 * @GetMapping(value = "/findById/{id}", produces = APPLICATION_JSON_VALUE)
-	 * public ResponseEntity<T> findById(@PathVariable I id) throws
-	 * URISyntaxException { try { return
-	 * Optional.ofNullable(findOne(id).get()).map(bean -> new ResponseEntity<>(bean,
-	 * HttpStatus.OK)) .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND)); } catch
-	 * (Exception e) { if (this.devuelveRuntimeException) { throw new
-	 * RuntimeException(getMensageErrorExceptionDebug(e)); } HttpHeaders headers =
-	 * this.devuelveErrorHeaders(e); return new ResponseEntity<>(headers,
-	 * HttpStatus.BAD_REQUEST); } }
-	 */
+
+	@ApiOperation(value = "Busca registro de tipo <T> en base al id enviado", produces = "application/json")
+	@GetMapping(value = "/findById/{id}", produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<T> findById(@PathVariable I id) throws URISyntaxException {
+		try {
+			return Optional.ofNullable(findOne(id).get()).map(bean -> new ResponseEntity<>(bean, HttpStatus.OK))
+					.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+		} catch (Exception e) {
+			if (this.devuelveRuntimeException) {
+				throw new RuntimeException(getMensageErrorExceptionDebug(e));
+			}
+			HttpHeaders headers = this.devuelveErrorHeaders(e);
+			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
+		}
+	}
 
 	@ApiOperation(value = "Devuelve lista de registros en base al Campo y su valor (Left Contains)", produces = "application/json")
 	@GetMapping(value = "/findByFieldLeftContainsText/{attributeName}/{valor}", produces = APPLICATION_JSON_VALUE)
@@ -261,7 +262,7 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	@DeleteMapping(value = "/deleteById/{id}", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> delete(@PathVariable I id) throws URISyntaxException {
 		try {
-			this.delete(id);
+			mainrepository.deleteById(id);
 			return ResponseEntity.ok().build();
 		} catch (Exception e) {
 			if (this.devuelveRuntimeException) {
@@ -278,8 +279,7 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	@DeleteMapping(value = "/deleteAll", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<T> deleteAll() throws URISyntaxException {
 		try {
-			this.mainrepository.deleteAll();
-			this.mainrepository.flush();
+			mainrepository.deleteAll();
 			return ResponseEntity.ok().build();
 		} catch (Exception e) {
 			if (this.devuelveRuntimeException) {
@@ -315,7 +315,7 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	}
 
 	/************************/
-	/* Instancia de Bean */
+	/* new instance of Bean */
 	/************************/
 	// protected abstract T createInstance();
 
