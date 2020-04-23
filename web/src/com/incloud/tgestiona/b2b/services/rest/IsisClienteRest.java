@@ -72,7 +72,7 @@ public class IsisClienteRest extends JPACustomRest<cliente, Integer> {
 
 			try {
 
-				entity = new cliente();
+			 	entity = new cliente();
 				entity.setClcodapli(data[0].trim());
 				entity.setClnomcli(data[1].trim());
 				entity.setClapecli(data[2].trim());
