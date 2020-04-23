@@ -40,7 +40,7 @@ public class Application extends SpringBootServletInitializer {
 		log.info(String.format("\n\n    _____\\    _______\n" + "   /      \\  |      /\\\n" + "  /_______/  |_____/  \\\n"
 				+ " |   \\   /        /   /\n" + "  \\   \\         \\/   /\n" + "   \\  /          \\__/_\n"
 				+ "    \\/ ____    /\\\n" + "      /  \\    /  \\\n" + "     /\\   \\  /   /\n"
-				+ "       \\   \\/   /\n" + "        \\___\\__/\n\n Business 2 Business - Provisioner \n\n ", context));
+				+ "       \\   \\/   /\n" + "        \\___\\__/\n\n:: Business 2 Business - Provisioner :: \n\n ", context));
 	}
 
 	@Bean

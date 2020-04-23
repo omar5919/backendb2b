@@ -262,7 +262,8 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	@DeleteMapping(value = "/deleteById/{id}", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> delete(@PathVariable I id) throws URISyntaxException {
 		try {
-			mainrepository.deleteById(id);
+			T entity = mainrepository.findById(id).get();
+			mainrepository.delete(entity);
 			return ResponseEntity.ok().build();
 		} catch (Exception e) {
 			if (this.devuelveRuntimeException) {
@@ -279,7 +280,8 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	@DeleteMapping(value = "/deleteAll", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<T> deleteAll() throws URISyntaxException {
 		try {
-			mainrepository.deleteAll();
+			List<T> list = mainrepository.findAll();
+			mainrepository.deleteAll(list);
 			return ResponseEntity.ok().build();
 		} catch (Exception e) {
 			if (this.devuelveRuntimeException) {

@@ -20,6 +20,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +42,7 @@ public class IsisClienteRest extends JPACustomRest<cliente, Integer> {
 
 	@ApiOperation(value = "Adjuntar archivo para ISIS-Cliente", produces = "application/json")
 	@PostMapping(value = "/uploadCVS", produces = APPLICATION_JSON_VALUE)
+	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<clienteOutIsisDto> uploadCVS(@RequestBody @Valid clienteInIsisDto clienteInputParam,
 			BindingResult bindingResult) throws IOException {
 
