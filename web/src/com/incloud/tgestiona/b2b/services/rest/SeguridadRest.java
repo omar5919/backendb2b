@@ -37,6 +37,7 @@ public class SeguridadRest extends  JPACustomRest<Usuarios, Integer>{
 			throws Exception {
 		log.info(String.format("usuario ---> %s", u.getUsuario()));
 		log.info(String.format("clave ---> %s", u.getClave()));
+		
 
 		try {
 			return Optional.ofNullable(seguridadService.findByCredenciales(u.getUsuario(), u.getClave()))
