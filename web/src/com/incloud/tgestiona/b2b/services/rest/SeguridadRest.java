@@ -9,7 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +32,7 @@ public class SeguridadRest extends  JPACustomRest<Usuarios, Integer>{
 
 	@ApiOperation(value = "Valida las credenciales del usuario si existe en bd", produces = "application/json")
 	@RequestMapping(value = "/autenticacion", method = RequestMethod.POST, headers = "Accept=application/json")
-	/// @CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	ResponseEntity<Optional<Usuarios>> autenticacion(@RequestBody Usuarios u, BindingResult bindingResult)
 			throws Exception {
 		log.info(String.format("usuario ---> %s", u.getUsuario()));
