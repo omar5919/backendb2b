@@ -25,7 +25,7 @@ import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-public abstract class AccionIsisRest extends com.incloud.tgestiona.util.MessagesUtils {
+public abstract class AccionIsisRest  extends com.incloud.tgestiona.util.MessagesUtils {
 
 	protected boolean devuelveRuntimeException = true;
 
