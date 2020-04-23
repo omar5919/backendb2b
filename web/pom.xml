@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.2.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<groupId>com.pe.tgestiona.b2b</groupId>
+	<artifactId>spring-boot</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>spring-boot</name>
+	<description>TEMPRESA- B2B</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
+
+	<profiles>
+		<!-- AZURE Cloud Platform -->
+		<!-- Self-contained JAR -->
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<packaging.type>jar</packaging.type>
+			</properties>
+
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-web</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.projectlombok</groupId>
+					<artifactId>lombok</artifactId>
+					<scope>provided</scope>
+				</dependency>
+
+				<!-- io.springfox setup -->
+				<dependency>
+					<groupId>io.springfox</groupId>
+					<artifactId>springfox-swagger-ui</artifactId>
+					<version>3.0.0-SNAPSHOT</version>
+				</dependency>
+
+				<dependency>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+				</dependency>
+
+				<dependency>
+					<groupId>io.springfox</groupId>
+					<artifactId>springfox-swagger2</artifactId>
+					<version>3.0.0-SNAPSHOT</version>
+				</dependency>
+
+				<dependency>
+					<groupId>io.springfox</groupId>
+					<artifactId>springfox-data-rest</artifactId>
+					<version>3.0.0-SNAPSHOT</version>
+				</dependency>
+
+				<dependency>
+					<groupId>net.sf.supercsv</groupId>
+					<artifactId>super-csv</artifactId>
+					<version>2.4.0</version>
+				</dependency>
+
+
+
+
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-actuator</artifactId>
+				</dependency>
+			</dependencies>
+
+			<!-- <build> <plugins> <plugin> <artifactId>maven-resources-plugin</artifactId> 
+				<executions> <execution> <id>copy-resources</id> <phase>validate</phase> 
+				<goals> <goal>copy-resources</goal> </goals> <configuration> <outputDirectory>${basedir}/target/classes/static</outputDirectory> 
+				<resources> <resource> <directory>src/main/webapp</directory> <filtering>true</filtering> 
+				</resource> </resources> </configuration> </execution> </executions> </plugin> 
+				</plugins> </build> -->
+
+		</profile>
+	</profiles>
+
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.directory.studio</groupId>
+			<artifactId>org.apache.commons.lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.10.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- io.springfox setup -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>3.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>3.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-data-rest</artifactId>
+			<version>3.0.0-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+
+
+	<repositories>
+
+		<repository>
+			<id>jcenter-snapshots</id>
+			<name>jcenter</name>
+			<url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
+		</repository>
+
+		<repository>
+			<id>maven Repo1</id>
+			<name>maven Repo1</name>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
+		<repository>
+			<id>Sonatype repository</id>
+			<name>Sonatype's Maven repository</name>
+			<url>http://oss.sonatype.org/content/groups/public</url>
+		</repository>
+
+	</repositories>
+
+	<build>
+
+		<finalName>${project.artifactId}-${project.version}</finalName>
+		<sourceDirectory>src</sourceDirectory>
+
+		<resources>
+			<resource>
+				<directory>${project.basedir}/resources</directory>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- <build> <finalName>b2bbackend</finalName> <sourceDirectory>src</sourceDirectory> 
+		<plugins> <plugin> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-maven-plugin</artifactId> 
+		<executions> <execution> <id>build-info</id> <goals> <goal>build-info</goal> 
+		</goals> </execution> </executions> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-compiler-plugin</artifactId> <configuration> <source>1.8</source> 
+		<target>1.8</target> </configuration> </plugin> <plugin> <artifactId>maven-compiler-plugin</artifactId> 
+		<configuration> <source>1.8</source> <target>1.8</target> </configuration> 
+		</plugin> <plugin> <groupId>com.microsoft.azure</groupId> <artifactId>azure-webapp-maven-plugin</artifactId> 
+		<version>1.8.0</version> <configuration> <schemaVersion>V2</schemaVersion> 
+		<resourceGroup>web</resourceGroup> <appName>web</appName> <region>westeurope</region> 
+		<pricingTier>P1V2</pricingTier> <runtime> <os>linux</os> <javaVersion>jre8</javaVersion> 
+		<webContainer>jre8</webContainer> </runtime> <appSettings> <property> <name>JAVA_OPTS</name> 
+		<value>-Dserver.port=80</value> </property> </appSettings> <deployment> <resources> 
+		<resource> <directory>${project.basedir}/target</directory> <includes> <include>*.jar</include> 
+		</includes> </resource> </resources> </deployment> </configuration> </plugin> 
+		<plugin> <groupId>com.microsoft.azure</groupId> <artifactId>azure-webapp-maven-plugin</artifactId> 
+		<version>1.9.0</version> <configuration> <schemaVersion>V2</schemaVersion> 
+		<resourceGroup>web-1584128232515-rg</resourceGroup> <appName>web-1584128232515</appName> 
+		<pricingTier>P1v2</pricingTier> <region>westeurope</region> <runtime> <os>linux</os> 
+		<javaVersion>jre8</javaVersion> <webContainer>TOMCAT 8.5</webContainer> </runtime> 
+		<deployment> <resources> <resource> <directory>${project.basedir}/target</directory> 
+		<includes> <include>*.war</include> </includes> </resource> </resources> 
+		</deployment> </configuration> </plugin> <plugin> <artifactId>maven-war-plugin</artifactId> 
+		<configuration> <warSourceDirectory>WebContent</warSourceDirectory> </configuration> 
+		</plugin> </plugins> </build> -->
+
+</project>
