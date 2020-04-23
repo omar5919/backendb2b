@@ -10,4 +10,5 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 @RequestMapping("/api/tipoContrato")
 public class TipoContratoRest extends JPACustomRest<TipoContrato, Integer> {
 
+
 }

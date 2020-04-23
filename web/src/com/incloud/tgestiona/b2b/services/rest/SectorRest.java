@@ -10,4 +10,5 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 @RequestMapping("/api/sector")
 public class SectorRest extends JPACustomRest<Sector, Integer> {
 
+
 }

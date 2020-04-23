@@ -9,4 +9,5 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 @RequestMapping("/api/oferta")
 public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
 
+
 }

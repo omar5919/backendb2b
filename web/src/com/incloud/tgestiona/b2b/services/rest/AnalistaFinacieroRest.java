@@ -9,6 +9,9 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 @RestController
 @RequestMapping("/api/analistaFinaciero")
 public  class AnalistaFinacieroRest extends JPACustomRest<AnalistaFinaciero,Integer>{
+
+ 
+	 
  
 
 }
