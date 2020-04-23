@@ -1,5 +1,4 @@
 
-
 import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
@@ -38,7 +37,10 @@ public class Application extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		context = SpringApplication.run(Application.class, args);
-		log.info(String.format("\n ********* Init. B2B BackEnd *********\n\n %s. \n\n", context));
+		log.info(String.format("\n\n    _____\\    _______\n" + "   /      \\  |      /\\\n" + "  /_______/  |_____/  \\\n"
+				+ " |   \\   /        /   /\n" + "  \\   \\         \\/   /\n" + "   \\  /          \\__/_\n"
+				+ "    \\/ ____    /\\\n" + "      /  \\    /  \\\n" + "     /\\   \\  /   /\n"
+				+ "       \\   \\/   /\n" + "        \\___\\__/\n\n Business 2 Business - Provisioner \n\n ", context));
 	}
 
 	@Bean
