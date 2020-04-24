@@ -34,6 +34,7 @@ public class Estado extends BaseDomain implements Identifiable<Integer>, Seriali
 	private Integer id;
 	private String codigoEstado;
 	private String descripcion;
+	private String color;
 
 	@Override
 	public String entityClassName() {
@@ -100,6 +101,22 @@ public class Estado extends BaseDomain implements Identifiable<Integer>, Seriali
 		setDescripcion(descripcion);
 		return this;
 	}
+	// -- [color] ------------------------
+
+	@Size(max = 20, message = "{message.estado.color.sizeMax} {max} {message.caracter}")
+	@Column(name = "color", length = 20)
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public Estado color(String color) {
+		setColor(color);
+		return this;
+	}
 
 	/**
 	 * Apply the default values.
@@ -132,8 +149,13 @@ public class Estado extends BaseDomain implements Identifiable<Integer>, Seriali
 	public String toString() {
 		return MoreObjects.toStringHelper(this) //
 				.add("id", getId()) //
+				.add("createdBy", getCreatedBy()) //
+				.add("createdDate", getCreatedDate()) //
+				.add("modifiedBy", getModifiedBy()) //
+				.add("modifiedDate", getModifiedDate()) //
 				.add("codigoEstado", getCodigoEstado()) //
 				.add("descripcion", getDescripcion()) //
+				.add("color", getColor()) //
 				.toString();
 	}
 }
