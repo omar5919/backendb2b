@@ -32,6 +32,8 @@ public class Estado extends BaseDomain implements Identifiable<Integer>, Seriali
 
 	
 	
+	
+	
 	// Raw attributes
 	private Integer id;
 	private String codigoEstado;
