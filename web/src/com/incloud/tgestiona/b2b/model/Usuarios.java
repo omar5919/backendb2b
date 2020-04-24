@@ -21,8 +21,10 @@ import com.google.common.base.MoreObjects;
 import com.incloud.tgestiona.domain.BaseDomain;
 import com.sun.istack.NotNull;
 @Entity
-@Table(name = "usuarios")
+@Table(name = "usuarios" , schema = "seguridad")
 public class Usuarios extends BaseDomain implements Identifiable<Integer>, Serializable {
+	
+
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(Usuarios.class.getName());
 
@@ -38,18 +40,17 @@ public class Usuarios extends BaseDomain implements Identifiable<Integer>, Seria
 		return Usuarios.class.getSimpleName();
 	}
 
-	public Integer getId() {
-		return id;
+	public Usuarios id(Integer id) {
+		setId(id);
+		return this;
 	}
 
 	@Override
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public Usuarios id(Integer id) {
-		setId(id);
-		return this;
+	public Integer getId() {
+		return id;
 	}
 
 	@Override
@@ -66,9 +67,36 @@ public class Usuarios extends BaseDomain implements Identifiable<Integer>, Seria
 	private String usuario;
 	@Column(name = "clave")
 	private String clave;
+	@Column(name = "activo")
+	private int activo;
+	@Column(name = "token")
+	private String token;
 	
+	private String mensaje;
 	
+	public String getMensaje() {
+		return mensaje;
+	}
 
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
+	}
+
+	public int getActivo() {
+		return activo;
+	}
+
+	public void setActivo(int activo) {
+		this.activo = activo;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
 
 	public String getNombres() {
 		return nombres;
