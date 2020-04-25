@@ -33,15 +33,16 @@ public class SeguridadRest extends  JPACustomRest<Usuarios, Integer>{
 	@ApiOperation(value = "Valida las credenciales del usuario si existe en bd", produces = "application/json")
 	@RequestMapping(value = "/autenticacion", method = RequestMethod.POST, headers = "Accept=application/json")
 	@CrossOrigin(origins = "http://localhost:4200")
-	ResponseEntity<Optional<Usuarios>> autenticacion(@RequestBody Usuarios u, BindingResult bindingResult)
+	public ResponseEntity<Usuarios> autenticacion(@RequestBody Usuarios entity, BindingResult bindingResult)
 			throws Exception {
-		log.info(String.format("usuario ---> %s", u.getUsuario()));
-		log.info(String.format("clave ---> %s", u.getClave()));
 		
-		log.info(String.format("clave ---> %s", u.getClave()));
-		log.info(String.format("clave ---> %s", u.getClave()));
 		
-
+		log.info(String.format("usuario %s - %s", entity.getUsuario(), entity.getClave()));
+		
+		Usuarios resutl = seguridadService.findEntity(entity);
+		
+		return ResponseEntity.ok().body(resutl);
+/*
 		try {
 			return Optional.ofNullable(seguridadService.findByCredenciales(u.getUsuario(), u.getClave()))
 					.map(l -> new ResponseEntity<>(l, HttpStatus.OK))
@@ -53,6 +54,7 @@ public class SeguridadRest extends  JPACustomRest<Usuarios, Integer>{
 			}
 			HttpHeaders headers = this.returnErrorHeaders(e);
 			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
-		}
+		}*/
+ 
 	}
 }

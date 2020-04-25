@@ -3,15 +3,12 @@ package com.incloud.tgestiona.b2b.model;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.logging.Logger;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,11 +16,10 @@ import org.springframework.data.annotation.Transient;
 
 import com.google.common.base.MoreObjects;
 import com.incloud.tgestiona.domain.BaseDomain;
-import com.sun.istack.NotNull;
+
 @Entity
-@Table(name = "usuarios" , schema = "seguridad")
+@Table(name = "usuarios", schema = "seguridad")
 public class Usuarios extends BaseDomain implements Identifiable<Integer>, Serializable {
-	
 
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(Usuarios.class.getName());
@@ -49,6 +45,7 @@ public class Usuarios extends BaseDomain implements Identifiable<Integer>, Seria
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -71,9 +68,9 @@ public class Usuarios extends BaseDomain implements Identifiable<Integer>, Seria
 	private int activo;
 	@Column(name = "token")
 	private String token;
-	
+
 	private String mensaje;
-	
+
 	public String getMensaje() {
 		return mensaje;
 	}
@@ -138,6 +135,13 @@ public class Usuarios extends BaseDomain implements Identifiable<Integer>, Seria
 		return this == other || (other instanceof Usuarios && hashCode() == other.hashCode());
 	}
 
+	private IdentifiableHashBuilder identifiableHashBuilder = new IdentifiableHashBuilder();
+
+	@Override
+	public int hashCode() {
+		return identifiableHashBuilder.hash(log, this);
+	}
+
 	/**
 	 * Construct a readable string representation for this FacImputacion instance.
 	 * 
@@ -145,8 +149,6 @@ public class Usuarios extends BaseDomain implements Identifiable<Integer>, Seria
 	 */
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
-				.add("Id", getId())
-				.toString();
+		return MoreObjects.toStringHelper(this).add("Id", getId()).toString();
 	}
 }
