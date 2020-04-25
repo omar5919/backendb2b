@@ -9,6 +9,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class usuarioInDto {
 
+	 
 	private String usuario;
 	private String clave;
 

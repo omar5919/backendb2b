@@ -9,7 +9,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class clienteOutIsisDto {
 
-     	private String msg;
+	private String msg;
 	private long totalRecord;
 
 }
