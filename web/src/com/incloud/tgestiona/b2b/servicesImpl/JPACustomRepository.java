@@ -71,7 +71,9 @@ public class JPACustomRepository<T, I> {
 
 	@Transactional(readOnly = true)
 	public Optional<T> findOne(I id) {
-		return this.mainrepository.findById(id);
+		if (this.mainrepository.existsById(id))
+			return this.mainrepository.findById(id);
+		return null;
 	}
 
 	@Transactional(readOnly = true)
@@ -111,7 +113,7 @@ public class JPACustomRepository<T, I> {
 		}
 		return null;
 	}
-	
+
 	@Transactional
 	public T deleteAll() {
 		List<T> list = mainrepository.findAll();
