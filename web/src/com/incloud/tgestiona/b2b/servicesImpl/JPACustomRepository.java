@@ -56,7 +56,7 @@ public class JPACustomRepository<T, I> {
 
 	@Transactional
 	public T Save(T entity) {
-		log.info("save entity into %s",type);
+		log.info("save entity into %s", type);
 		return mainrepository.save(entity);
 	}
 
@@ -100,6 +100,22 @@ public class JPACustomRepository<T, I> {
 		Example<T> entity = Example.of(bean);
 		if (this.mainrepository.exists(entity))
 			return this.mainrepository.findOne(entity).get();
+		return null;
+	}
+
+	@Transactional
+	public T deleteByID(I id) {
+		if (this.mainrepository.existsById(id)) {
+			T entity = mainrepository.findById(id).get();
+			mainrepository.delete(entity);
+		}
+		return null;
+	}
+	
+	@Transactional
+	public T deleteAll() {
+		List<T> list = mainrepository.findAll();
+		mainrepository.deleteAll(list);
 		return null;
 	}
 
