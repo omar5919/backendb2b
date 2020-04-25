@@ -128,7 +128,8 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 		return listaStream.collect(Collectors.toList());
 
 	}
-
+	
+	
 	/**
 	 * Update entity
 	 */
@@ -229,7 +230,7 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
 		}
 	}
-
+	
 	@ApiOperation(value = "Devuelve lista de registros de tipo <T> en base a los parámetros ingresados", produces = "application/json")
 	@PostMapping(value = "/findQuery", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<T>> find(@RequestBody T bean, BindingResult bindingResult) throws URISyntaxException {

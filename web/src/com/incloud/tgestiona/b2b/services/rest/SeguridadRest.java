@@ -1,9 +1,10 @@
 package com.incloud.tgestiona.b2b.services.rest;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.incloud.tgestiona.b2b.model.Usuarios;
+import com.incloud.tgestiona.b2b.service.dto.usuarioInDto;
 import com.incloud.tgestiona.b2b.servicesImpl.SeguridadServiceImpl;
 import com.incloud.tgestiona.framework.BindingErrorsResponse;
 import com.incloud.tgestiona.framework.JPACustomRest;
@@ -31,7 +33,7 @@ public class SeguridadRest extends JPACustomRest<Usuarios, Integer> {
 	@ApiOperation(value = "Valida las credenciales del usuario si existe en bd", produces = "application/json")
 	@RequestMapping(value = "/autenticacion", method = RequestMethod.POST, headers = "Accept=application/json")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<Usuarios> autenticacion(@RequestBody Usuarios entity, BindingResult bindingResult)
+	public ResponseEntity<Usuarios> autenticacion(@RequestBody @Valid usuarioInDto entity, BindingResult bindingResult)
 			throws Exception {
 
 		BindingErrorsResponse errors = new BindingErrorsResponse();
@@ -42,7 +44,13 @@ public class SeguridadRest extends JPACustomRest<Usuarios, Integer> {
 		}
 
 		log.info(String.format("usuario %s - %s", entity.getUsuario(), entity.getClave()));
-		Usuarios resutl = seguridadService.findEntity(entity);
+
+		Usuarios user = new Usuarios();
+		user.setUsuario(entity.getUsuario());
+		user.setClave(entity.getClave());
+
+		Usuarios resutl = seguridadService.findEntity(user);
+		log.info(String.format("result %s ", resutl));
 
 		return ResponseEntity.ok().body(resutl);
 	}
