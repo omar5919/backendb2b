@@ -10,8 +10,8 @@ import lombok.ToString;
 public class clienteInIsisDto {
 
 	 private String url;
-	private int tipo;
-	private String usuario;
-	private String fecha;
+	 private int tipo;
+	 private String usuario;
+	 private String fecha;
 
 }
