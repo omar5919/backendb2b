@@ -92,7 +92,7 @@ public class IsisClienteRest extends JPACustomRest<cliente, Integer> {
 
 			} finally {
 
-				cliente retorno = Save(entity);
+				cliente retorno = save(entity);
 
 			}
 			// do something with the data

@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpHeaders;
@@ -71,8 +72,28 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	}
 
 	@Transactional
-	public T Save(T entity) {
+	public T save(T entity) {
 		return mainrepository.save(entity);
+	}
+
+	@Transactional
+	public T deleteByID(I id) {
+
+		if (this.mainrepository.existsById(id)) {
+			T entity = mainrepository.findById(id).get();
+			mainrepository.delete(entity);
+		}
+		return null;
+	}
+
+	@Transactional
+	public T deleteAlls() {
+
+		entityManager.remove(type);
+
+//		List<T> list = mainrepository.findAll();
+//		mainrepository.deleteAll(list);
+		return null;
 	}
 
 	private Iterable<T> findAll() {
@@ -101,7 +122,13 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	}
 
 	@Transactional(readOnly = true)
-	public List<T> finds(T req) {
+	public PageResponse<T> findCondicionPaginated(T req, PageRequest pageRequest) throws Exception {
+		List<T> content = (List<T>) findAll();
+		return new PageResponse<>(10, 100, content);
+	}
+
+	@Transactional(readOnly = true)
+	public List<T> findEntityList(T req) {
 		T bean = req;
 		Example<T> employeeExample = Example.of(bean);
 		Sort sort = Sort.by("id");
@@ -128,8 +155,8 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 		return listaStream.collect(Collectors.toList());
 
 	}
-	
-	
+
+
 	/**
 	 * Update entity
 	 */
@@ -230,7 +257,7 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@ApiOperation(value = "Devuelve lista de registros de tipo <T> en base a los parámetros ingresados", produces = "application/json")
 	@PostMapping(value = "/findQuery", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<T>> find(@RequestBody T bean, BindingResult bindingResult) throws URISyntaxException {
@@ -245,7 +272,7 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
 		}
 		try {
-			return Optional.ofNullable(this.finds(bean)).map(l -> new ResponseEntity<>(l, HttpStatus.OK))
+			return Optional.ofNullable(this.findEntityList(bean)).map(l -> new ResponseEntity<>(l, HttpStatus.OK))
 					.orElse(new ResponseEntity<>(HttpStatus.NO_CONTENT));
 		} catch (Exception e) {
 			if (this.devuelveRuntimeException) {
@@ -263,8 +290,7 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	@DeleteMapping(value = "/deleteById/{id}", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> delete(@PathVariable I id) throws URISyntaxException {
 		try {
-			T entity = mainrepository.findById(id).get();
-			mainrepository.delete(entity);
+			deleteByID(id);
 			return ResponseEntity.ok().build();
 		} catch (Exception e) {
 			if (this.devuelveRuntimeException) {
@@ -281,8 +307,7 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	@DeleteMapping(value = "/deleteAll", produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<T> deleteAll() throws URISyntaxException {
 		try {
-			List<T> list = mainrepository.findAll();
-			mainrepository.deleteAll(list);
+			deleteAlls();
 			return ResponseEntity.ok().build();
 		} catch (Exception e) {
 			if (this.devuelveRuntimeException) {

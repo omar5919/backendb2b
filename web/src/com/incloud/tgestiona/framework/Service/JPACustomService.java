@@ -1,9 +1,20 @@
 package com.incloud.tgestiona.framework.Service;
 
- 
-import com.incloud.tgestiona.domain.BaseDomain;
-import com.incloud.tgestiona.domain.BaseResponseDomain;
+import java.util.List;
+import java.util.Optional;
 
-public interface JPACustomService<R extends BaseResponseDomain<?>, T extends BaseDomain, I> {
+public interface JPACustomService<T,I> {
 
+	
+	public T Save(T entity);
+	public Iterable<T> findAll();
+	public Optional<T> findOne(I id);
+	
+	public List<T> findByAttributeLeftContainsText(String attributeName, String text);
+	public List<T> findEntityList(T req);
+	public T findEntity(T req);
+	public T deleteByID(I id);
+	public T deleteAll();
+	public List<T> findByAttributeBetweenDate(String attributeName, String sfecha) throws Exception;
+	
 }

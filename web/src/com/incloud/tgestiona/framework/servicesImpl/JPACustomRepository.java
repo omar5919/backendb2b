@@ -24,10 +24,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.incloud.tgestiona.framework.Service.JPACustomService;
 import com.incloud.tgestiona.util.DateUtils;
 
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-public class JPACustomRepository<T, I> {
+public class JPACustomRepository<T, I>  implements JPACustomService< T, I>{
 
 	private final Logger log = LoggerFactory.getLogger(JPACustomRepository.class);
 
