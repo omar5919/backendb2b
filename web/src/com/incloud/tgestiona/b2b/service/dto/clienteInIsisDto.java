@@ -9,7 +9,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class clienteInIsisDto {
 
-	private String url;
+	 private String url;
 	private int tipo;
 	private String usuario;
 	private String fecha;
