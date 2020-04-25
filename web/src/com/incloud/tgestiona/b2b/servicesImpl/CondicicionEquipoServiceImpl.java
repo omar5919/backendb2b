@@ -2,6 +2,7 @@ package com.incloud.tgestiona.b2b.servicesImpl;
 
 import org.springframework.stereotype.Service;
 import com.incloud.tgestiona.b2b.model.CondicicionEquipo;
+import com.incloud.tgestiona.framework.servicesImpl.JPACustomRepository;
 
 @Service
 public class CondicicionEquipoServiceImpl extends JPACustomRepository<CondicicionEquipo, Integer> {

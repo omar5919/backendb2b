@@ -1,4 +1,4 @@
-package com.incloud.tgestiona.b2b.servicesImpl;
+package com.incloud.tgestiona.framework.servicesImpl;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
