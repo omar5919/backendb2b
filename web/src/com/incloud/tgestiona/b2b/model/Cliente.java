@@ -18,7 +18,7 @@ import com.google.common.base.MoreObjects;
 import com.incloud.tgestiona.domain.BaseDomain;
 
 @Entity
-@Table(name = "cliente")
+@Table(name = "cliente", schema = "seguridad")
 //@Audited
 //@AuditTable("_audi_cliente")
 public class Cliente extends BaseDomain implements Identifiable<Integer>, Serializable {
