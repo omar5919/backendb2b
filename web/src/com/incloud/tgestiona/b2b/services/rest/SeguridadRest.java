@@ -1,11 +1,12 @@
 package com.incloud.tgestiona.b2b.services.rest;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,12 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.incloud.tgestiona.b2b.model.Usuarios;
+import com.incloud.tgestiona.b2b.repository.SeguridadRepository;
 import com.incloud.tgestiona.b2b.service.dto.usuarioInDto;
 import com.incloud.tgestiona.b2b.servicesImpl.SeguridadServiceImpl;
-import com.incloud.tgestiona.framework.BindingErrorsResponse;
 import com.incloud.tgestiona.framework.JPACustomRest;
 
 import io.swagger.annotations.ApiOperation;
+import lombok.var;
 
 @RestController
 @RequestMapping("/api/seguridad")
@@ -30,29 +32,52 @@ public class SeguridadRest extends JPACustomRest<Usuarios, Integer> {
 	@Autowired
 	protected SeguridadServiceImpl seguridadService;
 
+	@Autowired
+	private SeguridadRepository<Usuarios> uRepo;
+
 	@ApiOperation(value = "Valida las credenciales del usuario si existe en bd", produces = "application/json")
 	@RequestMapping(value = "/autenticacion", method = RequestMethod.POST, headers = "Accept=application/json")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<Usuarios> autenticacion(@RequestBody @Valid usuarioInDto entity, BindingResult bindingResult)
-			throws Exception {
-
-		BindingErrorsResponse errors = new BindingErrorsResponse();
-		if (bindingResult.hasErrors()) {
-			log.error("Error into %s ", entity);
-			errors.addAllErrors(bindingResult);
-			throw new RuntimeException(errors.toJSON());
+	public Usuarios autenticacion(@RequestBody @Valid usuarioInDto e, BindingResult bindingResult) throws Exception {
+		Usuarios u = uRepo.findFirstByUsuario(e.getUsuario());
+		if (u != null) {
+			u = uRepo.findFirstByUsuarioAndClave(e.getUsuario(), e.getClave());
+			if (u != null) {
+				u = uRepo.findFirstByUsuarioAndClaveAndActivo(e.getUsuario(), e.getClave(), 1);
+				if (u != null) {
+					u.setMensaje("USUARIO PERMITIDO");
+					return u;
+				} else {
+					u = new Usuarios();	
+					u.setMensaje("EL USUARIO NO SE ENCUENTRA ACTIVO");
+				} 
+			} else {
+				u = new Usuarios();
+				u.setMensaje("LA CLAVE ES INCORRECTA");
+			}
+		} else {
+			u = new Usuarios();
+			u.setMensaje("USUARIO NO EXISTE");
+		} 
+		return u;
+	}
+	
+	@ApiOperation(value = "Valida las credenciales del usuario si existe en bd", produces = "application/json")
+	@RequestMapping(value = "/cambioclave", method = RequestMethod.POST, headers = "Accept=application/json")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public Usuarios cambioclave(@RequestBody @Valid usuarioInDto e, BindingResult bindingResult) throws Exception {
+		Usuarios res = new Usuarios();
+		var u = uRepo.findById(e.getId());
+		if(u.isPresent()) {
+			Usuarios us =  u.get();
+			if(us.getClave().equalsIgnoreCase(e.getPasswordActual())) {
+				us.setClave(e.getConfirmPassword());
+				res = uRepo.save(us);	
+			}else {
+				res.setMensaje("LA CLAVE NO COINCIDE...");
+			}
 		}
-
-		log.info(String.format("usuario %s - %s", entity.getUsuario(), entity.getClave()));
-
-		Usuarios user = new Usuarios();
-		user.setUsuario(entity.getUsuario());
-		user.setClave(entity.getClave());
-
-		Usuarios resutl = seguridadService.findEntity(user);
-		log.info(String.format("result %s ", resutl));
-
-		return ResponseEntity.ok().body(resutl);
+		return res;
 	}
 
 }

@@ -6,5 +6,4 @@ import com.incloud.tgestiona.framework.servicesImpl.JPACustomRepository;
 
 @Service("SeguridadServiceImpl")
 public class SeguridadServiceImpl extends JPACustomRepository<Usuarios, Integer> {
-
 }
