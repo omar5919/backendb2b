@@ -8,6 +8,6 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 
 @RestController
 @RequestMapping("/api/categoriaEquipoRest")
-public  class CategoriaEquipoRest extends JPACustomRest<CategoriaEquipo, Integer> {
+public class CategoriaEquipoRest extends JPACustomRest<CategoriaEquipo, Integer> {
 
 }
