@@ -28,7 +28,7 @@ import com.incloud.tgestiona.framework.Service.JPACustomService;
 import com.incloud.tgestiona.util.DateUtils;
 
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-public class JPACustomRepository<T, I>  implements JPACustomService< T, I>{
+public class JPACustomRepository<T, I> implements JPACustomService<T, I> {
 
 	private final Logger log = LoggerFactory.getLogger(JPACustomRepository.class);
 

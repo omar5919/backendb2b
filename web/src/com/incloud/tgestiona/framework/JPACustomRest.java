@@ -31,6 +31,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
+import org.hibernate.envers.query.AuditEntity;
+import org.hibernate.envers.query.AuditQuery;
+
 import com.incloud.tgestiona.util.DateUtils;
 
 import io.swagger.annotations.ApiOperation;
@@ -77,10 +82,11 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	}
 
 	@Transactional
-	public T deleteByID(I id) {
-
+	public T deleteByID(I id) throws Exception {
+		System.out.println(id);
 		if (this.mainrepository.existsById(id)) {
 			T entity = mainrepository.findById(id).get();
+			System.out.println(entity);
 			mainrepository.delete(entity);
 		}
 		return null;
@@ -88,11 +94,8 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 
 	@Transactional
 	public T deleteAlls() {
-
-		entityManager.remove(type);
-
-//		List<T> list = mainrepository.findAll();
-//		mainrepository.deleteAll(list);
+		List<T> list = mainrepository.findAll();
+		mainrepository.deleteAll(list);
 		return null;
 	}
 
@@ -130,9 +133,10 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 	@Transactional(readOnly = true)
 	public List<T> findEntityList(T req) {
 		T bean = req;
-		Example<T> employeeExample = Example.of(bean);
+		/// ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues();
+		Example<T> entity = Example.of(bean);
 		Sort sort = Sort.by("id");
-		Stream<T> listaStream = this.mainrepository.findAll(employeeExample, sort).parallelStream();
+		Stream<T> listaStream = this.mainrepository.findAll(entity, sort).parallelStream();
 		return listaStream.collect(Collectors.toList());
 	}
 
@@ -156,6 +160,22 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 
 	}
 
+	@Transactional(readOnly = true)
+	public List<T> findAuditQueryBetweenDate(String fechaIni, String fechaFin) throws Exception {
+		Date dfechaInicio = DateUtils.convertStringToDate("dd-MM-yyyy", fechaIni);
+		Date dfechaFin = DateUtils.convertStringToDate("dd-MM-yyyy", fechaFin);
+		dfechaFin = DateUtils.sumarRestarHoras(dfechaFin, 23);
+		dfechaFin = DateUtils.sumarRestarMinutos(dfechaFin, 59);
+		dfechaFin = DateUtils.sumarRestarSegundos(dfechaFin, 59);
+		AuditReader reader = AuditReaderFactory.get(this.entityManager);
+		AuditQuery query = reader.createQuery().forRevisionsOfEntity(type, true, true)
+				.add(AuditEntity.revisionProperty("timestamp").between(dfechaInicio.getTime(), dfechaFin.getTime()));
+		query.addOrder(AuditEntity.revisionNumber().desc());
+		List<T> listaStream = query.getResultList();
+		return listaStream;
+	}
+
+	/* End Crud */
 
 	/**
 	 * Update entity
@@ -339,6 +359,24 @@ public abstract class JPACustomRest<T, I> extends BaseRest {
 					.orElse(new ResponseEntity<>(HttpStatus.NO_CONTENT));
 		} catch (Exception e) {
 			throw new RuntimeException(getMensageErrorExceptionDebug(e));
+		}
+	}
+
+	@ApiOperation(value = "Busca registro de tipo <T> a traves del tiempo en base a la tabla de Auditoria por Fechas Historicas (Formato String dd-MM-yyyy)", produces = "application/json")
+	@GetMapping(value = "/findAuditBetweenDate/{fechaInicio}/{fechaFin}", produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<T>> findAuditBetweenDate(@PathVariable String fechaInicio, @PathVariable String fechaFin)
+			throws URISyntaxException {
+		log.debug(" Begin findAuditoriaBetweenDate: ");
+		try {
+			return Optional.ofNullable(findAuditQueryBetweenDate(fechaInicio, fechaFin))
+					.map(bean -> new ResponseEntity<>(bean, HttpStatus.OK))
+					.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+		} catch (Exception e) {
+			if (this.devuelveRuntimeException) {
+				throw new RuntimeException(getMensageErrorExceptionDebug(e));
+			}
+			HttpHeaders headers = this.devuelveErrorHeaders(e);
+			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
 		}
 	}
 
