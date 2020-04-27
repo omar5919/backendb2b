@@ -69,7 +69,17 @@ public class Usuarios extends BaseDomain implements Identifiable<Integer>, Seria
 	@Column(name = "token")
 	private String token;
 
+	@javax.persistence.Transient
 	private String mensaje;
+	private String nombrecorto;
+
+	public String getNombrecorto() {
+		return nombrecorto;
+	}
+
+	public void setNombrecorto(String nombrecorto) {
+		this.nombrecorto = nombrecorto;
+	}
 
 	public String getMensaje() {
 		return mensaje;

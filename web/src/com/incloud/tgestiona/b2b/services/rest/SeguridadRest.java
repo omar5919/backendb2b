@@ -46,11 +46,13 @@ public class SeguridadRest extends JPACustomRest<Usuarios, Integer> {
 				u = uRepo.findFirstByUsuarioAndClaveAndActivo(e.getUsuario(), e.getClave(), 1);
 				if (u != null) {
 					u.setMensaje("USUARIO PERMITIDO");
+					u.setNombrecorto(
+							String.valueOf(u.getNombres().charAt(0)) + String.valueOf(u.getApellidos().charAt(0)));
 					return u;
 				} else {
-					u = new Usuarios();	
+					u = new Usuarios();
 					u.setMensaje("EL USUARIO NO SE ENCUENTRA ACTIVO");
-				} 
+				}
 			} else {
 				u = new Usuarios();
 				u.setMensaje("LA CLAVE ES INCORRECTA");
@@ -58,23 +60,24 @@ public class SeguridadRest extends JPACustomRest<Usuarios, Integer> {
 		} else {
 			u = new Usuarios();
 			u.setMensaje("USUARIO NO EXISTE");
-		} 
+		}
 		return u;
 	}
-	
+
 	@ApiOperation(value = "Valida las credenciales del usuario si existe en bd", produces = "application/json")
 	@RequestMapping(value = "/cambioclave", method = RequestMethod.POST, headers = "Accept=application/json")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Usuarios cambioclave(@RequestBody @Valid usuarioInDto e, BindingResult bindingResult) throws Exception {
 		Usuarios res = new Usuarios();
 		var u = uRepo.findById(e.getId());
-		if(u.isPresent()) {
-			Usuarios us =  u.get();
-			if(us.getClave().equalsIgnoreCase(e.getPasswordActual())) {
+		if (u.isPresent()) {
+			Usuarios us = u.get();
+			if (us.getClave().equalsIgnoreCase(e.getPasswordActual())) {
 				us.setClave(e.getConfirmPassword());
-				res = uRepo.save(us);	
-			}else {
-				res.setMensaje("LA CLAVE NO COINCIDE...");
+				res = uRepo.save(us);
+				res.setMensaje("LA CLAVE SE CAMBIO CORRECTAMENTE... DEBE DE SALIR...");
+			} else {
+				res.setMensaje("LA CLAVE ACTUAL NO COINCIDE...");
 			}
 		}
 		return res;
