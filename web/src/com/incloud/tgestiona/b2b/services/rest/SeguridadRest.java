@@ -61,6 +61,7 @@ public class SeguridadRest extends JPACustomRest<Usuarios, Integer> {
 			u = new Usuarios();
 			u.setMensaje("USUARIO NO EXISTE");
 		}
+		
 		return u;
 	}
 
