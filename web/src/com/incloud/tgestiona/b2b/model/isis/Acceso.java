@@ -122,8 +122,8 @@ public class Acceso extends BaseDomain implements Identifiable<Integer>, Seriali
 	}
 	// -- [velocidad] ------------------------
 
-	@Digits(integer = 0, fraction = 17)
-	@Column(name = "velocidad", precision = 17, scale = 17)
+	@Digits(integer = 8, fraction = 4)
+	@Column(name = "velocidad", precision = 12, scale = 4)
 	public Double getVelocidad() {
 		return velocidad;
 	}
