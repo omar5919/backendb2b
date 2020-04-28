@@ -63,7 +63,7 @@ public class IsisEquipoRest extends JPACustomRest<Equipo, Integer>{
 		equipoOutIsisDto equipoDto = new equipoOutIsisDto();
 		
 		Equipo entity = null;
-		
+		//
 		String row;
 		long increment = 0;
 		InputStream is = new ByteArrayInputStream(fileContent);
