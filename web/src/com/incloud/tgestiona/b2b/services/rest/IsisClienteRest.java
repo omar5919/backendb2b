@@ -31,7 +31,6 @@ import com.incloud.tgestiona.b2b.service.dto.clienteInIsisDto;
 import com.incloud.tgestiona.b2b.service.dto.clienteOutIsisDto;
 import com.incloud.tgestiona.framework.BindingErrorsResponse;
 import com.incloud.tgestiona.framework.JPACustomRest;
-
 import io.swagger.annotations.ApiOperation;
 
 @RestController
@@ -42,7 +41,7 @@ public class IsisClienteRest extends JPACustomRest<cliente, Integer> {
 
 	@ApiOperation(value = "Adjuntar archivo para ISIS-Cliente", produces = "application/json")
 	@PostMapping(value = "/uploadCVS", produces = APPLICATION_JSON_VALUE)
-	@CrossOrigin(origins = "http://localhost:4200")
+	///@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<clienteOutIsisDto> uploadCVS(@RequestBody @Valid clienteInIsisDto clienteInputParam,
 			BindingResult bindingResult) throws IOException {
 
@@ -50,7 +49,6 @@ public class IsisClienteRest extends JPACustomRest<cliente, Integer> {
 		HttpHeaders headers = new HttpHeaders();
 
 		if (clienteInputParam.getUrl() == null) {
-
 			String errorDevuelve = this.devuelveErrorHeaders(bindingResult, errors);
 			if (this.devuelveRuntimeException) {
 				throw new RuntimeException(errorDevuelve);
