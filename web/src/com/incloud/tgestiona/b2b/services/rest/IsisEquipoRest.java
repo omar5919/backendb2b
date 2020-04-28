@@ -69,23 +69,25 @@ public class IsisEquipoRest extends JPACustomRest<Equipo, Integer>{
 		InputStream is = new ByteArrayInputStream(fileContent);
 		BufferedReader csvReader = new BufferedReader(new InputStreamReader(is));
 		while((row = csvReader.readLine()) != null) {
-			String[] data = row.split(";");
-			try {
-				entity = new Equipo();
-				entity.setCodigoIsis(Integer.parseInt(data[0].trim()));
-				entity.setB2bDedescripcion(data[1].trim());
-				entity.setCodMarcEqui(Integer.parseInt(data[2].trim()));
-				entity.setIndEqui(data[3].trim());
-				entity.setMadesmar(data[4].trim());
-				
-				increment++;
-				equipoDto.setTotalRecord(increment);
-		
-			}catch (ArrayIndexOutOfBoundsException e) {
-				
-			}finally {
-				Equipo retorno = save(entity);
+			if (increment > 0) {
+				String[] data = row.split(";");
+				try {
+					entity = new Equipo();
+					entity.setCodigoIsis(Integer.parseInt(data[0].trim()));
+					entity.setB2bDedescripcion(data[1].trim());
+					entity.setCodMarcEqui(Integer.parseInt(data[2].trim()));
+					entity.setIndEqui(data[3].trim());
+					entity.setMadesmar(data[4].trim());
+	
+					equipoDto.setTotalRecord(increment);
+			
+				}catch (ArrayIndexOutOfBoundsException e) {
+					
+				}finally {
+					Equipo retorno = save(entity);
+				}
 			}
+			increment++;
 		}
 		csvReader.close();
 		is.close();
