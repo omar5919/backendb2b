@@ -23,7 +23,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.incloud.tgestiona.b2b.model.isis.Acceso;
 import com.incloud.tgestiona.b2b.model.isis.cliente;
@@ -41,15 +44,19 @@ public class IsisAccesoRest extends JPACustomRest<Acceso, Integer> {
 	private final Logger log = LoggerFactory.getLogger(IsisAccesoRest.class);
 
 	@ApiOperation(value = "Adjuntar archivo para ISIS-Acceso", produces = "application/json")
-	@PostMapping(value = "/uploadCVS", produces = APPLICATION_JSON_VALUE)
-	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<clienteOutIsisDto> uploadCVS(@RequestBody @Valid clienteInIsisDto clienteInputParam,
-			BindingResult bindingResult) throws IOException {
+//	@PostMapping(value = "/uploadCVS", produces = APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/uploadCVS", method = RequestMethod.POST, headers = "Accept=application/json")
+//	@CrossOrigin(origins = "http://localhost:4200")
+	//public ResponseEntity<clienteOutIsisDto> uploadCVS(@RequestBody @Valid clienteInIsisDto clienteInputParam,
+	///		BindingResult bindingResult) throws IOException {
+	
+	
+	public ResponseEntity<clienteOutIsisDto> uploadCVS(@RequestParam("file") MultipartFile file) throws IOException {
 
 		BindingErrorsResponse errors = new BindingErrorsResponse();
 		HttpHeaders headers = new HttpHeaders();
 
-		if (clienteInputParam.getUrl() == null) {
+		/*if (clienteInputParam.getUrl() == null) {
 
 			String errorDevuelve = this.devuelveErrorHeaders(bindingResult, errors);
 			if (this.devuelveRuntimeException) {
@@ -57,9 +64,9 @@ public class IsisAccesoRest extends JPACustomRest<Acceso, Integer> {
 			}
 			headers.add("errors", errorDevuelve);
 			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
-		}
+		}*/
 
-		byte[] fileContent = IOUtils.toByteArray(new URL(clienteInputParam.getUrl()));
+	//	byte[] fileContent = IOUtils.toByteArray(new URL(clienteInputParam.getUrl()));
 
 		clienteOutIsisDto clienteDto = new clienteOutIsisDto();
 		
@@ -67,7 +74,8 @@ public class IsisAccesoRest extends JPACustomRest<Acceso, Integer> {
 
 		String row;
 		long increment = 0;
-		InputStream is = new ByteArrayInputStream(fileContent);
+	//	InputStream is = new ByteArrayInputStream(fileContent);
+		InputStream is = new ByteArrayInputStream(file.getBytes());
 		BufferedReader csvReader = new BufferedReader(new InputStreamReader(is));
 		
 		while ((row = csvReader.readLine()) != null) {
@@ -77,7 +85,7 @@ public class IsisAccesoRest extends JPACustomRest<Acceso, Integer> {
 					
 						entityAcceso = new Acceso();
 						entityAcceso.setCodigoIsis(data[0].trim());
-						entityAcceso.setVelocidad(Double.parseDouble(data[1].trim().replace(",", ".")));
+						//entityAcceso.setVelocidad(Double.parseDouble(data[1].trim().replace(",", ".")));
 						entityAcceso.setTipoServicioId(Integer.parseInt(data[2].trim()));
 						entityAcceso.setActivo(true);
 						clienteDto.setTotalRecord(increment);
@@ -117,4 +125,7 @@ public class IsisAccesoRest extends JPACustomRest<Acceso, Integer> {
 		}
 	}
 
+	
+	 
+	
 }
