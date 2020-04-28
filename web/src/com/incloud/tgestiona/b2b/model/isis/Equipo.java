@@ -1,4 +1,4 @@
-package com.incloud.tgestiona.b2b.model;
+package com.incloud.tgestiona.b2b.model.isis;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -16,10 +16,12 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Size;
 
 import com.google.common.base.MoreObjects;
+import com.incloud.tgestiona.b2b.model.Identifiable;
+import com.incloud.tgestiona.b2b.model.IdentifiableHashBuilder;
 import com.incloud.tgestiona.domain.BaseDomain;
 
 @Entity
-@Table(name = "equipo")
+@Table(name = "equipo", schema = "isis")
 //@Audited
 //@AuditTable("_audi_equipo")
 public class Equipo extends BaseDomain implements Identifiable<Integer>, Serializable {
