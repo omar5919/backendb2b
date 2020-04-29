@@ -41,15 +41,15 @@ import io.swagger.annotations.ApiOperation;
 public class IsisEquipoRest extends JPACustomRest<Equipo, Integer>{
 
 	private final Logger log = LoggerFactory.getLogger(EquipoRest.class);
-
+	
 	@ApiOperation(value = "Adjuntar archivo para ISIS-Equipo", produces = "application/json")
 	@PostMapping(value = "/uploadCVS", produces = APPLICATION_JSON_VALUE)
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<equipoOutIsisDto> uploadCVS(@RequestBody @Valid equipoInIsisDto equipoInputParam, BindingResult bindingResult) throws IOException {
 		BindingErrorsResponse errors = new BindingErrorsResponse();
-
+		
 		HttpHeaders headers = new HttpHeaders();
-
+		
 		if (equipoInputParam.getUrl() == null) {
 			String errorDevuelve = this.devuelveErrorHeaders(bindingResult, errors);
 			if (this.devuelveRuntimeException) {
@@ -58,10 +58,10 @@ public class IsisEquipoRest extends JPACustomRest<Equipo, Integer>{
 			headers.add("errors", errorDevuelve);
 			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
 		}
-
+		
 		byte[] fileContent = IOUtils.toByteArray(new URL(equipoInputParam.getUrl()));
 		equipoOutIsisDto equipoDto = new equipoOutIsisDto();
-
+		
 		Equipo entity = null;
 		//
 		String row;
@@ -78,11 +78,11 @@ public class IsisEquipoRest extends JPACustomRest<Equipo, Integer>{
 					entity.setCodMarcEqui(Integer.parseInt(data[2].trim()));
 					entity.setIndEqui(data[3].trim());
 					entity.setMadesmar(data[4].trim());
-
+	
 					equipoDto.setTotalRecord(increment);
-
+			
 				}catch (ArrayIndexOutOfBoundsException e) {
-
+					
 				}finally {
 					Equipo retorno = save(entity);
 				}
@@ -91,11 +91,11 @@ public class IsisEquipoRest extends JPACustomRest<Equipo, Integer>{
 		}
 		csvReader.close();
 		is.close();
-
+		
 		equipoDto.setMsg("Record on table Equipo and schema Isis is OK");
-
+		
 		log.info("Total of records on table Equipo and schema Isis %s", equipoDto);
-
+		
 		try {
 			return Optional.ofNullable(equipoDto).map(l -> new ResponseEntity<>(l, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NO_CONTENT));
 		}catch(Exception e) {
