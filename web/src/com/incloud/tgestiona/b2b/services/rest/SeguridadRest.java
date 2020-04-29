@@ -1,27 +1,19 @@
 package com.incloud.tgestiona.b2b.services.rest;
 
-import java.util.Optional;
-
-import javax.validation.Valid;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.incloud.tgestiona.b2b.model.Usuarios;
 import com.incloud.tgestiona.b2b.repository.SeguridadRepository;
 import com.incloud.tgestiona.b2b.service.dto.usuarioInDto;
 import com.incloud.tgestiona.b2b.servicesImpl.SeguridadServiceImpl;
 import com.incloud.tgestiona.framework.JPACustomRest;
-
 import io.swagger.annotations.ApiOperation;
 import lombok.var;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/seguridad")
@@ -37,7 +29,7 @@ public class SeguridadRest extends JPACustomRest<Usuarios, Integer> {
 
 	@ApiOperation(value = "Valida las credenciales del usuario si existe en bd", produces = "application/json")
 	@RequestMapping(value = "/autenticacion", method = RequestMethod.POST, headers = "Accept=application/json")
-	//@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Usuarios autenticacion(@RequestBody @Valid usuarioInDto e, BindingResult bindingResult) throws Exception {
 		Usuarios u = uRepo.findFirstByUsuario(e.getUsuario());
 		if (u != null) {
