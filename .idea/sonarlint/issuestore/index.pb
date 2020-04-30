@@ -1,28 +1,18 @@
 
 ;
 web/pom.xml,7\4\74db3766c5ffc022e47692cc672a7bd748475ac8
-r
-Bweb/src/com/incloud/tgestiona/b2b/repository/OfertaRepository.java,e\6\e61a2e037c78137d1ebef542692ee034fac9e706
 w
 Gweb/src/com/incloud/tgestiona/b2b/services/rest/OfertasDetalleRest.java,7\5\755758bf7b73c264e6308f83863a0e8b4a6287ac
 o
 ?web/src/com/incloud/tgestiona/b2b/services/rest/OfertaRest.java,1\e\1e80714d2a9fb51212adfb248e01522a45eb3790
 r
 Bweb/src/com/incloud/tgestiona/b2b/services/rest/SeguridadRest.java,b\6\b638b9cc68c95e6fa9810d3c8ed79a014d381837
-d
-4web/src/com/incloud/tgestiona/b2b/model/Ofertas.java,2\c\2ca36bf6fa6c452363543cff3d381e86f84dfa86
-o
-?web/src/com/incloud/tgestiona/b2b/model/oferta/OfertaModel.java,5\7\57d7a25320c1e4cef1a7ccba69fad7ae6cda0a1a
 s
 Cweb/src/com/incloud/tgestiona/b2b/repository/OfertasRepository.java,6\1\61320c73120e313bad48a5234820cc6eeb999563
 u
 Eweb/src/com/incloud/tgestiona/b2b/repository/SeguridadRepository.java,a\a\aabb7734bc7241517c4b83d297a970896b071174
 L
 web/src/META-INF/MANIFEST.MF,f\a\fad75e54b4e387abd6fe55c8abafe2bdea7aa6b0
-l
-<web/src/com/incloud/tgestiona/b2b/serices/OfertaService.java,8\3\838f767716627d395e88fc1dd430e5b9acf349f4
-u
-Eweb/src/com/incloud/tgestiona/b2b/servicesImpl/OfertaServiceImpl.java,8\6\864afda79e2aec04cf62534d459884b7cc774b66
 o
 ?web/src/com/incloud/tgestiona/b2b/service/dto/usuarioInDto.java,9\4\946a723eb7cf69c8d6aadf73f69d3261141d9557
 l
@@ -57,3 +47,21 @@ h
 8web/src/com/incloud/tgestiona/b2b/model/Oportunidad.java,1\6\16acbd82cf6376348f7864c0d7315b68d6411b33
 k
 ;web/src/com/incloud/tgestiona/b2b/model/oferta/Ofertas.java,b\3\b38a26d2d88446a60093bd88ff0fc015ac822d2e
+h
+8web/src/com/incloud/tgestiona/b2b/model/Complejidad.java,5\1\512249e152e2e9b6e320fa320a3b3535bc84620a
+l
+<web/src/com/incloud/tgestiona/b2b/model/SegmentoNegocio.java,2\5\252b1a5546cc78e91ea86513a831a87c43d08670
+n
+>web/src/com/incloud/tgestiona/b2b/model/AnalistaFinaciero.java,4\5\45205618ef36ed9204976f40f4f0bd4e8ef9cdf3
+c
+3web/src/com/incloud/tgestiona/b2b/model/Moneda.java,8\2\8205b1fd2377ebbd885b19a333f0395c473080cc
+e
+5web/src/com/incloud/tgestiona/b2b/model/Usuarios.java,4\c\4c64665717450b983f3a2b78dfa9ec9f6ec3c4af
+d
+4web/src/com/incloud/tgestiona/b2b/model/Cliente.java,f\c\fc710f02fb5d6731aab6cd9d324d7c07c23610fa
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+e
+5web/src/com/incloud/tgestiona/b2b/model/Preventa.java,d\7\d75f6dcf34796701e22a6363727d27f399d1cd05
+e
+5web/src/com/incloud/tgestiona/b2b/model/TipoPago.java,8\5\859b6aae59a6f8356c29affc804f6f982dd18af0
