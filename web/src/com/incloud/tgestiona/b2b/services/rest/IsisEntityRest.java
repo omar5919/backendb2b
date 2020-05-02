@@ -13,7 +13,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import com.incloud.tgestiona.b2b.serice.dto.EntityIsisInputDto;
+import com.incloud.tgestiona.b2b.service.dto.EntityIsisInDto;
 import com.incloud.tgestiona.b2b.service.dto.EntityIsisOutDto;
 import org.apache.commons.io.IOUtils;
 import org.apache.poi.ss.formula.functions.T;
@@ -63,7 +63,7 @@ public class IsisEntityRest extends JPACustomRest<T, Integer> {
 	@PostMapping(value = "/uploadCVS", produces = APPLICATION_JSON_VALUE)
 	//@RequestMapping(value = "/uploadCVS" )
 	//@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<EntityIsisOutDto> uploadCVS(@RequestBody @Valid EntityIsisInputDto entityInputParam, BindingResult bindingResult ) throws IOException {
+	public ResponseEntity<EntityIsisOutDto> uploadCVS(@RequestBody @Valid EntityIsisInDto entityInputParam, BindingResult bindingResult ) throws IOException {
 		//BindingResult bindingResult = null;
 		BindingErrorsResponse errors = new BindingErrorsResponse();
 		HttpHeaders headers = new HttpHeaders();
