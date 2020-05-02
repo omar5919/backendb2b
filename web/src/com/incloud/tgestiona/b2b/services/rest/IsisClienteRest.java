@@ -36,7 +36,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/api/IsisCliente")
 public class IsisClienteRest extends JPACustomRest<cliente, Integer> {
-
+/*
 	private final Logger log = LoggerFactory.getLogger(ClientesRest.class);
 
 	@ApiOperation(value = "Adjuntar archivo para ISIS-Cliente", produces = "application/json")
@@ -114,5 +114,5 @@ public class IsisClienteRest extends JPACustomRest<cliente, Integer> {
 			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
 		}
 	}
-
+*/
 }

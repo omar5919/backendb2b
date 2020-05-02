@@ -41,7 +41,7 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/api/IsisAcceso")
 public class IsisAccesoRest extends JPACustomRest<Acceso, Integer> {
 
-	private final Logger log = LoggerFactory.getLogger(IsisAccesoRest.class);
+	/*private final Logger log = LoggerFactory.getLogger(IsisAccesoRest.class);
 	
 	@ApiOperation(value = "Adjuntar archivo para ISIS-Acceso", produces = "application/json")
 	@PostMapping(value = "/uploadCVS", produces = APPLICATION_JSON_VALUE)
@@ -130,7 +130,7 @@ public class IsisAccesoRest extends JPACustomRest<Acceso, Integer> {
 	      //now convert the string to double
 	      double result = Double.parseDouble(f); 
 	      return result; // return the result
-	}
+	}*/
 	 
 	
 }

@@ -39,7 +39,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/api/IsisEquipo")
 public class IsisEquipoRest extends JPACustomRest<Equipo, Integer>{
-
+/*
 	private final Logger log = LoggerFactory.getLogger(EquipoRest.class);
 	
 	@ApiOperation(value = "Adjuntar archivo para ISIS-Equipo", produces = "application/json")
@@ -106,5 +106,5 @@ public class IsisEquipoRest extends JPACustomRest<Equipo, Integer>{
 			headers = this.devuelveErrorHeaders(e);
 			return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
 		}
-	}
+	}*/
 }
