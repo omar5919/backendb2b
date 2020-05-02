@@ -67,7 +67,6 @@ public class IsisEntityRest extends JPACustomRest<T, Integer> {
 		//BindingResult bindingResult = null;
 		BindingErrorsResponse errors = new BindingErrorsResponse();
 		HttpHeaders headers = new HttpHeaders();
-		
 		 EntityIsisOutDto entityOutDto = new EntityIsisOutDto(); 
     
 		    cliente _cliente =null;	
@@ -128,7 +127,7 @@ public class IsisEntityRest extends JPACustomRest<T, Integer> {
 		csvReader.close();
 		is.close();
 		
-		entityOutDto.setMsg("Record on table " + entityInputParam.getEntity().toString() + " and schema Isis is OK");		
+		entityOutDto.setMsg("Record on table " + entityInputParam.getEntity().toString() + " and schema Isis is OK");
 		log.info("Total of records on " + entityInputParam.getEntity().toString() + " Equipo and schema Isis %s", entityOutDto);
 		
 		try {
