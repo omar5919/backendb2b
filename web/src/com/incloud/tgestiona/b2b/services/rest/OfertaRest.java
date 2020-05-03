@@ -23,7 +23,6 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
     }
 
     @GetMapping("/obtenerofertas")
-    @CrossOrigin(origins = "http://localhost:4200")
     public List<ofertaDto> getStudents(@RequestParam(required = false) String codoportunidad,
                                        @RequestParam(required = false) Integer cliente,
                                        @RequestParam(required = false) String descripcion,
@@ -31,7 +30,7 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
                                        @RequestParam(required = false) Integer estado,
                                        @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date desde,
                                        @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date hasta,
-                                       Pageable pageable){
+                                       Pageable pageable) throws Exception{
         return oServ.getOfertas(desde, hasta, descripcion, pageable);
     }
 

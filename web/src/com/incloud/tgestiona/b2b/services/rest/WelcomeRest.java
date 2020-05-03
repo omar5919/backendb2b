@@ -9,7 +9,7 @@ class WelcomeRest {
 
 	@RequestMapping("/")
 	String home() {
-		return "*********** Welcome to Rest Aplication ***********";
+		return "*********** ONLINE ***********";
 	}
 
 }

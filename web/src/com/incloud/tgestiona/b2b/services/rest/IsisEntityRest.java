@@ -61,8 +61,6 @@ public class IsisEntityRest extends JPACustomRest<T, Integer> {
 
     @ApiOperation(value = "Adjuntar archivo para ISIS-Generico", produces = "application/json")
     @PostMapping(value = "/uploadCVS", produces = APPLICATION_JSON_VALUE)
-    //@RequestMapping(value = "/uploadCVS" )
-    //@CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<EntityIsisOutDto> uploadCVS(@RequestBody @Valid EntityIsisInDto entityInputParam, BindingResult bindingResult) throws IOException {
         //BindingResult bindingResult = null;
         BindingErrorsResponse errors = new BindingErrorsResponse();

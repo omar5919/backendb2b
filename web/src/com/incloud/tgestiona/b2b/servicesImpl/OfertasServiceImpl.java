@@ -25,16 +25,16 @@ public class OfertasServiceImpl implements OfertasService {
     }
 
     @Override
-    public List<ofertaDto> getOfertas(Date desde, Date hasta, String name, Pageable pageable) {
+    public List<ofertaDto> getOfertas(Date desde, Date hasta, String desc, Pageable pageable) {
         List<Ofertas> oList = oRepo.findAll((Specification<Ofertas>) (root, cq, cb) -> {
             Predicate p = cb.conjunction();
             if (Objects.nonNull(desde) && Objects.nonNull(hasta) && desde.before(hasta)) {
-                p = cb.and(p, cb.between(root.get("fechareg"), desde, hasta));
+                p = cb.and(p, cb.between(root.get("fecha_reg"), desde, hasta));
             }
-            if (!StringUtils.isEmpty(name)) {
-                p = cb.and(p, cb.like(root.get("nombre"), "%" + name + "%"));
+            if (!StringUtils.isEmpty(desc)) {
+                p = cb.and(p, cb.like(root.get("descripcion"), "%" + desc + "%"));
             }
-            cq.orderBy(cb.desc(root.get("nombre")), cb.asc(root.get("id")));
+            cq.orderBy(cb.desc(root.get("descripcion")), cb.asc(root.get("oferta_id")));
             return p;
         }, pageable).getContent();
         return ofertasConverter.convertToOfertaDTO(oList);

@@ -21,7 +21,7 @@ import com.incloud.tgestiona.domain.BaseDomain;
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name = "ofertas_detalle")
+@Table(name = "ofertas_detalle",schema = "oferta")
 //@Audited
 //@AuditTable("_audi_ofertas_detalle")
 public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>, Serializable {
