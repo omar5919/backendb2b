@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import com.incloud.tgestiona.b2b.model.oferta.Ofertas;
 import com.incloud.tgestiona.b2b.model.oferta.OfertasOpex;
+import com.incloud.tgestiona.domain.BaseDomain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "concepto_opex",schema = "b2b")
-public class ConceptosOpex {
+public class ConceptosOpex  extends BaseDomain{
 	 	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "concepto_id" , nullable = false)
@@ -32,4 +33,10 @@ public class ConceptosOpex {
 	 	
 		@Column(name = "activo"  )
 		private Boolean activo ;
+
+		@Override
+		public boolean isIdSet() {
+			// TODO Auto-generated method stub
+			return false;
+		}
 }

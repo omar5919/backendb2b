@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.incloud.tgestiona.domain.BaseDomain;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "tipo_equipamiento",schema = "b2b")
-public class TipoEquipamiento {
+public class TipoEquipamiento  extends BaseDomain{
 	
 	
 	@Id
@@ -28,4 +30,9 @@ public class TipoEquipamiento {
 	private String descripcion ;
 	@Column(name = "activo"  )
 	private Boolean activo ;
+	@Override
+	public boolean isIdSet() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

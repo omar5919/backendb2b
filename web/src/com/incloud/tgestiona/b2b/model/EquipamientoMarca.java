@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.incloud.tgestiona.domain.BaseDomain;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "tipo_equipamiento",schema = "b2b")
-public class EquipamientoMarca {
+public class EquipamientoMarca  extends BaseDomain{
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,4 +34,9 @@ public class EquipamientoMarca {
 	private String codigo_isis ;
 	@Column(name = "activo"  )
 	private Boolean activo ;
+	@Override
+	public boolean isIdSet() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

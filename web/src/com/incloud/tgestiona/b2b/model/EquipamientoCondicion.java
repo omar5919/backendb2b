@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.incloud.tgestiona.b2b.model.oferta.OfertasOpex;
+import com.incloud.tgestiona.domain.BaseDomain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "equipamiento_condicion",schema = "b2b")
-public class EquipamientoCondicion {
+public class EquipamientoCondicion  extends BaseDomain {
 	 @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "equipamiento_condicion_id" , nullable = false)
@@ -32,4 +33,10 @@ public class EquipamientoCondicion {
 	 	
 		@Column(name = "activo"  )
 		private Boolean activo ;
+
+		@Override
+		public boolean isIdSet() {
+			// TODO Auto-generated method stub
+			return false;
+		}
 }
