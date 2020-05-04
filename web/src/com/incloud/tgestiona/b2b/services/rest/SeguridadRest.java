@@ -29,7 +29,7 @@ public class SeguridadRest extends JPACustomRest<Usuarios, Integer> {
 
 	@ApiOperation(value = "Valida las credenciales del usuario si existe en bd", produces = "application/json")
 	@RequestMapping(value = "/autenticacion", method = RequestMethod.POST, headers = "Accept=application/json")
-	@CrossOrigin(origins = "http://localhost:4200")
+//	@CrossOrigin(origins = "http://localhost:4200")
 	public Usuarios autenticacion(@RequestBody @Valid usuarioInDto e, BindingResult bindingResult) throws Exception {
 		Usuarios u = uRepo.findFirstByUsuario(e.getUsuario());
 		if (u != null) {

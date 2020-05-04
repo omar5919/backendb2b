@@ -1,11 +1,10 @@
 package com.incloud.tgestiona.b2b.repository;
 
+import com.incloud.tgestiona.b2b.model.isis.IsisTarifa;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.incloud.tgestiona.b2b.model.isis.Tarifa;
 
-
-public interface TarifaIsisRepository extends JpaRepository<Tarifa, Integer> {
+public interface TarifaIsisRepository extends JpaRepository<IsisTarifa, Integer> {
 
 }
  

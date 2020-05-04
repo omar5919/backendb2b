@@ -1,32 +1,22 @@
 package com.incloud.tgestiona.b2b.model.isis;
 
-import static javax.persistence.GenerationType.SEQUENCE;
-
-import java.io.Serializable;
-import java.util.logging.Logger;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Size;
-
 import com.google.common.base.MoreObjects;
 import com.incloud.tgestiona.b2b.model.Identifiable;
 import com.incloud.tgestiona.b2b.model.IdentifiableHashBuilder;
 import com.incloud.tgestiona.domain.BaseDomain;
 
+import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.logging.Logger;
+
+import static javax.persistence.GenerationType.SEQUENCE;
 @Entity
-@Table(name = "equipo", schema = "isis")
-//@Audited
-//@AuditTable("_audi_equipo")
-public class Equipo extends BaseDomain implements Identifiable<Integer>, Serializable {
+@Table(name = "i_equipo", schema = "isis")
+public class IsisEquipo extends BaseDomain implements Identifiable<Integer>, Serializable {
     private static final long serialVersionUID = 1L;
-    private static final Logger log = Logger.getLogger(Equipo.class.getName());
+    private static final Logger log = Logger.getLogger(IsisEquipo.class.getName());
 
     /***************************/
     /* Atributos de la Entidad */
@@ -42,7 +32,7 @@ public class Equipo extends BaseDomain implements Identifiable<Integer>, Seriali
 
     @Override
     public String entityClassName() {
-        return Equipo.class.getSimpleName();
+        return IsisEquipo.class.getSimpleName();
     }
 
     // -- [id] ------------------------
@@ -61,7 +51,7 @@ public class Equipo extends BaseDomain implements Identifiable<Integer>, Seriali
         this.id = id;
     }
 
-    public Equipo id(Integer id) {
+    public IsisEquipo id(Integer id) {
         setId(id);
         return this;
     }
@@ -83,7 +73,7 @@ public class Equipo extends BaseDomain implements Identifiable<Integer>, Seriali
         this.codigoIsis = codigoIsis;
     }
 
-    public Equipo codigoIsis(Integer codigoIsis) {
+    public IsisEquipo codigoIsis(Integer codigoIsis) {
         setCodigoIsis(codigoIsis);
         return this;
     }
@@ -99,7 +89,7 @@ public class Equipo extends BaseDomain implements Identifiable<Integer>, Seriali
         this.b2bDedescripcion = b2bDedescripcion;
     }
 
-    public Equipo b2bDedescripcion(String b2bDedescripcion) {
+    public IsisEquipo b2bDedescripcion(String b2bDedescripcion) {
         setB2bDedescripcion(b2bDedescripcion);
         return this;
     }
@@ -115,7 +105,7 @@ public class Equipo extends BaseDomain implements Identifiable<Integer>, Seriali
         this.codMarcEqui = codMarcEqui;
     }
 
-    public Equipo codMarcEqui(Integer codMarcEqui) {
+    public IsisEquipo codMarcEqui(Integer codMarcEqui) {
         setCodMarcEqui(codMarcEqui);
         return this;
     }
@@ -131,7 +121,7 @@ public class Equipo extends BaseDomain implements Identifiable<Integer>, Seriali
         this.indEqui = indEqui;
     }
 
-    public Equipo indEqui(String indEqui) {
+    public IsisEquipo indEqui(String indEqui) {
         setIndEqui(indEqui);
         return this;
     }
@@ -147,7 +137,7 @@ public class Equipo extends BaseDomain implements Identifiable<Integer>, Seriali
         this.madesmar = madesmar;
     }
 
-    public Equipo madesmar(String madesmar) {
+    public IsisEquipo madesmar(String madesmar) {
         setMadesmar(madesmar);
         return this;
     }
@@ -155,7 +145,7 @@ public class Equipo extends BaseDomain implements Identifiable<Integer>, Seriali
     /**
      * Apply the default values.
      */
-    public Equipo withDefaults() {
+    public IsisEquipo withDefaults() {
         return this;
     }
 
@@ -164,7 +154,7 @@ public class Equipo extends BaseDomain implements Identifiable<Integer>, Seriali
      */
     @Override
     public boolean equals(Object other) {
-        return this == other || (other instanceof Equipo && hashCode() == other.hashCode());
+        return this == other || (other instanceof IsisEquipo && hashCode() == other.hashCode());
     }
 
     private IdentifiableHashBuilder identifiableHashBuilder = new IdentifiableHashBuilder();

@@ -13,6 +13,9 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.incloud.tgestiona.b2b.model.isis.IsisCliente;
+import com.incloud.tgestiona.b2b.model.isis.IsisEquipo;
+import com.incloud.tgestiona.b2b.model.isis.IsisTarifa;
 import com.incloud.tgestiona.b2b.service.dto.EntityIsisInDto;
 import com.incloud.tgestiona.b2b.service.dto.EntityIsisOutDto;
 import org.apache.commons.io.IOUtils;
@@ -24,23 +27,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.incloud.tgestiona.b2b.model.Cliente;
-import com.incloud.tgestiona.b2b.model.isis.Acceso;
-import com.incloud.tgestiona.b2b.model.isis.Equipo;
-import com.incloud.tgestiona.b2b.model.isis.Tarifa;
-import com.incloud.tgestiona.b2b.model.isis.cliente;
 import com.incloud.tgestiona.b2b.repository.ClienteIsisRepository;
 import com.incloud.tgestiona.b2b.repository.EquipoIsisRepository;
 import com.incloud.tgestiona.b2b.repository.TarifaIsisRepository;
 import com.incloud.tgestiona.framework.BindingErrorsResponse;
 import com.incloud.tgestiona.framework.JPACustomRest;
-import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -49,7 +45,7 @@ import io.swagger.annotations.ApiOperation;
 public class IsisEntityRest extends JPACustomRest<T, Integer> {
     private T entity;
 
-    private final Logger log = LoggerFactory.getLogger(Equipo.class);
+    private final Logger log = LoggerFactory.getLogger(IsisEquipo.class);
 
     @Autowired
     private ClienteIsisRepository _clienteRst;//IsisClienteRest
@@ -67,9 +63,9 @@ public class IsisEntityRest extends JPACustomRest<T, Integer> {
         HttpHeaders headers = new HttpHeaders();
         EntityIsisOutDto entityOutDto = new EntityIsisOutDto();
 
-        cliente _cliente = null;
-        Tarifa _tarifa = null;
-        Equipo _equipo = null;
+        IsisCliente _cliente = null;
+        IsisTarifa _tarifa = null;
+        IsisEquipo _equipo = null;
         /**/
         if (entityInputParam.getUrl() == null) {
             String errorDevuelve = this.devuelveErrorHeaders(bindingResult, errors);
@@ -95,17 +91,17 @@ public class IsisEntityRest extends JPACustomRest<T, Integer> {
 
                 try {
                     if (entityInputParam.getEntity().equals("cliente")) {
-                        _cliente = new cliente();
+                        _cliente = new IsisCliente();
                         _cliente = InsertInformacionCvs_clienteIsis(_cliente, data);
                         increment++;
                         entityOutDto.setTotalRecord(increment);
                     } else if (entityInputParam.getEntity().equals("tarifa")) {
-                        _tarifa = new Tarifa();
+                        _tarifa = new IsisTarifa();
                         _tarifa = InsertInformacionCvs_tarifaIsis(_tarifa, data);
                         increment++;
                         entityOutDto.setTotalRecord(increment);
                     } else if (entityInputParam.getEntity().equals("equipo")) {
-                        _equipo = new Equipo();
+                        _equipo = new IsisEquipo();
                         _equipo = InsertInformacionCvs_equipoIsis(_equipo, data);
                         increment++;
                         entityOutDto.setTotalRecord(increment);
@@ -114,11 +110,11 @@ public class IsisEntityRest extends JPACustomRest<T, Integer> {
                 } catch (ArrayIndexOutOfBoundsException e) {
                 } finally {
                     if (entityInputParam.getEntity().equals("cliente")) {
-                        cliente cl = _clienteRst.save(_cliente);
+                        IsisCliente cl = _clienteRst.save(_cliente);
                     } else if (entityInputParam.getEntity().equals("tarifa")) {
-                        Tarifa tr = _tarifaRst.save(_tarifa);
+                        IsisTarifa tr = _tarifaRst.save(_tarifa);
                     } else if (entityInputParam.getEntity().equals("equipo")) {
-                        Equipo eq = _equipoRst.save(_equipo);
+                        IsisEquipo eq = _equipoRst.save(_equipo);
                     }
                 }
             }
@@ -143,7 +139,7 @@ public class IsisEntityRest extends JPACustomRest<T, Integer> {
     }
 
 
-    private cliente InsertInformacionCvs_clienteIsis(cliente isiscliente, String[] data) {
+    private IsisCliente InsertInformacionCvs_clienteIsis(IsisCliente isiscliente, String[] data) {
         isiscliente.setClcodapli(data[1].trim());
         isiscliente.setClnomcli(data[1].trim());
         isiscliente.setClapecli(data[1].trim());
@@ -155,7 +151,7 @@ public class IsisEntityRest extends JPACustomRest<T, Integer> {
         return isiscliente;
     }
 
-    private Tarifa InsertInformacionCvs_tarifaIsis(Tarifa isistarifa, String[] data) {
+    private IsisTarifa InsertInformacionCvs_tarifaIsis(IsisTarifa isistarifa, String[] data) {
         isistarifa.setCodTari(data[0].trim());
         isistarifa.setDesTari(data[1].trim());
         isistarifa.setMonto(data[2].trim());
@@ -171,7 +167,7 @@ public class IsisEntityRest extends JPACustomRest<T, Integer> {
         return isistarifa;
     }
 
-    private Equipo InsertInformacionCvs_equipoIsis(Equipo isis_equipo, String[] data) {
+    private IsisEquipo InsertInformacionCvs_equipoIsis(IsisEquipo isis_equipo, String[] data) {
         isis_equipo.setCodigoIsis(Integer.parseInt(data[0].trim()));
         isis_equipo.setB2bDedescripcion(data[1].trim());
         isis_equipo.setCodMarcEqui(Integer.parseInt(data[2].trim()));

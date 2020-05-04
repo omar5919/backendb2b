@@ -24,7 +24,7 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
     }
 
     @GetMapping("/obtenerofertas")
-    @CrossOrigin(origins = "http://localhost:4200")
+//    @CrossOrigin(origins = "http://localhost:4200")
     public BaseBandejaResponse<List<ofertaDto>> obtenerofertas(@RequestParam(required = false) String codoportunidad,
                                                                @RequestParam(required = false) String cliente,
                                                                @RequestParam(required = false) String descripcion,

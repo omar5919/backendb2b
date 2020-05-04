@@ -19,7 +19,7 @@ public class ofertasConverter {
                         .color(s.getEstado().getColor())
                         .version(s.getVersion())
                         .oportunidad(s.getOportunidad())
-                        .cliente(s.getCliente_id().getDescripcion())
+                        .cliente(s.getCliente().getDescripcion())
                         .descripcion(s.getDescripcion())
                         .estado(s.getEstado().getDescripcion())
                         .tipoproyecto(s.getTipoproyecto().getDescripcion())

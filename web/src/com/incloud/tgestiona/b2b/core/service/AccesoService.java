@@ -1,12 +1,13 @@
 package com.incloud.tgestiona.b2b.core.service;
 
 import javax.persistence.EntityManager;
+
+import com.incloud.tgestiona.b2b.model.isis.IsisAcceso;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
-import com.incloud.tgestiona.b2b.model.isis.Acceso;
 
-public class AccesoService extends SimpleJpaRepository<Acceso, Integer>{
+public class AccesoService extends SimpleJpaRepository<IsisAcceso, Integer>{
 
-	public AccesoService(Class<Acceso> domainClass, EntityManager em) {
+	public AccesoService(Class<IsisAcceso> domainClass, EntityManager em) {
 		super(domainClass, em);
 		// TODO Auto-generated constructor stub
 	}
