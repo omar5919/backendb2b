@@ -16,6 +16,7 @@ import java.util.List;
 public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
 
     private static final String DATE_PATTERN = "yyyy/MM/dd";
+
     private final OfertasService oServ;
 
     public OfertaRest(OfertasService oServ) {
