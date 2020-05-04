@@ -31,7 +31,6 @@ public abstract class Auditoria {
 	private final String mensajeOK = "OK";
 	private final int MAXIMO_CARACTERES_SALIDA = 3950;
 
-	
     @Autowired
     private MessageSource messageSource;
     
@@ -123,8 +122,6 @@ public abstract class Auditoria {
 					mapperOut.setSerializationInclusion(Include.NON_NULL);
 					String outResult = mapperOut.writerWithDefaultPrettyPrinter().writeValueAsString(proceed);
 
-					System.out.println("---------------------->  "+outResult);
-					
 					if (outResult.length() > MAXIMO_CARACTERES_SALIDA) {
 						outResult = outResult.substring(0, MAXIMO_CARACTERES_SALIDA);
 					}
