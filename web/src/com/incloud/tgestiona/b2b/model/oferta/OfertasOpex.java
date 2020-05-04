@@ -1,6 +1,8 @@
 package com.incloud.tgestiona.b2b.model.oferta;
 
 
+import com.incloud.tgestiona.b2b.model.ConceptosOpex;
+import com.incloud.tgestiona.b2b.model.Moneda;
 import com.incloud.tgestiona.b2b.model.Preventa;
 import com.incloud.tgestiona.domain.BaseDomain;
 import lombok.AllArgsConstructor;
@@ -23,16 +25,27 @@ public class OfertasOpex extends BaseDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ofertas_opex_id" , nullable = false)
-    private Integer ofertaOpexID;
+    private Integer ofertaOpexId;
 
     
-    @ManyToOne
-    @JoinColumn(name = "ofertas_id")
+    //@ManyToOne
+    //@JoinColumn(name = "ofertas_id")
     //@Column(name = "oferta_id",nullable = true, precision = 10)
-    private Integer ofertaId;
+    //private Integer ofertaId;
 
-    @Column(name = "concepto_id",nullable = true, precision = 10)
-    private Integer conceptoId;
+    @ManyToOne
+    @JoinColumn(name = "oferta Id",referencedColumnName = "oferta Id")
+    //@Column(name = "oferta_id",nullable = true, precision = 10)
+    private Ofertas oferta;
+   
+    
+    //@Column(name = "concepto_id",nullable = true, precision = 10)
+    //private Integer conceptoId;
+    
+    @ManyToOne
+    @JoinColumn(name = "concepto_id",referencedColumnName = "concepto_id")
+    //@Column(name = "oferta_id",nullable = true, precision = 10)
+    private ConceptosOpex conceptosOpex;
 
     @Column(name = "nombre",  precision = 250)
     private String nombre;
@@ -47,8 +60,12 @@ public class OfertasOpex extends BaseDomain {
     @Column(name = "factor", precision = 12, scale = 4)
     private BigDecimal factor;
 
-    @Column(name = "moneda_id",nullable = true, precision = 10)
-    private Integer monedaId;
+    //@JoinColumn(name = "monedaId")
+    //@Column(name = "monedaId",nullable = true, precision = 10)
+    //private Integer 	moneda_id;
+    @ManyToOne
+    @JoinColumn(name = "moneda_id",referencedColumnName = "moneda_id")
+    private Moneda 	moneda;
 
     @Digits(integer = 4, fraction = 5)
     @Column(name = "unitario_mensual", precision = 12, scale = 4)
