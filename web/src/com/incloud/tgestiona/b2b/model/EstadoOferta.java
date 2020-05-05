@@ -20,7 +20,7 @@ import com.google.common.base.MoreObjects;
 import com.incloud.tgestiona.domain.BaseDomain;
 
 @Entity
-@Table(name = "estado_oferta",schema = "b2b_dev")
+@Table(name = "estado",schema = "b2b_dev")
 //@Audited
 //@AuditTable("_audi_estado")
 public class EstadoOferta extends BaseDomain implements Identifiable<Integer>, Serializable {
@@ -34,7 +34,7 @@ public class EstadoOferta extends BaseDomain implements Identifiable<Integer>, S
 	// Raw attributes
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "estado_oferta_id" ,nullable = true, precision = 10)
+    @Column(name = "estado_id" ,nullable = true, precision = 10)
 	private Integer id;
 	private String codigoEstado;
 	private String descripcion;

@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "concepto_opex",schema = "b2b")
+@Table(name = "concepto_opex",schema = "oferta_dev")
 public class ConceptosOpex  extends BaseDomain{
 	 	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
