@@ -97,8 +97,8 @@ public class Ofertas extends BaseDomain {
     private Complejidad complejidad;
 
     @ManyToOne
-    @JoinColumn(name = "estado_id")
-    private Estado estado;
+    @JoinColumn(name = "estado_oferta_id")
+    private EstadoOferta estadoOferta;
 
     @ManyToOne
     @JoinColumn(name = "tipo_contrato_id")

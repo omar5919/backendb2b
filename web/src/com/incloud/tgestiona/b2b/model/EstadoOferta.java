@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -19,18 +20,21 @@ import com.google.common.base.MoreObjects;
 import com.incloud.tgestiona.domain.BaseDomain;
 
 @Entity
-@Table(name = "estado")
+@Table(name = "estado_oferta",schema = "b2b_dev")
 //@Audited
 //@AuditTable("_audi_estado")
-public class Estado extends BaseDomain implements Identifiable<Integer>, Serializable {
+public class EstadoOferta extends BaseDomain implements Identifiable<Integer>, Serializable {
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(Estado.class.getName());
+	private static final Logger log = Logger.getLogger(EstadoOferta.class.getName());
 
 	/***************************/
 	/* Atributos de la Entidad */
 	/***************************/
 
 	// Raw attributes
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "estado_oferta_id" ,nullable = true, precision = 10)
 	private Integer id;
 	private String codigoEstado;
 	private String descripcion;
@@ -38,16 +42,12 @@ public class Estado extends BaseDomain implements Identifiable<Integer>, Seriali
 
 	@Override
 	public String entityClassName() {
-		return Estado.class.getSimpleName();
+		return EstadoOferta.class.getSimpleName();
 	}
 
 	// -- [id] ------------------------
 
-	@Override
-	@Column(name = "estado_id", precision = 10)
-	@GeneratedValue(strategy = SEQUENCE, generator = "seq_estado")
-	@Id
-	@SequenceGenerator(name = "seq_estado", sequenceName = "seq_estado", allocationSize = 1)
+
 	public Integer getId() {
 		return id;
 	}
@@ -57,7 +57,7 @@ public class Estado extends BaseDomain implements Identifiable<Integer>, Seriali
 		this.id = id;
 	}
 
-	public Estado id(Integer id) {
+	public EstadoOferta id(Integer id) {
 		setId(id);
 		return this;
 	}
@@ -80,7 +80,7 @@ public class Estado extends BaseDomain implements Identifiable<Integer>, Seriali
 		this.codigoEstado = codigoEstado;
 	}
 
-	public Estado codigoEstado(String codigoEstado) {
+	public EstadoOferta codigoEstado(String codigoEstado) {
 		setCodigoEstado(codigoEstado);
 		return this;
 	}
@@ -97,7 +97,7 @@ public class Estado extends BaseDomain implements Identifiable<Integer>, Seriali
 		this.descripcion = descripcion;
 	}
 
-	public Estado descripcion(String descripcion) {
+	public EstadoOferta descripcion(String descripcion) {
 		setDescripcion(descripcion);
 		return this;
 	}
@@ -113,7 +113,7 @@ public class Estado extends BaseDomain implements Identifiable<Integer>, Seriali
 		this.color = color;
 	}
 
-	public Estado color(String color) {
+	public EstadoOferta color(String color) {
 		setColor(color);
 		return this;
 	}
@@ -121,7 +121,7 @@ public class Estado extends BaseDomain implements Identifiable<Integer>, Seriali
 	/**
 	 * Apply the default values.
 	 */
-	public Estado withDefaults() {
+	public EstadoOferta withDefaults() {
 		return this;
 	}
 
@@ -130,7 +130,7 @@ public class Estado extends BaseDomain implements Identifiable<Integer>, Seriali
 	 */
 	@Override
 	public boolean equals(Object other) {
-		return this == other || (other instanceof Estado && hashCode() == other.hashCode());
+		return this == other || (other instanceof EstadoOferta && hashCode() == other.hashCode());
 	}
 
 	private IdentifiableHashBuilder identifiableHashBuilder = new IdentifiableHashBuilder();
