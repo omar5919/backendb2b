@@ -3,7 +3,7 @@ package com.incloud.tgestiona.b2b.servicesImpl;
 import com.incloud.tgestiona.b2b.converter.ofertasConverter;
 import com.incloud.tgestiona.b2b.model.Cliente;
 import com.incloud.tgestiona.b2b.model.Complejidad;
-import com.incloud.tgestiona.b2b.model.Estado;
+import com.incloud.tgestiona.b2b.model.EstadoOferta;
 import com.incloud.tgestiona.b2b.model.oferta.Ofertas;
 import com.incloud.tgestiona.b2b.repository.OfertasRepository;
 import com.incloud.tgestiona.b2b.serices.OfertasService;
@@ -46,7 +46,7 @@ public class OfertasServiceImpl implements OfertasService {
         List<Ofertas> oList = oRepo.findAll((Specification<Ofertas>) (root, cq, cb) -> {
             Predicate p = cb.conjunction();
             Join<Ofertas, Cliente> clienteOfertas = root.join("cliente");
-            Join<Ofertas, Estado> estadoOfertas = root.join("estado");
+            Join<Ofertas, EstadoOferta> estadoOfertas = root.join("estado");
             Join<Ofertas, Complejidad> complejidadOfertas = root.join("complejidad");
 
             if (!StringUtils.isEmpty(codoportunidad)) {
