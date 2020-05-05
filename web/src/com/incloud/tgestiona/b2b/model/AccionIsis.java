@@ -34,6 +34,35 @@ public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Ser
 	private Integer id;
 	private Integer codigoEquivalente;
 	private String descripcion;
+	private String codigoIsis;
+	private Boolean activo;
+	private String codTablTipo;
+	
+ 
+
+	public String getCodigoIsis() {
+		return codigoIsis;
+	}
+
+	public void setCodigoIsis(String codigoIsis) {
+		this.codigoIsis = codigoIsis;
+	}
+
+	public Boolean getActivo() {
+		return activo;
+	}
+
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
+	}
+
+	public String getCodTablTipo() {
+		return codTablTipo;
+	}
+
+	public void setCodTablTipo(String codTablTipo) {
+		this.codTablTipo = codTablTipo;
+	}
 
 	@Override
 	public String entityClassName() {
