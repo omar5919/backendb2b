@@ -90,7 +90,7 @@ public class Ofertas extends BaseDomain {
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
-    private Cliente cliente_id;
+    private Cliente cliente;
 
     @ManyToOne
     @JoinColumn(name = "complejidad_id")

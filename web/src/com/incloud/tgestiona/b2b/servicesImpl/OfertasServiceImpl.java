@@ -1,6 +1,7 @@
 package com.incloud.tgestiona.b2b.servicesImpl;
 
 import com.incloud.tgestiona.b2b.converter.ofertasConverter;
+import com.incloud.tgestiona.b2b.model.Cliente;
 import com.incloud.tgestiona.b2b.model.Complejidad;
 import com.incloud.tgestiona.b2b.model.Estado;
 import com.incloud.tgestiona.b2b.model.oferta.Ofertas;
@@ -44,33 +45,30 @@ public class OfertasServiceImpl implements OfertasService {
 //        }, pageable);
         List<Ofertas> oList = oRepo.findAll((Specification<Ofertas>) (root, cq, cb) -> {
             Predicate p = cb.conjunction();
+            Join<Ofertas, Cliente> clienteOfertas = root.join("cliente");
             Join<Ofertas, Estado> estadoOfertas = root.join("estado");
             Join<Ofertas, Complejidad> complejidadOfertas = root.join("complejidad");
-            try {
-                if (!StringUtils.isEmpty(codoportunidad)) {
-                    p = cb.and(p, cb.like(root.get("codigo"), "%" + codoportunidad + "%"));
-                }
-                if (!StringUtils.isEmpty(cliente)) {
-                    //p = cb.and(p, cb.like(root.get("codigo"), "%" + codoportunidad + "%"));
-                }
-                if (!StringUtils.isEmpty(descripcion)) {
-                    p = cb.and(p, cb.like(root.get("descripcion"), "%" + descripcion + "%"));
-                }
-                if (complejidad != null) {
-                    p = cb.and(p, cb.equal(complejidadOfertas.get("id"), complejidad));
-                }
-                if (estado != null) {
-                    p = cb.and(p, cb.equal(estadoOfertas.get("id"), estado));
-                }
-                if (Objects.nonNull(desde) && Objects.nonNull(hasta) && desde.before(hasta)) {
-                    p = cb.and(p, cb.between(root.get("fecha_reg"), desde, hasta));
-                }
-                cq.orderBy(cb.desc(root.get("descripcion")), cb.asc(root.get("oferta_id")));
-                return p;
-            } catch (Exception e) {
-                System.out.println("");
-                return p;
+
+            if (!StringUtils.isEmpty(codoportunidad)) {
+                p = cb.and(p, cb.like(root.get("codigo"), "%" + codoportunidad + "%"));
             }
+            if (!StringUtils.isEmpty(cliente)) {
+                p = cb.and(p, cb.like(clienteOfertas.get("descripcion"), "%" + cliente + "%"));
+            }
+            if (!StringUtils.isEmpty(descripcion)) {
+                p = cb.and(p, cb.like(root.get("descripcion"), "%" + descripcion + "%"));
+            }
+            if (complejidad != null) {
+                p = cb.and(p, cb.equal(complejidadOfertas.get("id"), complejidad));
+            }
+            if (estado != null) {
+                p = cb.and(p, cb.equal(estadoOfertas.get("id"), estado));
+            }
+            if (Objects.nonNull(desde) && Objects.nonNull(hasta) && desde.before(hasta)) {
+                p = cb.and(p, cb.between(root.get("fecha_reg"), desde, hasta));
+            }
+            cq.orderBy(cb.desc(root.get("descripcion")), cb.asc(root.get("oferta_id")));
+            return p;
         }, pageable).getContent();
         return ofertasConverter.convertToOfertaDTO(oList);
     }
