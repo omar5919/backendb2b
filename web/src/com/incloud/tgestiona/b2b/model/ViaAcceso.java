@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "via_acceso",schema = "oferta")
+@Table(name = "via_acceso",schema = "oferta_dev")
 public class ViaAcceso {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,10 +29,13 @@ public class ViaAcceso {
 	
 	@Column(name = "codigo_isis", length = 2 )
 	private String codigo_isis ;
+	
 	@Column(name = "descripcion", length = 60 )
 	private String descripcion ;
+	
 	@Column(name = "tipo_servicio_id",  precision = 10 )
 	private Integer tipo_servicio_id ;
+	
 	@Column(name = "activo" )
 	private Boolean activo ;
 }

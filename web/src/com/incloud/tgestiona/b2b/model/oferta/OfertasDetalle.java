@@ -3,6 +3,7 @@ package com.incloud.tgestiona.b2b.model.oferta;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import javax.persistence.*;
@@ -11,17 +12,33 @@ import javax.validation.constraints.Size;
 
 import com.google.common.base.MoreObjects;
 import com.incloud.tgestiona.b2b.model.AccionIsis;
+import com.incloud.tgestiona.b2b.model.AnalistaFinaciero;
 import com.incloud.tgestiona.b2b.model.Cliente;
+import com.incloud.tgestiona.b2b.model.Complejidad;
+import com.incloud.tgestiona.b2b.model.EstadoOferta;
 import com.incloud.tgestiona.b2b.model.Identifiable;
+import com.incloud.tgestiona.b2b.model.Moneda;
+import com.incloud.tgestiona.b2b.model.Preventa;
+import com.incloud.tgestiona.b2b.model.SegmentoNegocio;
 import com.incloud.tgestiona.b2b.model.TipoCircuito;
+import com.incloud.tgestiona.b2b.model.TipoContrato;
+import com.incloud.tgestiona.b2b.model.TipoPago;
+import com.incloud.tgestiona.b2b.model.TipoProyecto;
 import com.incloud.tgestiona.domain.BaseDomain;
 import com.sun.istack.NotNull;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import static javax.persistence.GenerationType.IDENTITY;
 import static javax.persistence.GenerationType.SEQUENCE;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "ofertas_detalle",schema="oferta")
+@Table(name = "ofertas_detalle",schema="oferta_dev")
 //@Audited
 //@AuditTable("_audi_ofertas_detalle")
 public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>, Serializable {
@@ -78,10 +95,13 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	
 	@Column(name = "longitud", length = 20  )
 	private String longitud;
+	
 	@Column(name = "zoom",  length = 1 )
 	private String zoom;
+	
 	@Column(name = "contacto",length = 150  )
 	private String contacto;
+	
 	@Column(name = "telefono", length = 15 )
 	private String telefono;
 
@@ -272,8 +292,7 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 
 	@Override
 	public boolean isIdSet() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.ofertasDetalleId != null;
 	}
 
 	@Override

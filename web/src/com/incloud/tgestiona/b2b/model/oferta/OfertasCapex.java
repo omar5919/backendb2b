@@ -21,7 +21,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ofertas_capex",schema = "oferta")
+@Table(name = "ofertas_capex",schema = "oferta_dev")
 public class OfertasCapex extends BaseDomain {
  
 
@@ -89,9 +89,7 @@ public class OfertasCapex extends BaseDomain {
 
 	@Override
 	public boolean isIdSet() {
-		// TODO Auto-generated method stub
-		//OfertasCapex m; 
-		return false;
+		return this.ofertaCapexId != null;
 	}
 	
 	
