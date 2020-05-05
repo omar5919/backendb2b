@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tipo_equipamiento",schema = "b2b")
+@Table(name = "equipamiento_marca",schema = "b2b_dev")
 public class EquipamientoMarca  extends BaseDomain{
 
 	@Id
@@ -30,8 +30,10 @@ public class EquipamientoMarca  extends BaseDomain{
 	
 	@Column(name = "descripcion", length = 50 )
 	private String descripcion ;
-	@Column(name = "descripcion", length = 50 )
+	
+	@Column(name = "codigo_isis", length = 50 )
 	private String codigo_isis ;
+	
 	@Column(name = "activo"  )
 	private Boolean activo ;
 	@Override
