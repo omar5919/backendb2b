@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "equipamiento_condicion",schema = "b2b_dev")
+@Table(name = "equipamiento_condicion",schema = "oferta_dev")
 public class EquipamientoCondicion  extends BaseDomain {
 	 @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)

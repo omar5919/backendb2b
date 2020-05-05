@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tipo_equipamiento",schema = "b2b_dev")
+@Table(name = "tipo_equipamiento",schema = "oferta_dev")
 public class TipoEquipamiento  extends BaseDomain{
 	
 	

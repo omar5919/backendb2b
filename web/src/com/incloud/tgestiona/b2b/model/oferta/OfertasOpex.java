@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ofertas_opex",schema = "oferta")
+@Table(name = "ofertas_opex",schema = "oferta_dev")
 public class OfertasOpex extends BaseDomain {
 
 	
