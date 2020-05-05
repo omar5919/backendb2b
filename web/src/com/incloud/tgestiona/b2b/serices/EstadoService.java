@@ -5,21 +5,21 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import com.incloud.tgestiona.b2b.model.Estado;
+import com.incloud.tgestiona.b2b.model.*;
 
 @Component
 public interface EstadoService {
 
-	public List<Estado> getAll();
+	public List<EstadoOferta> getAll();
 
-	public Optional<Estado> findByID(Integer id);
+	public Optional<EstadoOferta> findByID(Integer id);
 
-	public List<Estado> saveAll(List<Estado> entities);
+	public List<EstadoOferta> saveAll(List<EstadoOferta> entities);
 
-	public Estado save(Estado entities);
+	public EstadoOferta save(EstadoOferta entities);
 
-	public Estado deleteById(Integer id);
+	public EstadoOferta deleteById(Integer id);
 
-	public Estado deleteAll();
+	public EstadoOferta deleteAll();
 
 }

@@ -20,7 +20,7 @@ import com.google.common.base.MoreObjects;
 import com.incloud.tgestiona.domain.BaseDomain;
 
 @Entity
-@Table(name = "estado_oferta",schema = "oferta")
+@Table(name = "estado_oferta",schema = "b2b_dev")
 //@Audited
 //@AuditTable("_audi_estado")
 public class EstadoOferta extends BaseDomain implements Identifiable<Integer>, Serializable {
