@@ -36,7 +36,7 @@ public class OfertasCapex extends BaseDomain {
     //private Integer 	ofertaId;
     
     @ManyToOne
-    @JoinColumn(name = "oferta Id",referencedColumnName = "oferta Id")
+    @JoinColumn(name = "oferta_Id",referencedColumnName = "oferta_Id")
     private Ofertas ofertas;
     
 
