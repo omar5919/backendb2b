@@ -21,7 +21,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
-@Table(name = "ofertas_detalle")
+@Table(name = "ofertas_detalle",schema="oferta")
 //@Audited
 //@AuditTable("_audi_ofertas_detalle")
 public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>, Serializable {
@@ -45,7 +45,7 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	
 	 
     @ManyToOne
-    @JoinColumn(name = "oferta Id",referencedColumnName = "oferta Id")
+    @JoinColumn(name = "oferta_Id",referencedColumnName = "oferta_Id")
     private Ofertas ofertas;
 	
 	//@Column(name = "cliente_id",nullable = false, precision = 10)
@@ -57,20 +57,26 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	
 	@Column(name = "secuencia",nullable = false, precision = 10)
 	private Integer secuencia;
+	
 	@Column(name = "nombre_sede", length = 100  )
 	private String nombreSede;
+	
 	@Column(name = "direccion", length = 400)
 	private String direccion;
+	
 	@Column(name = "departamento_id" , length = 2)
 	private String departamentoId;
+	
 	@Column(name = "provincia_id", length = 2  )
 	private String provinciaId;
+	
 	@Column(name = "distrito_id", length = 2  )
 	private String distritoId;
 
 	@Column(name = "latidud", length = 20)
 	private String latidud;
-	@Column(name = "latidud", length = 20  )
+	
+	@Column(name = "longitud", length = 20  )
 	private String longitud;
 	@Column(name = "zoom",  length = 1 )
 	private String zoom;
@@ -81,51 +87,71 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 
 	@Column(name = "tipo_cd_actual", length = 5 )
 	private String tipoCdActual;
+	
 	@Column(name = "numero_cd_actual" )
 	private String numeroCdActual;
+	
 	@Column(name = "tipo_servicio_id_actual" )
 	private Integer tipoServicioIdActual;
 
 	@Column(name = "bw_actual_actual", length = 15 )
 	private String bwActualActual;
+	
 	@Column(name = "caudal_bronce_actual" , length = 20)
 	private String caudalBronceActual;
+	
 	@Column(name = "caudal_plata_actual" , length = 20)
 	private String caudal_plata_actual;
+	
 	@Column(name = "caudal_oro_actual", length = 20 )
 	private String caudalOroActual;
+	
 	@Column(name = "caudal_platinum_actual" , length = 20)
 	private String caudalPlatinumActual;
+	
 	@Column(name = "caudal_voz_actual" , length = 20)
 	private String caudalVozActual;
+	
 	@Column(name = "caudal_video_actual", length = 20 )
 	private String caudalVideoActual;
-	@Column(name = "bw_actual_actual" , length = 20)
+	
+	@Column(name = "caudal_ldn_actual" , length = 20)
 	private String caudalLdnActual;
 
 
 	@Column(name = "ultima_milla_actual" )
 	private Integer ultimaMillaActual;
+	
 	@Column(name = "router_switch_actual", length = 25 )
 	private String routerSwitchActual;
+	
 	@Column(name = "dte_actual" , length = 25 )
 	private Integer dteActual;
+	
 	@Column(name = "equipoAdicionalActual" , length = 25 )
 	private String equipo_adicional_actual;
+	
 	@Column(name = "equipo_terminal_actual" , length = 25 )
 	private String equipoTerminalActual;
+	
 	@Column(name = "recurso_transporte_actual" , length = 50 )
 	private String recursoTransporteActual;
+	
 	@Column(name = "tipo_antena_actual", length = 15  )
 	private String tipoAntenaActual;
+	
 	@Column(name = "segmento_satelital_actual" )
 	private Integer segmentoSatelitalActual;
+	
 	@Column(name = "pozo_tierra_actual" , length = 15 )
 	private String pozoTierraActual;
+	
 	@Column(name = "ups_actual" , length = 5)
 	private String upsActual;
+	
 	@Column(name = "facturacion_actual" )
 	private BigDecimal facturacion_actual;
+	
 	@Column(name = "vrf_actual" , length = 15)
 	private String vrf_actual;
 
@@ -148,48 +174,67 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	
 	@Column(name = "tipo_servicio_id_propuesto", precision = 10)
 	private Integer tipoServicioIdPropuesto;
+	
 	@Column(name = "sva_propuesto" , precision = 10)
 	private String svaPropuesto;
+	
 	@Column(name = "descripcion_sva_propuesto" , length = 15)
 	private String descripcionSvaPropuesto;
 
 	@Column(name = "bw_propuesto" , length = 10)
 	private String bwPropuesto;
+	
 	@Column(name = "caudal_bronce_propuesto" , length = 20)
 	private String caudalBroncePropuesto;
+	
 	@Column(name = "caudal_plata_propuesto" , length = 20)
 	private String caudalPlataPropuesto;
+	
 	@Column(name = "caudal_oro_propuesto" , length = 20)
 	private String caudalOroPropuesto;
+	
 	@Column(name = "caudal_platinum_propuesto" , length = 20)
 	private String caudalPlatinumPropuesto;
+	
 	@Column(name = "caudal_voz_propuesto" , length = 20)
 	private String caudalVozPropuesto;
+	
 	@Column(name = "caudal_video_propuesto" , length = 20)
 	private String caudalVideoPropuesto;
+	
 	@Column(name = "sp_caudal_ldn_propuesto" , length = 20)
 	private String spCaudalLdnPropuesto;
 
 	@Column(name = "via_acceso_id_propuesto" , precision = 10)
 	private Integer viaAccesoIdPropuesto;
+	
 	@Column(name = "equipo_terminal_propuesto" , length = 25)
 	private String equipoTerminalPropuesto;
+	
 	@Column(name = "router_propuesto" , length = 25)
 	private String routerPropuesto;
+	
 	@Column(name = "equipo_stock_propuesto" , length = 25)
 	private String equipoStockPropuesto;
+	
 	@Column(name = "fecha_llegada_propuesto" , length = 10)
 	private String fechaLlegadaPropuesto;
+	
 	@Column(name = "otros_equipos_propuesto" , length = 15)
 	private String otrosEquiposPropuesto;
+	
 	@Column(name = "componentes_propuesto" , length = 25)
 	private String componentesPropuesto;
+	
 	@Column(name = "vrf_propuesto" , length = 15)
 	private String vrfPropuesto;
+	
 	@Column(name = "detalle_accion_enlace_propuesto" , length = 15)
 	private String detalleAccionEnlacePropuesto;
+	
 	@Column(name = "observaciones_propuesto" , length = 200)
 	private String observacionesPropuesto;
+	
 	@Digits(integer = 4, fraction = 5)
 	@Column(name = "precio_propuesto" , precision = 12, scale = 4)
 	private BigDecimal precioPropuesto;
