@@ -38,7 +38,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ofertas_detalle",schema="oferta_dev")
+@Table(name = "ofertas_detalle",schema="oferta")
 //@Audited
 //@AuditTable("_audi_ofertas_detalle")
 public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>, Serializable {

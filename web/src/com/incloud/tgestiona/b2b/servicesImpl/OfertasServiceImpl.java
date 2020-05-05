@@ -46,7 +46,7 @@ public class OfertasServiceImpl implements OfertasService {
         List<Ofertas> oList = oRepo.findAll((Specification<Ofertas>) (root, cq, cb) -> {
             Predicate p = cb.conjunction();
             Join<Ofertas, Cliente> clienteOfertas = root.join("cliente");
-            Join<Ofertas, EstadoOferta> estadoOfertas = root.join("estado");
+            Join<Ofertas, EstadoOferta> estadoOfertas = root.join("estadooferta");
             Join<Ofertas, Complejidad> complejidadOfertas = root.join("complejidad");
 
             if (!StringUtils.isEmpty(codoportunidad)) {

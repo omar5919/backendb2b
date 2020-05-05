@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ofertas",schema = "oferta_dev")
+@Table(name = "ofertas",schema = "oferta")
 public class Ofertas extends BaseDomain {
 
     @Id
@@ -97,8 +97,8 @@ public class Ofertas extends BaseDomain {
     private Complejidad complejidad;
 
     @ManyToOne
-    @JoinColumn(name = "estado_id")
-    private EstadoOferta estado;
+    @JoinColumn(name = "estado_oferta_id")
+    private EstadoOferta estadoOferta;
 
     @ManyToOne
     @JoinColumn(name = "tipo_contrato_id")
