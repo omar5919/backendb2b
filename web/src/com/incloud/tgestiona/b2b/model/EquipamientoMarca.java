@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "equipamiento_marca",schema = "oferta_dev")
+@Table(name = "equipamiento_marca",schema = "oferta")
 public class EquipamientoMarca  extends BaseDomain{
 
 	@Id
