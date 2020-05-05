@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import com.incloud.tgestiona.b2b.model.OfertasDetalle;
+import com.incloud.tgestiona.b2b.model.oferta.OfertasDetalle;
 
 @Component
 public interface OfertasDetalleService {
