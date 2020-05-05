@@ -34,7 +34,7 @@ public class OfertasOpex extends BaseDomain {
     //private Integer ofertaId;
 
     @ManyToOne
-    @JoinColumn(name = "oferta Id",referencedColumnName = "oferta Id")
+    @JoinColumn(name = "oferta Id",referencedColumnName = "oferta_Id")
     //@Column(name = "oferta_id",nullable = true, precision = 10)
     private Ofertas oferta;
    
