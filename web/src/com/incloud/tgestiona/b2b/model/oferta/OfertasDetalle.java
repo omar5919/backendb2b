@@ -11,7 +11,9 @@ import javax.validation.constraints.Size;
 
 import com.google.common.base.MoreObjects;
 import com.incloud.tgestiona.b2b.model.AccionIsis;
+import com.incloud.tgestiona.b2b.model.Cliente;
 import com.incloud.tgestiona.b2b.model.Identifiable;
+import com.incloud.tgestiona.b2b.model.TipoCircuito;
 import com.incloud.tgestiona.domain.BaseDomain;
 import com.sun.istack.NotNull;
 
@@ -136,8 +138,14 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     @JoinColumn(name = "accion_isis_id_propuesto",referencedColumnName = "accion_isis_id")
     private AccionIsis accionIsis;
 	
-	@Column(name = "tipo_circuito_id_propuesto"  , precision = 10)
-	private Integer tipoCircuitoIdPropuesto;
+	//@Column(name = "tipo_circuito_id_propuesto"  , precision = 10)
+	//private Integer tipoCircuitoIdPropuesto;
+	
+    @ManyToOne
+    @JoinColumn(name = "tipo_circuito_id",referencedColumnName = "tipo_circuito_id")
+    private TipoCircuito tipoCircuito;
+	
+	
 	@Column(name = "tipo_servicio_id_propuesto", precision = 10)
 	private Integer tipoServicioIdPropuesto;
 	@Column(name = "sva_propuesto" , precision = 10)
