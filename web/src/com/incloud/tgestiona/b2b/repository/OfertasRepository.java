@@ -16,11 +16,11 @@ public interface OfertasRepository extends JpaRepository<Ofertas, Integer>, JpaS
 
 	
 	@Procedure("sp_copiar_oferta")
-	int copiarOferta(Integer ofertaId,Integer usuarioId,String usuario);
+	int copiarOferta(Integer poferta_id,Integer pusuario_id,String pusuario);
 	
 	@Procedure("sp_anular_oferta")
-	int anularOferta(Integer ofertaId,Integer usuarioId,String usuario);
+	int anularOferta(Integer poferta_id,Integer pusuario_id,String pusuario);
 	
 	@Procedure("sp_versionar_oferta")
-	int versionarOferta(Integer ofertaId,Integer usuarioId,String usuario);
+	int versionarOferta(Integer poferta_id,Integer pusuario_id,String pusuario);
 }
