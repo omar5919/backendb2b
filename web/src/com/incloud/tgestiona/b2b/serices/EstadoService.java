@@ -3,6 +3,7 @@ package com.incloud.tgestiona.b2b.serices;
 import java.util.List;
 import java.util.Optional;
 
+import com.incloud.tgestiona.b2b.model.oferta.Estado;
 import org.springframework.stereotype.Component;
 
 import com.incloud.tgestiona.b2b.model.*;
@@ -10,16 +11,16 @@ import com.incloud.tgestiona.b2b.model.*;
 @Component
 public interface EstadoService {
 
-	public List<EstadoOferta> getAll();
+	public List<Estado> getAll();
 
-	public Optional<EstadoOferta> findByID(Integer id);
+	public Optional<Estado> findByID(Integer id);
 
-	public List<EstadoOferta> saveAll(List<EstadoOferta> entities);
+	public List<Estado> saveAll(List<Estado> entities);
 
-	public EstadoOferta save(EstadoOferta entities);
+	public Estado save(Estado entities);
 
-	public EstadoOferta deleteById(Integer id);
+	public Estado deleteById(Integer id);
 
-	public EstadoOferta deleteAll();
+	public Estado deleteAll();
 
 }
