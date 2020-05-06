@@ -43,29 +43,29 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
     }
     
     @PostMapping("/copiaroferta")
-    public void CopiarOferta(@RequestParam(required = false) int ofertaId,
+    public int CopiarOferta(@RequestParam(required = false) int ofertaId,
     						@RequestParam(required = false) int usuarioId,
     						@RequestParam(required = false) String usuario){
     	
-    	   	oServ.copiarOferta(ofertaId,usuarioId,usuario);
+    	return   	oServ.copiarOferta(ofertaId,usuarioId,usuario);
     	
     }
     
     @PostMapping("/anularoferta")
-    public void AnularOferta(@RequestParam(required = false) int ofertaId,
+    public int AnularOferta(@RequestParam(required = false) int ofertaId,
 								@RequestParam(required = false) int usuarioId,
 								@RequestParam(required = false) String usuario){
     	
-    	oServ.anularOferta(ofertaId,  usuarioId,  usuario);
+    return	 oServ.anularOferta(ofertaId,  usuarioId,  usuario);
     	
     }
     
     @PostMapping("/versionaroferta")
-    public void versionarOferta(@RequestParam(required = false) int ofertaId,
+    public int versionarOferta(@RequestParam(required = false) int ofertaId,
 							@RequestParam(required = false) int usuarioId,
 							@RequestParam(required = false) String usuario){
   	
-    	oServ.versionarOferta(ofertaId, usuarioId, usuario);
+    	return	oServ.versionarOferta(ofertaId, usuarioId, usuario);
   	
   	}
 
