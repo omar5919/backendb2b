@@ -18,7 +18,8 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
 
     private static final String DATE_PATTERN = "yyyy/MM/dd";
     private final OfertasService oServ;
-
+    
+   
     public OfertaRest(OfertasService oServ) {
         this.oServ = oServ;
     }
@@ -40,5 +41,32 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
     public void addStudent(@RequestBody ofertaDto student) {
         oServ.addOferta(student);
     }
+    
+    @PostMapping("/copiaroferta")
+    public void CopiarOferta(@RequestParam(required = false) int ofertaId,
+    						@RequestParam(required = false) int usuarioId,
+    						@RequestParam(required = false) String usuario){
+    	
+    	   	oServ.copiarOferta(ofertaId,usuarioId,usuario);
+    	
+    }
+    
+    @PostMapping("/anularoferta")
+    public void AnularOferta(@RequestParam(required = false) int ofertaId,
+								@RequestParam(required = false) int usuarioId,
+								@RequestParam(required = false) String usuario){
+    	
+    	oServ.anularOferta(ofertaId,  usuarioId,  usuario);
+    	
+    }
+    
+    @PostMapping("/versionaroferta")
+    public void versionarOferta(@RequestParam(required = false) int ofertaId,
+							@RequestParam(required = false) int usuarioId,
+							@RequestParam(required = false) String usuario){
+  	
+    	oServ.versionarOferta(ofertaId, usuarioId, usuario);
+  	
+  	}
 
 }

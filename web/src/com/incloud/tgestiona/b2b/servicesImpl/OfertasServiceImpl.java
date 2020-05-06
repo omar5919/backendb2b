@@ -76,4 +76,16 @@ public class OfertasServiceImpl implements OfertasService {
     public void addOferta(ofertaDto o) {
         oRepo.save(ofertasConverter.convertToOferta(o));
     }
+    
+    public int copiarOferta(Integer ofertaId,Integer usuarioId,String usuario) {
+     return	this.oRepo.copiarOferta(ofertaId,  usuarioId,  usuario);
+    	
+    }
+    public int anularOferta(Integer ofertaId,Integer usuarioId,String usuario){
+        return	this.oRepo.anularOferta(ofertaId,  usuarioId,  usuario);
+       	
+    }
+    public int versionarOferta(Integer ofertaId,Integer usuarioId,String usuario) {
+    	return this.oRepo.versionarOferta(ofertaId, usuarioId, usuario);
+    }
 }

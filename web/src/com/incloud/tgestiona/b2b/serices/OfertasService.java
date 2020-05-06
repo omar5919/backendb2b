@@ -13,4 +13,10 @@ public interface OfertasService {
     BaseBandejaResponse<List<ofertaDto>> getOfertas(String codoportunidad,String cliente,String descripcion, Integer complejidad,Integer estado,Date desde, Date hasta, Pageable pageable);
 
     void addOferta(ofertaDto student);
+    
+    int copiarOferta(Integer ofertaId,Integer usuarioId,String usuario);
+    
+    int anularOferta(Integer ofertaId,Integer usuarioId,String usuario);
+    
+    int versionarOferta(Integer ofertaId,Integer usuarioId,String usuario);
 }
