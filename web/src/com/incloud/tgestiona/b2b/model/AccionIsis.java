@@ -19,7 +19,7 @@ import com.google.common.base.MoreObjects;
 import com.incloud.tgestiona.domain.BaseDomain;
 
 @Entity
-@Table(name = "accion_isis")
+@Table(name = "accion_isis",schema="oferta")
 //@Audited
 //@AuditTable("_audi_accion_isis")
 public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Serializable {
