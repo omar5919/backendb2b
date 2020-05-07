@@ -19,4 +19,6 @@ public interface OfertasService {
     int anularOferta(Integer ofertaId,Integer usuarioId,String usuario);
     
     int versionarOferta(Integer ofertaId,Integer usuarioId,String usuario);
+    
+    int ganarOferta(Integer ofertaId,Integer usuarioId,String usuario);
 }

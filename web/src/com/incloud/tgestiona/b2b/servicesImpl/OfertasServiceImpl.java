@@ -88,4 +88,8 @@ public class OfertasServiceImpl implements OfertasService {
     public int versionarOferta(Integer ofertaId,Integer usuarioId,String usuario) {
     	return this.oRepo.versionarOferta(ofertaId, usuarioId, usuario);
     }
+    
+    public  int ganarOferta(Integer ofertaId,Integer usuarioId,String usuario) {
+    	return this.oRepo.ganarOferta(ofertaId, usuarioId, usuario);
+    }
 }

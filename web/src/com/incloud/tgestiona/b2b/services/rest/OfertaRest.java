@@ -68,5 +68,11 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
     	return	oServ.versionarOferta(ofertaId, usuarioId, usuario);
   	
   	}
+    @PostMapping("/ganaroferta")
+    public  int ganarOferta(@RequestParam(required = false) int ofertaId,
+			@RequestParam(required = false) int usuarioId,
+			@RequestParam(required = false) String usuario) {
+    	return this.oServ.ganarOferta(ofertaId, usuarioId, usuario);
+    }
 
 }

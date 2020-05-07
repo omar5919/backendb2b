@@ -23,4 +23,7 @@ public interface OfertasRepository extends JpaRepository<Ofertas, Integer>, JpaS
 	
 	@Procedure("sp_versionar_oferta")
 	int versionarOferta(Integer poferta_id,Integer pusuario_id,String pusuario);
+	
+	@Procedure("sp_ganar_oferta")
+	int ganarOferta(Integer poferta_id,Integer pusuario_id,String pusuario);
 }
