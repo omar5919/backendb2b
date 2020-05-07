@@ -23,7 +23,7 @@ import com.incloud.tgestiona.b2b.audit.AuditorAwareImpl;
 @SpringBootApplication
 @EnableAutoConfiguration
 //@ComponentScan({ "com.incloud.tgestiona.b2b.services" })
-@ComponentScan({ "com.incloud.tgestiona" })
+@ComponentScan({"com.incloud.tgestiona"})
 @EnableJpaRepositories("com.incloud.tgestiona.b2b.repository")
 @EntityScan("com.incloud.tgestiona.b2b.model")
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
@@ -31,41 +31,41 @@ import com.incloud.tgestiona.b2b.audit.AuditorAwareImpl;
 
 public class Application extends SpringBootServletInitializer {
 
-	private static ConfigurableApplicationContext context;
+    private static ConfigurableApplicationContext context;
 
-	private static final Logger log = LoggerFactory.getLogger(Application.class);
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
 
-	public static void main(String[] args) {
-		context = SpringApplication.run(Application.class, args);
-		log.info(String.format("\n\n    _____\\    _______\n" + "   /      \\  |      /\\\n" + "  /_______/  |_____/  \\\n"
-				+ " |   \\   /        /   /\n" + "  \\   \\         \\/   /\n" + "   \\  /          \\__/_\n"
-				+ "    \\/ ____    /\\\n" + "      /  \\    /  \\\n" + "     /\\   \\  /   /\n"
-				+ "       \\   \\/   /\n" + "        \\___\\__/\n\n:: Business 2 Business - Provisioner :: \n\n ", context));
-	}
+    public static void main(String[] args) {
+        context = SpringApplication.run(Application.class, args);
+        log.info(String.format("\n\n    _____\\    _______\n" + "   /      \\  |      /\\\n" + "  /_______/  |_____/  \\\n"
+                + " |   \\   /        /   /\n" + "  \\   \\         \\/   /\n" + "   \\  /          \\__/_\n"
+                + "    \\/ ____    /\\\n" + "      /  \\    /  \\\n" + "     /\\   \\  /   /\n"
+                + "       \\   \\/   /\n" + "        \\___\\__/\n\n:: Business 2 Business - Provisioner :: \n\n ", context));
+    }
 
-	@Bean
-	public AuditorAware<String> auditorAware() {
-		return new AuditorAwareImpl();
-	}
+    @Bean
+    public AuditorAware<String> auditorAware() {
+        return new AuditorAwareImpl();
+    }
 
-	@Scheduled(cron = "0 */1 * * * ?")
-	public void perform() throws Exception {
-		/// log.info(String.format("@Scheduled Iniciando -----> %s.", context));
-	}
+    @Scheduled(cron = "0 */1 * * * ?")
+    public void perform() throws Exception {
+        /// log.info(String.format("@Scheduled Iniciando -----> %s.", context));
+    }
 
-	@PostConstruct
-	public void init() {
-		// Setting Spring Boot Init
-	}
+    @PostConstruct
+    public void init() {
+        // Setting Spring Boot Init
+    }
 
-	public static void restart() {
-		ApplicationArguments args = context.getBean(ApplicationArguments.class);
-		Thread thread = new Thread(() -> {
-			context.close();
-			context = SpringApplication.run(Application.class, args.getSourceArgs());
-		});
-		thread.setDaemon(false);
-		thread.start();
-	}
+    public static void restart() {
+        ApplicationArguments args = context.getBean(ApplicationArguments.class);
+        Thread thread = new Thread(() -> {
+            context.close();
+            context = SpringApplication.run(Application.class, args.getSourceArgs());
+        });
+        thread.setDaemon(false);
+        thread.start();
+    }
 
 }
