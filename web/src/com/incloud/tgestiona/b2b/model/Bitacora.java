@@ -1,14 +1,13 @@
 package com.incloud.tgestiona.b2b.model;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.logging.Logger;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.incloud.tgestiona.b2b.model.oferta.Estado;
+import com.incloud.tgestiona.b2b.model.oferta.Ofertas;
 import com.incloud.tgestiona.domain.BaseDomain;
 
 import lombok.AllArgsConstructor;
@@ -19,29 +18,50 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "bitacora",schema = "oferta")
-public class Bitacora extends BaseDomain {
+@Table(name = "bitacora", schema = "oferta")
+public class Bitacora extends BaseDomain implements Identifiable<Integer>, Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(Bitacora.class.getName());
-	
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bitacora_id" , nullable = false)
-	
-	private Integer bitacora_id;
-	private Integer usuario_id;
-	
-	@Column(name = "usuario", length = 255 )
-	private String usuario;
-	
-	private Integer estado_id;
-	private String fecha;
-	private Integer oferta_id;
-	
-	@Override
-	public boolean isIdSet() {
-		return bitacora_id != null;
-	}
-	
+    @Column(name = "bitacora_id", updatable = false, nullable = false)
+    private Integer id;
+
+    @Column(name = "responsable")
+    private String responsable;
+
+    @Column(name = "fecha")
+    private String fecha;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuarios usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "estado_id")
+    private Estado estado;
+
+    @ManyToOne
+    @JoinColumn(name = "oferta_id")
+    private Ofertas ofertas;
+
+    @Override
+    public String entityClassName() {
+        return Bitacora.class.getSimpleName();
+    }
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean isIdSet() {
+        return id != null;
+    }
+
 }

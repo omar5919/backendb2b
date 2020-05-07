@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Builder
 @Getter
-public class ofertaDto extends BaseBandejaResponse {
+public class ofertaDto {
     private long id;
     private String codigo;
     private Integer version;

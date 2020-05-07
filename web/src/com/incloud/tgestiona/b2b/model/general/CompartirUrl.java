@@ -1,4 +1,4 @@
-package com.incloud.tgestiona.b2b.model.oferta;
+package com.incloud.tgestiona.b2b.model.general;
 
 import com.incloud.tgestiona.b2b.model.Identifiable;
 import com.incloud.tgestiona.domain.BaseDomain;
@@ -13,26 +13,26 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "estado", schema = "oferta")
-public class Estado extends BaseDomain implements Identifiable<Integer>, Serializable {
+@Table(name = "compartirurl")
+public class CompartirUrl extends BaseDomain implements Identifiable<Integer>, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "estado_id", updatable = false, nullable = false)
+    @Column(name = "compartirurl_id", updatable = false, nullable = false)
     private Integer id;
 
-    @Column(name = "codigo_estado")
-    private String codigo_estado;
+    @Column(name = "codigo",length = 255)
+    private String codigo;
 
-    @Column(name = "color")
-    private String color;
+    @Column(name = "url",length = 255)
+    private String url;
 
-    @Column(name = "descripcion")
-    private String descripcion;
+    @Column(name = "data",length = 255)
+    private String data;
 
     @Override
     public String entityClassName() {
-        return Estado.class.getSimpleName();
+        return CompartirUrl.class.getSimpleName();
     }
 
     @Override
