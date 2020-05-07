@@ -126,9 +126,9 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
         Adjunto adjunto = new Adjunto();
         adjunto.setArchivoId(id);
 
-        Adjunto result = adjuntoServiceImpl.findEntity(adjunto);
-        byte[] fileContent = blobstoreimpl.getFile(result.getArchivoNombre());
-        log.info("Download file from Azure ...Id " + result.getArchivoId());
+         Adjunto result = adjuntoServiceImpl.findEntity(adjunto);
+         byte[] fileContent = blobstoreimpl.getFile(result.getArchivoNombre());
+         log.info("Download file from Azure ...Id " + result.getArchivoId());
 
         try {
 
