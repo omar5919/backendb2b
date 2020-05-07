@@ -91,7 +91,7 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
         Adjunto result = adjuntoServiceImpl.findEntity(adjunto);
         if (Optional.ofNullable(result).isPresent()) {
             System.out.println(result.getId());
-             //adjuntoServiceImpl.delete(result.getId());
+            //adjuntoServiceImpl.delete(result.getId());
             blobstoreimpl.deleteFile(result.getArchivoId());
             log.info("Delete file from Azure ...Id " + result.getArchivoId());
         }
@@ -128,6 +128,7 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
 
         Adjunto result = adjuntoServiceImpl.findEntity(adjunto);
         byte[] fileContent = blobstoreimpl.getFile(result.getArchivoNombre());
+        log.info("Download file from Azure ...Id " + result.getArchivoId());
 
         try {
 
