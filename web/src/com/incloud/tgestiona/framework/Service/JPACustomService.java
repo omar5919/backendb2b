@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface JPACustomService<T, I> {
 
-	public T Save(T entity);
+	public T save(T entity);
 
 	public Iterable<T> findAll();
 
@@ -17,7 +17,7 @@ public interface JPACustomService<T, I> {
 
 	public T findEntity(T req);
 
-	public T deleteByID(I id);
+	public void delete(I id) throws Exception;
 
 	public T deleteAll();
 
