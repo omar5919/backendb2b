@@ -10,7 +10,10 @@ import javax.validation.constraints.Digits;
 
 import com.incloud.tgestiona.b2b.model.AccionIsis;
 import com.incloud.tgestiona.b2b.model.Cliente;
+import com.incloud.tgestiona.b2b.model.Departamento;
+import com.incloud.tgestiona.b2b.model.Distrito;
 import com.incloud.tgestiona.b2b.model.Identifiable;
+import com.incloud.tgestiona.b2b.model.Provincia;
 import com.incloud.tgestiona.b2b.model.TipoCircuito;
 import com.incloud.tgestiona.domain.BaseDomain;
 
@@ -65,14 +68,14 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	@Column(name = "direccion", length = 400)
 	private String direccion;
 	
-	@Column(name = "departamento_id" , length = 2)
-	private String departamentoId;
+	//@Column(name = "departamento_id" )
+	//private String departamentoId;
 	
-	@Column(name = "provincia_id", length = 2  )
-	private String provinciaId;
+	//@Column(name = "provincia_id"  )
+	//private String provinciaId;
 	
-	@Column(name = "distrito_id", length = 2  )
-	private String distritoId;
+	//@Column(name = "distrito_id" )
+	//private String distritoId;
 
 	@Column(name = "latidud", length = 20)
 	private String latidud;
@@ -172,7 +175,7 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	//private Integer tipoCircuitoIdPropuesto;
 	
     @ManyToOne
-    @JoinColumn(name = "tipo_circuito_id",referencedColumnName = "tipo_circuito_id")
+    @JoinColumn(name = "tipo_circuito_id_propuesto",referencedColumnName = "tipo_circuito_id")
     private TipoCircuito tipoCircuito;
 	
 	
@@ -274,6 +277,28 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	@Column(name = "costo_opex", precision = 12, scale = 4)
 	private BigDecimal costoOpex;
 
+	
+	/** relaciones **/
+	
+ 
+	@ManyToOne
+	@JoinColumn(name = "departamento_id")
+	private Departamento departamento;
+	
+ 
+	 @ManyToOne
+	 @JoinColumn(name = "provincia_id")
+	 private Provincia provincia;
+	
+ 
+	 @ManyToOne	 
+	 @JoinColumn(name = "distrito_id")	 
+	 private Distrito distrito;
+
+	
+	
+	
+	
 	@Override
 	public boolean isIdSet() {
 		return this.ofertasDetalleId != null;
