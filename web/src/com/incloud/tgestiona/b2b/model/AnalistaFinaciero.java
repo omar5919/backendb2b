@@ -16,6 +16,13 @@ import javax.persistence.Transient;
 import com.google.common.base.MoreObjects;
 import com.incloud.tgestiona.domain.BaseDomain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "analista_finaciero")
 //@Audited
@@ -27,9 +34,12 @@ public class AnalistaFinaciero extends BaseDomain implements Identifiable<Intege
 	/***************************/
 	/* Atributos de la Entidad */
 	/***************************/
-
 	// Raw attributes
 	private Integer id;
+	@Column(name = "nombre")
+	private String nombre;
+	@Column(name = "activo")
+	private Boolean activo;
 
 	@Override
 	public String entityClassName() {

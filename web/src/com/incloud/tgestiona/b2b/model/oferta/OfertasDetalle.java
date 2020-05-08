@@ -1,45 +1,46 @@
 package com.incloud.tgestiona.b2b.model.oferta;
 
-
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.logging.Logger;
 
-import javax.persistence.*;
-import javax.validation.constraints.Digits;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.incloud.tgestiona.b2b.model.AccionIsis;
 import com.incloud.tgestiona.b2b.model.Cliente;
 import com.incloud.tgestiona.b2b.model.Departamento;
 import com.incloud.tgestiona.b2b.model.Distrito;
-import com.incloud.tgestiona.b2b.model.Identifiable;
+import com.incloud.tgestiona.b2b.model.EquipamientoCondicion;
+import com.incloud.tgestiona.b2b.model.EquipamientoMarca;
+import com.incloud.tgestiona.b2b.model.Moneda;
 import com.incloud.tgestiona.b2b.model.Provincia;
 import com.incloud.tgestiona.b2b.model.TipoCircuito;
+import com.incloud.tgestiona.b2b.model.TipoEquipamiento;
 import com.incloud.tgestiona.domain.BaseDomain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ofertas_detalle",schema="oferta")
-//@Audited
-//@AuditTable("_audi_ofertas_detalle")
-public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>, Serializable {
-	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(OfertasDetalle.class.getName());
+@Table(name = "ofertas_detalle",schema = "oferta")
+public class OfertasDetalle extends BaseDomain{
 
-	/***************************/
-	/* Atributos de la Entidad */
-	/***************************/
-
+	
+	
 	// Raw attributes
-	@Column(name = "ofertas_detalle_id" , nullable = false, precision = 10)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
+	@Column(name = "ofertas_detalle_id" , updatable = false, nullable = false)
 	private Integer ofertasDetalleId;
 	
 	
@@ -48,24 +49,20 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
  	//private Integer ofertaId;
 	
 	 
-    @ManyToOne
-    @JoinColumn(name = "oferta_Id",referencedColumnName = "oferta_Id")
-    private Ofertas ofertas;
+   
 	
 	//@Column(name = "cliente_id",nullable = false, precision = 10)
 	//private Integer clienteId;
 	
-	 @ManyToOne
-	 @JoinColumn(name = "cliente_id",referencedColumnName = "cliente_id")
-	 private Cliente cliente;
+	 
 	
-	@Column(name = "secuencia",nullable = false, precision = 10)
+	@Column(name = "secuencia")
 	private Integer secuencia;
 	
-	@Column(name = "nombre_sede", length = 100  )
+	@Column(name = "nombre_sede" )
 	private String nombreSede;
 	
-	@Column(name = "direccion", length = 400)
+	@Column(name = "direccion")
 	private String direccion;
 	
 	//@Column(name = "departamento_id" )
@@ -77,22 +74,22 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	//@Column(name = "distrito_id" )
 	//private String distritoId;
 
-	@Column(name = "latidud", length = 20)
+	@Column(name = "latidud")
 	private String latidud;
 	
-	@Column(name = "longitud", length = 20  )
+	@Column(name = "longitud" )
 	private String longitud;
 	
-	@Column(name = "zoom",  length = 1 )
+	@Column(name = "zoom" )
 	private String zoom;
 	
-	@Column(name = "contacto",length = 150  )
+	@Column(name = "contacto"  )
 	private String contacto;
 	
-	@Column(name = "telefono", length = 15 )
+	@Column(name = "telefono")
 	private String telefono;
 
-	@Column(name = "tipo_cd_actual", length = 5 )
+	@Column(name = "tipo_cd_actual" )
 	private String tipoCdActual;
 	
 	@Column(name = "numero_cd_actual" )
@@ -101,186 +98,200 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	@Column(name = "tipo_servicio_id_actual" )
 	private Integer tipoServicioIdActual;
 
-	@Column(name = "bw_actual_actual", length = 15 )
+	@Column(name = "bw_actual_actual" )
 	private String bwActualActual;
 	
-	@Column(name = "caudal_bronce_actual" , length = 20)
+	@Column(name = "caudal_bronce_actual")
 	private String caudalBronceActual;
 	
-	@Column(name = "caudal_plata_actual" , length = 20)
+	@Column(name = "caudal_plata_actual" )
 	private String caudal_plata_actual;
 	
-	@Column(name = "caudal_oro_actual", length = 20 )
+	@Column(name = "caudal_oro_actual")
 	private String caudalOroActual;
 	
-	@Column(name = "caudal_platinum_actual" , length = 20)
+	@Column(name = "caudal_platinum_actual" )
 	private String caudalPlatinumActual;
 	
-	@Column(name = "caudal_voz_actual" , length = 20)
+	@Column(name = "caudal_voz_actual" )
 	private String caudalVozActual;
 	
-	@Column(name = "caudal_video_actual", length = 20 )
+	@Column(name = "caudal_video_actual" )
 	private String caudalVideoActual;
 	
-	@Column(name = "caudal_ldn_actual" , length = 20)
+	@Column(name = "caudal_ldn_actual" )
 	private String caudalLdnActual;
 
 
 	@Column(name = "ultima_milla_actual" )
 	private Integer ultimaMillaActual;
 	
-	@Column(name = "router_switch_actual", length = 25 )
+	@Column(name = "router_switch_actual" )
 	private String routerSwitchActual;
 	
-	@Column(name = "dte_actual" , length = 25 )
+	@Column(name = "dte_actual")
 	private Integer dteActual;
 	
-	@Column(name = "equipoAdicionalActual" , length = 25 )
+	@Column(name = "equipoAdicionalActual" )
 	private String equipo_adicional_actual;
 	
-	@Column(name = "equipo_terminal_actual" , length = 25 )
+	@Column(name = "equipo_terminal_actual"  )
 	private String equipoTerminalActual;
 	
-	@Column(name = "recurso_transporte_actual" , length = 50 )
+	@Column(name = "recurso_transporte_actual"  )
 	private String recursoTransporteActual;
 	
-	@Column(name = "tipo_antena_actual", length = 15  )
+	@Column(name = "tipo_antena_actual"  )
 	private String tipoAntenaActual;
 	
 	@Column(name = "segmento_satelital_actual" )
 	private Integer segmentoSatelitalActual;
 	
-	@Column(name = "pozo_tierra_actual" , length = 15 )
+	@Column(name = "pozo_tierra_actual" )
 	private String pozoTierraActual;
 	
-	@Column(name = "ups_actual" , length = 5)
+	@Column(name = "ups_actual" )
 	private String upsActual;
 	
 	@Column(name = "facturacion_actual" )
 	private BigDecimal facturacion_actual;
 	
-	@Column(name = "vrf_actual" , length = 15)
+	@Column(name = "vrf_actual" )
 	private String vrf_actual;
 
-	@Column(name = "oferta_isis_propuesto" , length = 15)
+	@Column(name = "oferta_isis_propuesto")
 	private String ofertaIsisPropuesto;
 	
 	//@Column(name = "accion_id_propuesto" , precision = 10)
 	//private Integer accionIdPropuesto;
-    @ManyToOne
-    @JoinColumn(name = "accion_isis_id_propuesto",referencedColumnName = "accion_isis_id")
-    private AccionIsis accionIsis;
-	
+   
 	//@Column(name = "tipo_circuito_id_propuesto"  , precision = 10)
 	//private Integer tipoCircuitoIdPropuesto;
 	
-    @ManyToOne
-    @JoinColumn(name = "tipo_circuito_id_propuesto",referencedColumnName = "tipo_circuito_id")
-    private TipoCircuito tipoCircuito;
-	
-	
-	@Column(name = "tipo_servicio_id_propuesto", precision = 10)
+
+	@Column(name = "tipo_servicio_id_propuesto")
 	private Integer tipoServicioIdPropuesto;
 	
-	@Column(name = "sva_propuesto" , precision = 10)
+	@Column(name = "sva_propuesto" )
 	private String svaPropuesto;
 	
-	@Column(name = "descripcion_sva_propuesto" , length = 15)
+	@Column(name = "descripcion_sva_propuesto" )
 	private String descripcionSvaPropuesto;
 
-	@Column(name = "bw_propuesto" , length = 10)
+	@Column(name = "bw_propuesto" )
 	private String bwPropuesto;
 	
-	@Column(name = "caudal_bronce_propuesto" , length = 20)
+	@Column(name = "caudal_bronce_propuesto" )
 	private String caudalBroncePropuesto;
 	
-	@Column(name = "caudal_plata_propuesto" , length = 20)
+	@Column(name = "caudal_plata_propuesto" )
 	private String caudalPlataPropuesto;
 	
-	@Column(name = "caudal_oro_propuesto" , length = 20)
+	@Column(name = "caudal_oro_propuesto" )
 	private String caudalOroPropuesto;
 	
-	@Column(name = "caudal_platinum_propuesto" , length = 20)
+	@Column(name = "caudal_platinum_propuesto")
 	private String caudalPlatinumPropuesto;
 	
-	@Column(name = "caudal_voz_propuesto" , length = 20)
+	@Column(name = "caudal_voz_propuesto")
 	private String caudalVozPropuesto;
 	
-	@Column(name = "caudal_video_propuesto" , length = 20)
+	@Column(name = "caudal_video_propuesto" )
 	private String caudalVideoPropuesto;
 	
-	@Column(name = "sp_caudal_ldn_propuesto" , length = 20)
+	@Column(name = "sp_caudal_ldn_propuesto")
 	private String spCaudalLdnPropuesto;
 
-	@Column(name = "via_acceso_id_propuesto" , precision = 10)
+	@Column(name = "via_acceso_id_propuesto" )
 	private Integer viaAccesoIdPropuesto;
 	
-	@Column(name = "equipo_terminal_propuesto" , length = 25)
+	@Column(name = "equipo_terminal_propuesto")
 	private String equipoTerminalPropuesto;
 	
-	@Column(name = "router_propuesto" , length = 25)
+	@Column(name = "router_propuesto" )
 	private String routerPropuesto;
 	
-	@Column(name = "equipo_stock_propuesto" , length = 25)
+	@Column(name = "equipo_stock_propuesto" )
 	private String equipoStockPropuesto;
 	
-	@Column(name = "fecha_llegada_propuesto" , length = 10)
+	@Column(name = "fecha_llegada_propuesto" )
 	private String fechaLlegadaPropuesto;
 	
-	@Column(name = "otros_equipos_propuesto" , length = 15)
+	@Column(name = "otros_equipos_propuesto" )
 	private String otrosEquiposPropuesto;
 	
-	@Column(name = "componentes_propuesto" , length = 25)
+	@Column(name = "componentes_propuesto" )
 	private String componentesPropuesto;
 	
-	@Column(name = "vrf_propuesto" , length = 15)
+	@Column(name = "vrf_propuesto")
 	private String vrfPropuesto;
 	
-	@Column(name = "detalle_accion_enlace_propuesto" , length = 15)
+	@Column(name = "detalle_accion_enlace_propuesto" )
 	private String detalleAccionEnlacePropuesto;
 	
-	@Column(name = "observaciones_propuesto" , length = 200)
+	@Column(name = "observaciones_propuesto")
 	private String observacionesPropuesto;
 	
-	@Digits(integer = 4, fraction = 5)
-	@Column(name = "precio_propuesto" , precision = 12, scale = 4)
+	@Column(name = "precio_propuesto" )
 	private BigDecimal precioPropuesto;
 
-	@Column(name = "codigo_sisego" , length = 20)
+	@Column(name = "codigo_sisego" )
 	private String codigoSisego;
 
-	@Column(name = "zona_sisego" , length = 20)
+	@Column(name = "zona_sisego")
 	private String zonaSisego;
-	@Column(name = "sisego_condicion_id" ,  precision = 10)
+	
+	@Column(name = "sisego_condicion_id" )
 	private Integer sisegoCondicionId;
-	@Column(name = "antiguedad" ,  precision = 10)
+	
+	@Column(name = "antiguedad" )
 	private Integer antiguedad;
-	@Digits(integer = 4, fraction = 5)
-	@Column(name = "antiguedad_costo" , precision = 12, scale = 4)
+	
+	
+	@Column(name = "antiguedad_costo")
 	private BigDecimal antiguedadCosto;
-	@Digits(integer = 4, fraction = 5)
-	@Column(name = "valor_residual" , precision = 12, scale = 4)
+	
+	@Column(name = "valor_residual" )
 	private BigDecimal valorResidual;
-	@Column(name = "dias_ejecucion" ,  precision = 10)
+	
+	@Column(name = "dias_ejecucion" )
 	private Integer diasEjecucion;
-	@Digits(integer = 4, fraction = 5)
-	@Column(name = "costo_ultima_milla" , precision = 12, scale = 4)
+	
+
+	@Column(name = "costo_ultima_milla" )
 	private BigDecimal costoUltimaMilla;
-	@Digits(integer = 4, fraction = 5)
-	@Column(name = "costo_transmision" , precision = 12, scale = 4)
+	
+
+	@Column(name = "costo_transmision")
 	private BigDecimal costoTransmision;
-	@Digits(integer = 4, fraction = 5)
-	@Column(name = "costo_planta_externa" , precision = 12, scale = 4)
+	
+	
+	@Column(name = "costo_planta_externa" )
 	private BigDecimal costoPlantaExterna;
 
-	@Digits(integer = 4, fraction = 5)
-	@Column(name = "costo_opex", precision = 12, scale = 4)
+
+	@Column(name = "costo_opex")
 	private BigDecimal costoOpex;
 
 	
 	/** relaciones **/
-	
+	@ManyToOne
+    @JoinColumn(name = "oferta_Id",referencedColumnName = "oferta_Id")
+    private Ofertas ofertas;
  
+	 @ManyToOne
+	 @JoinColumn(name = "cliente_id",referencedColumnName = "cliente_id")
+	 private Cliente cliente;
+ 
+	 @ManyToOne
+	 @JoinColumn(name = "accion_isis_id_propuesto",referencedColumnName = "accion_isis_id")
+	 private AccionIsis accionIsis;
+		
+	 @ManyToOne
+	 @JoinColumn(name = "tipo_circuito_id_propuesto",referencedColumnName = "tipo_circuito_id")
+	 private TipoCircuito tipoCircuito;
+	
+	 
 	@ManyToOne
 	@JoinColumn(name = "departamento_id")
 	private Departamento departamento;
@@ -295,131 +306,11 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	 @JoinColumn(name = "distrito_id")	 
 	 private Distrito distrito;
 
-	
-	
-	
-	
+
 	@Override
 	public boolean isIdSet() {
-		return this.ofertasDetalleId != null;
-	}
-
-	@Override
-	public String entityClassName() {
 		// TODO Auto-generated method stub
-		return OfertasDetalle.class.getSimpleName();
+		return false;
 	}
 
-	@Override
-	public Integer getId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setId(Integer id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	/*@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this) //
-				.add("id", getId()) //
-				.add("clienteId", getClienteId()) //
-				.add("icSede", getIcSede()) //
-				.add("icDireccion", getIcDireccion()) //
-				.add("icDisrtito", getIcDisrtito()) //
-				.add("icProvincia", getIcProvincia()) //
-				.add("icDepartamento", getIcDepartamento()) //
-				.add("icLatitud", getIcLatitud()) //
-				.add("icLongitud", getIcLongitud()) //
-				.add("icZoom", getIcZoom()) //
-				.add("icDireccionmap", getIcDireccionmap()) //
-				.add("icContactos", getIcContactos()) //
-				.add("saConectadoa", getSaConectadoa()) //
-				.add("saSede", getSaSede()) //
-				.add("saTipoCircuitoId", getSaTipoCircuitoId()) //
-				.add("saIdservicio", getSaIdservicio()) //
-				.add("saIdmedioacceso", getSaIdmedioacceso()) //
-				.add("saMedidabw", getSaMedidabw()) //
-				.add("saBw", getSaBw()) //
-				.add("saBwsatelital", getSaBwsatelital()) //
-				.add("saLdn", getSaLdn()) //
-				.add("saMedidavoz", getSaMedidavoz()) //
-				.add("saCaudalvoz", getSaCaudalvoz()) //
-				.add("saVozsatelital", getSaVozsatelital()) //
-				.add("saMedidavideo", getSaMedidavideo()) //
-				.add("saCaudalvideo", getSaCaudalvideo()) //
-				.add("saVideosatelital", getSaVideosatelital()) //
-				.add("saMedidaplatinium", getSaMedidaplatinium()) //
-				.add("saCaudalplatinium", getSaCaudalplatinium()) //
-				.add("saPlatiniumsatelital", getSaPlatiniumsatelital()) //
-				.add("saMedidaoro", getSaMedidaoro()) //
-				.add("saCaudaloro", getSaCaudaloro()) //
-				.add("saOrosatelital", getSaOrosatelital()) //
-				.add("saMedidaplata", getSaMedidaplata()) //
-				.add("saCaudalplata", getSaCaudalplata()) //
-				.add("saPlatasatelital", getSaPlatasatelital()) //
-				.add("saMedidabronce", getSaMedidabronce()) //
-				.add("saCaudalbronce", getSaCaudalbronce()) //
-				.add("saBroncesatelital", getSaBroncesatelital()) //
-				.add("saPma", getSaPma()) //
-				.add("saEquipo1", getSaEquipo1()) //
-				.add("saCosto1", getSaCosto1()) //
-				.add("saImputacion1", getSaImputacion1()) //
-
-				.add("saObservacion", getSaObservacion()) //
-				.add("spAccionIsis", getSpAccionIsis()) //
-				.add("spTipoSede", getSpTipoSede()) //
-				.add("spCondicionCircuito", getSpCondicionCircuito()) //
-				.add("spTipoCircuito", getSpTipoCircuito()) //
-				.add("spNumerocd", getSpNumerocd()) //
-				.add("spCircuitosconectados", getSpCircuitosconectados()) //
-				.add("spServicioId", getSpServicioId()) //
-				.add("spMedioAcceso", getSpMedioAcceso()) //
-				.add("spTipoInstalacionSatelital", getSpTipoInstalacionSatelital()) //
-				.add("spMedidabw", getSpMedidabw()) //
-				.add("spBw", getSpBw()) //
-				.add("spBwsatelital", getSpBwsatelital()) //
-				.add("spLdn", getSpLdn()) //
-				.add("spMedidavoz", getSpMedidavoz()) //
-				.add("spCaudalvoz", getSpCaudalvoz()) //
-				.add("spVozsatelital", getSpVozsatelital()) //
-				.add("spMedidavideo", getSpMedidavideo()) //
-				.add("spCaudalvideo", getSpCaudalvideo()) //
-				.add("spVideosatelital", getSpVideosatelital()) //
-				.add("spMedidaplatinium", getSpMedidaplatinium()) //
-				.add("spCaudalplatinium", getSpCaudalplatinium()) //
-				.add("spPlatiniumsatelital ", getSpPlatiniumsatelital()) //
-				.add("spMedidaoro", getSpMedidaoro()) //
-				.add("spCaudaloro", getSpCaudaloro()) //
-				.add("spOrosatelital", getSpOrosatelital()) //
-				.add("spMedidaplata", getSpMedidaplata()) //
-				.add("spCaudalplata", getSpCaudalplata()) //
-				.add("spPlatasatelital", getSpPlatasatelital()) //
-				.add("spMedidabronce", getSpMedidabronce()) //
-				.add("spCaudalbronce", getSpCaudalbronce()) //
-				.add("spBroncesatelital", getSpBroncesatelital()) //
-				.add("spAntiguedad", getSpAntiguedad()) //
-				.add("spEquipo1", getSpEquipo1()) //
-				.add("spCosto1", getSpCosto1()) //
-				.add("spImputacion1", getSpImputacion1()) //
-
-				.add("spObservacion", getSpObservacion()) //
-				.add("ssCodigoSisego", getSsCodigoSisego()) //
-				.add("ssCondicionSisego", getSsCondicionSisego()) //
-				.add("ssAntiguedad ", getSsAntiguedad()) //
-				.add("ssCostoAntiguo", getSsCostoAntiguo()) //
-				.add("ssValorResidual", getSsValorResidual()) //
-				.add("ssDiasejecucion", getSsDiasejecucion()) //
-				.add("ssUltimamilla", getSsUltimamilla()) //
-				.add("ssCostoTransmision", getSsCostoTransmision()) //
-				.add("ssCostoPlantaexterna", getSsCostoPlantaexterna()) //
-				.add("CostoOpex", getCostoOpex()) //
-				.toString();
-	}
-	*/
 }

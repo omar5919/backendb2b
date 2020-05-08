@@ -1,25 +1,21 @@
 package com.incloud.tgestiona.b2b.serices;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Component;
 
 import com.incloud.tgestiona.b2b.model.oferta.OfertasDetalle;
 
-@Component
 public interface OfertasDetalleService {
+	//List<OfertasDetalle> getAll();
 
-	public List<OfertasDetalle> getAll();
+	//Optional<OfertasDetalle> findByID(Integer id);
 
-	public Optional<OfertasDetalle> findByID(Integer id);
+	//List<OfertasDetalle> saveAll(List<OfertasDetalle> entities);
 
-	public List<OfertasDetalle> saveAll(List<OfertasDetalle> entities);
+	//OfertasDetalle save(OfertasDetalle entities);
 
-	public OfertasDetalle save(OfertasDetalle entities);
-
-	public OfertasDetalle deleteById(Integer id);
+	//OfertasDetalle deleteById(Integer id);
 	
-	public OfertasDetalle deleteAll();
+	//OfertasDetalle deleteAll();
 
+	List<OfertasDetalle> listaOfertaDetalle(Integer ofertaId) ;
 }
