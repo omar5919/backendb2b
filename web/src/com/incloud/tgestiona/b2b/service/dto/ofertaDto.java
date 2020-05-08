@@ -13,8 +13,13 @@ public class ofertaDto {
     private String oportunidad;
     private String cliente;
     private String descripcion;
+    private String observaciones;
+    private String complejidad;
+    private String preventa;
+    private String analistafinanciero;
     private String estado;
     private String tipoproyecto;
     private String color;
     private Date fechareg;
+    private Date fechamod;
 }

@@ -29,3 +29,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/.gradle/5.6.3/fileHashes/fileHashes.lock

@@ -9,6 +9,7 @@ import com.incloud.tgestiona.b2b.repository.OfertasRepository;
 import com.incloud.tgestiona.b2b.serices.OfertasService;
 import com.incloud.tgestiona.b2b.service.dto.BaseBandejaResponse;
 import com.incloud.tgestiona.b2b.service.dto.ofertaDto;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -31,25 +32,14 @@ public class OfertasServiceImpl implements OfertasService {
 
     @Override
     public BaseBandejaResponse<List<ofertaDto>> getOfertas(String codoportunidad, String cliente, String descripcion, Integer complejidad, Integer estado, Date desde, Date hasta, Pageable pageable) {
-//        Page<Ofertas> pOfertas = oRepo.findAll((Specification<Ofertas>) (root, cq, cb) -> {
-//            Predicate p = cb.conjunction();
-//            if (Objects.nonNull(desde) && Objects.nonNull(hasta) && desde.before(hasta)) {
-//                p = cb.and(p, cb.between(root.get("fecha_reg"), desde, hasta));
-//            }
-//            if (!StringUtils.isEmpty(desc)) {
-//                p = cb.and(p, cb.like(root.get("descripcion"), "%" + desc + "%"));
-//            }
-//            cq.orderBy(cb.desc(root.get("descripcion")), cb.asc(root.get("oferta_id")));
-//            return p;
-//        }, pageable);
-        List<Ofertas> oList = oRepo.findAll((Specification<Ofertas>) (root, cq, cb) -> {
+        Page<Ofertas> pOfertas = oRepo.findAll((Specification<Ofertas>) (root, cq, cb) -> {
             Predicate p = cb.conjunction();
             Join<Ofertas, Cliente> clienteOfertas = root.join("cliente");
             Join<Ofertas, Estado> estadoOfertas = root.join("estado");
             Join<Ofertas, Complejidad> complejidadOfertas = root.join("complejidad");
 
             if (!StringUtils.isEmpty(codoportunidad)) {
-                p = cb.and(p, cb.like(root.get("codigo"), "%" + codoportunidad + "%"));
+                p = cb.and(p, cb.like(root.get("oportunidad"), "%" + codoportunidad + "%"));
             }
             if (!StringUtils.isEmpty(cliente)) {
                 p = cb.and(p, cb.like(clienteOfertas.get("descripcion"), "%" + cliente + "%"));
@@ -68,8 +58,8 @@ public class OfertasServiceImpl implements OfertasService {
             }
             cq.orderBy(cb.desc(root.get("descripcion")), cb.asc(root.get("oferta_id")));
             return p;
-        }, pageable).getContent();
-        return ofertasConverter.convertToOfertaDTO(oList);
+        }, pageable);
+        return ofertasConverter.convertToOfertaDTO(pOfertas.getContent(),pOfertas.getTotalElements());
     }
 
     @Override

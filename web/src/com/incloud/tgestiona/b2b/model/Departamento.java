@@ -21,14 +21,13 @@ import lombok.NoArgsConstructor;
 @Table(name = "departamento", schema = "oferta")
 public class Departamento {
 
-	
-	 	@Id
-	    @Column(name = "departamento_id", nullable = false)
-	    private String departamentoId;
-	 	
-	 	@Column(name = "descripcion")
-		 private String descripcion;
-	 	
-	 	@Column(name = "activo")
-		 private Boolean activo;
+    @Id
+    @Column(name = "departamento_id", nullable = false)
+    private String departamentoId;
+
+    @Column(name = "descripcion")
+    private String descripcion;
+
+    @Column(name = "activo")
+    private Boolean activo;
 }

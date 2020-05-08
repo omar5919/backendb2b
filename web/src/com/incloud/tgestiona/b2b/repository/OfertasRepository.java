@@ -15,15 +15,15 @@ import java.util.List;
 public interface OfertasRepository extends JpaRepository<Ofertas, Integer>, JpaSpecificationExecutor<Ofertas> {
 
 	
-	@Procedure("oferta.sp_copiar_oferta")
+	@Procedure("sp_copiar_oferta")
 	int copiarOferta(Integer poferta_id,Integer pusuario_id,String pusuario);
 	
 	@Procedure("sp_anular_oferta")
 	int anularOferta(Integer poferta_id,Integer pusuario_id,String pusuario);
 	
-	@Procedure("oferta.sp_versionar_oferta")
+	@Procedure("sp_versionar_oferta")
 	int versionarOferta(Integer poferta_id,Integer pusuario_id,String pusuario);
 	
-	@Procedure("oferta.sp_ganar_oferta")
+	@Procedure("sp_ganar_oferta")
 	int ganarOferta(Integer poferta_id,Integer pusuario_id,String pusuario);
 }

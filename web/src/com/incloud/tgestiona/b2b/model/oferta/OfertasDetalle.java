@@ -276,7 +276,7 @@ public class OfertasDetalle extends BaseDomain{
 	
 	/** relaciones **/
 	@ManyToOne
-    @JoinColumn(name = "oferta_Id",referencedColumnName = "oferta_Id")
+    @JoinColumn(name = "oferta_id",referencedColumnName = "oferta_id")
     private Ofertas ofertas;
  
 	 @ManyToOne

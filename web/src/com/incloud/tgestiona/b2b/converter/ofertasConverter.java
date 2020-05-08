@@ -4,19 +4,25 @@ import com.incloud.tgestiona.b2b.model.oferta.Ofertas;
 import com.incloud.tgestiona.b2b.service.dto.BaseBandejaResponse;
 import com.incloud.tgestiona.b2b.service.dto.ofertaDto;
 
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ofertasConverter {
-    public static BaseBandejaResponse<List<ofertaDto>> convertToOfertaDTO(List<Ofertas> oList) {
+    public static BaseBandejaResponse<List<ofertaDto>> convertToOfertaDTO(List<Ofertas> oList,Long total) {
         BaseBandejaResponse<List<ofertaDto>> oDto = new BaseBandejaResponse<>();
         oDto.setMsj("200");
-        oDto.setRows(1);
+        oDto.setRows(total);
         List<ofertaDto> ol = oList.stream().map(s ->
                 ofertaDto.builder()
                         .id(s.getOferta_id())
                         .codigo(s.getCodigo())
                         .color(s.getEstado().getColor())
+                        .observaciones(s.getObservaciones())
+                        .complejidad(s.getComplejidad().getComplejidadTipologiaDescrip())
+                        .preventa(s.getPreventa().getNombre())
+                        .analistafinanciero(s.getAnalistafinanciero().getCreatedBy())
                         .version(s.getVersion())
                         .oportunidad(s.getOportunidad())
                         .cliente(s.getCliente().getDescripcion())
@@ -24,6 +30,7 @@ public class ofertasConverter {
                         .estado(s.getEstado().getDescripcion())
                         .tipoproyecto(s.getTipoproyecto().getDescripcion())
                         .fechareg(s.getFecha_reg())
+                        .fechamod(s.getFecha_mod())
                         .build()
         ).collect(Collectors.toList());
         oDto.setData(ol);

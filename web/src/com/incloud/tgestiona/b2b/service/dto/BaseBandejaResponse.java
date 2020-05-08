@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BaseBandejaResponse<T> {
     private String msj;
-    private int rows;
+    private Long rows;
     private T data;
 }

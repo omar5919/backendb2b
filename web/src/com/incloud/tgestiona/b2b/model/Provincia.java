@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
- 
 
 @Data
 @AllArgsConstructor
@@ -20,19 +19,18 @@ import lombok.NoArgsConstructor;
 @Table(name = "provincia", schema = "oferta")
 public class Provincia {
 
-	
-	 	@Id
-	    @Column(name = "provincia_id" , nullable = false)
-	    private String provinciaId;
-	 	
-	 	@Column(name = "departamento_id")
-		 private String departamentoId;
-	 	
-	 	@Column(name = "descripcion")
-		 private String descripcion;
-	 	
-	 	@Column(name = "activo")
-		 private Boolean activo;
-	 	
-	 
+    @Id
+    @Column(name = "provincia_id", nullable = false)
+    private String provinciaId;
+
+    @Column(name = "departamento_id")
+    private String departamentoId;
+
+    @Column(name = "descripcion")
+    private String descripcion;
+
+    @Column(name = "activo")
+    private Boolean activo;
+
+
 }

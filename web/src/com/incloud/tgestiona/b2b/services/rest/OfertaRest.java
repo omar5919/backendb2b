@@ -19,8 +19,8 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
     private static final String DATE_PATTERN = "yyyy/MM/dd";
 
     private final OfertasService oServ;
-    
-   
+
+
     public OfertaRest(OfertasService oServ) {
         this.oServ = oServ;
     }
@@ -34,46 +34,47 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
                                                                @RequestParam(required = false) Integer estado,
                                                                @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date desde,
                                                                @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date hasta,
-                                                               Pageable pageable) throws Exception{
-        return oServ.getOfertas(codoportunidad,cliente,descripcion,complejidad,estado,desde,hasta,pageable);
+                                                               Pageable pageable) throws Exception {
+        return oServ.getOfertas(codoportunidad, cliente, descripcion, complejidad, estado, desde, hasta, pageable);
     }
 
     @PostMapping("/registraroferta")
     public void addStudent(@RequestBody ofertaDto student) {
         oServ.addOferta(student);
     }
-    
+
     @PostMapping("/copiaroferta")
     public int CopiarOferta(@RequestParam(required = false) int ofertaId,
-    						@RequestParam(required = false) int usuarioId,
-    						@RequestParam(required = false) String usuario){
-    	
-    	return   	oServ.copiarOferta(ofertaId,usuarioId,usuario);
-    	
+                            @RequestParam(required = false) int usuarioId,
+                            @RequestParam(required = false) String usuario) {
+
+        return oServ.copiarOferta(ofertaId, usuarioId, usuario);
+
     }
-    
+
     @PostMapping("/anularoferta")
     public int AnularOferta(@RequestParam(required = false) int ofertaId,
-								@RequestParam(required = false) int usuarioId,
-								@RequestParam(required = false) String usuario){
-    	
-    return	 oServ.anularOferta(ofertaId,  usuarioId,  usuario);
-    	
+                            @RequestParam(required = false) int usuarioId,
+                            @RequestParam(required = false) String usuario) {
+
+        return oServ.anularOferta(ofertaId, usuarioId, usuario);
+
     }
-    
+
     @PostMapping("/versionaroferta")
     public int versionarOferta(@RequestParam(required = false) int ofertaId,
-							@RequestParam(required = false) int usuarioId,
-							@RequestParam(required = false) String usuario){
-  	
-    	return	oServ.versionarOferta(ofertaId, usuarioId, usuario);
-  	
-  	}
+                               @RequestParam(required = false) int usuarioId,
+                               @RequestParam(required = false) String usuario) {
+
+        return oServ.versionarOferta(ofertaId, usuarioId, usuario);
+
+    }
+
     @PostMapping("/ganaroferta")
-    public  int ganarOferta(@RequestParam(required = false) int ofertaId,
-			@RequestParam(required = false) int usuarioId,
-			@RequestParam(required = false) String usuario) {
-    	return this.oServ.ganarOferta(ofertaId, usuarioId, usuario);
+    public int ganarOferta(@RequestParam(required = false) int ofertaId,
+                           @RequestParam(required = false) int usuarioId,
+                           @RequestParam(required = false) String usuario) {
+        return this.oServ.ganarOferta(ofertaId, usuarioId, usuario);
     }
 
 }

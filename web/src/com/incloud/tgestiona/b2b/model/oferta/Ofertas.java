@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ofertas",schema = "oferta")
+@Table(name = "ofertas", schema = "oferta")
 public class Ofertas extends BaseDomain {
 
     @Id
@@ -40,8 +40,11 @@ public class Ofertas extends BaseDomain {
     @Column(name = "correo_contacto")
     private String correo_contacto;
 
-    @Column(name = "descripcion")
+    @Column(name = "descripcion", length = 255)
     private String descripcion;
+
+    @Column(name = "observaciones", length = 255)
+    private String observaciones;
 
     @Column(name = "periodo_contrato")
     private Integer periodo_contrato;
@@ -88,6 +91,9 @@ public class Ofertas extends BaseDomain {
     @Column(name = "fecha_reg")
     private Date fecha_reg;
 
+    @Column(name = "fecha_mod")
+    private Date fecha_mod;
+
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -109,7 +115,7 @@ public class Ofertas extends BaseDomain {
     private TipoProyecto tipoproyecto;
 
     @ManyToOne
-    @JoinColumn(name = "tipo_pago_id",referencedColumnName = "tipo_pago")
+    @JoinColumn(name = "tipo_pago_id", referencedColumnName = "tipo_pago")
     private TipoPago tipopago;
 
     @ManyToOne

@@ -16,20 +16,19 @@ import lombok.NoArgsConstructor;
 @Table(name = "distrito", schema = "oferta")
 public class Distrito {
 
-	
-	@Id
-    @Column(name = "distrito_id" , nullable = false)
+    @Id
+    @Column(name = "distrito_id", nullable = false)
     private String distritoId;
- 	
-	@Column(name = "provincia_id")
-	 private String provinciaId;
-	
-	@Column(name = "departamento_id")
-	 private String departamentoId;
-	
- 	@Column(name = "descripcion")
-	 private String descripcion;
- 	
- 	@Column(name = "activo")
-	 private Boolean activo;
+
+    @Column(name = "provincia_id")
+    private String provinciaId;
+
+    @Column(name = "departamento_id")
+    private String departamentoId;
+
+    @Column(name = "descripcion")
+    private String descripcion;
+
+    @Column(name = "activo")
+    private Boolean activo;
 }
