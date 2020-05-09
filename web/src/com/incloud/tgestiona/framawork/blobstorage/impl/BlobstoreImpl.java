@@ -5,6 +5,7 @@ import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
 
+import com.incloud.tgestiona.b2b.model.Adjunto;
 import com.incloud.tgestiona.framawork.blobstorage.BlobstoreService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -103,15 +104,14 @@ public class BlobstoreImpl implements BlobstoreService {
      *Delete file for ID
      * */
     @Override
-    public void deleteFile(String archivoId) {
+    public void deleteFile(Adjunto archivo) {
 
         BlobServiceClient blobServiceClient = new BlobServiceClientBuilder()
                 .endpoint(endpoint).sasToken(sastoken).buildClient();
         BlobContainerClient blobClient = blobServiceClient.getBlobContainerClient(containerName);
-        BlobClient returnblobClient = blobClient.getBlobClient(archivoId);
+        BlobClient returnblobClient = blobClient.getBlobClient(archivo.getArchivoNombre());
         if (returnblobClient.exists())
             returnblobClient.delete();
-
     }
 
 

@@ -1,6 +1,7 @@
 package com.incloud.tgestiona.framawork.blobstorage;
 
 import com.azure.storage.blob.BlobContainerClient;
+import com.incloud.tgestiona.b2b.model.Adjunto;
 import com.incloud.tgestiona.framawork.blobstorage.impl.BlobStoreFile;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,7 +16,7 @@ public interface BlobstoreService {
 
     public byte[] getFile(String archivoId) throws IOException;
 
-    public void deleteFile(String archivoId);
+    public void deleteFile(Adjunto archivo);
 
     public List<BlobStoreFile> getListFileByFolderId();
 

@@ -56,8 +56,8 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
     public int AnularOferta(@RequestParam(required = false) int ofertaId,
                             @RequestParam(required = false) int usuarioId,
                             @RequestParam(required = false) String usuario) {
-
-        return oServ.anularOferta(ofertaId, usuarioId, usuario);
+        int respuesta = oServ.anularOferta(ofertaId, usuarioId, usuario);
+        return respuesta;
 
     }
 

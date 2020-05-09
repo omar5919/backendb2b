@@ -92,7 +92,8 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
         if (Optional.ofNullable(result).isPresent()) {
             System.out.println(result.getId());
             //adjuntoServiceImpl.delete(result.getId());
-            blobstoreimpl.deleteFile(result.getArchivoId());
+            blobstoreimpl.deleteFile(result);
+            adjuntoServiceImpl.delete(result.getId());
             log.info("Delete file from Azure ...Id " + result.getArchivoId());
         }
 
@@ -124,30 +125,23 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
                                        HttpServletResponse response) throws IOException {
 
         Adjunto adjunto = new Adjunto();
-        adjunto.setArchivoId(id);
-
-         Adjunto result = adjuntoServiceImpl.findEntity(adjunto);
-         byte[] fileContent = blobstoreimpl.getFile(result.getArchivoNombre());
-         log.info("Download file from Azure ...Id " + result.getArchivoId());
-
+        adjunto.setId(Integer.parseInt(id));
+        Adjunto result = adjuntoServiceImpl.findEntity(adjunto);
+        byte[] fileContent = blobstoreimpl.getFile(result.getArchivoNombre());
+        log.info("Download file from Azure ...Id " + result.getArchivoId());
         try {
-
             response.setHeader("Pragma", "public");
             response.setHeader("Expires", "0");
             response.setHeader("Cache - Control", "must - revalidate, post - check = 0, pre - check = 0");
             response.setHeader("Content - type", "application - download");
             response.addHeader("Content-disposition", "attachment;filename=" + result.getArchivoNombre());
             response.setHeader("Content - Transfer - Encoding", "binary");
-
             OutputStream outStream = response.getOutputStream();
             outStream.write(fileContent);
             outStream.close();
             response.flushBuffer();
-
         } catch (Exception e) {
             throw new RuntimeException(getMensageErrorExceptionDebug(e));
         }
-
     }
-
 }
