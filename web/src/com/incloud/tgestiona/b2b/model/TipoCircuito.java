@@ -49,7 +49,7 @@ public class TipoCircuito extends BaseDomain  implements Identifiable<Integer>, 
 	
 
 	 @Column(name = "codigo_isis")
-     private boolean codigoIsis;
+     private String codigoIsis;
 	
 	 @Column(name = "activo")
 	 private boolean activo;
@@ -101,11 +101,11 @@ public class TipoCircuito extends BaseDomain  implements Identifiable<Integer>, 
 
 	
 	
-	public boolean isCodigoIsis() {
+	public String isCodigoIsis() {
 		return codigoIsis;
 	}
 
-	public void setCodigoIsis(boolean codigoIsis) {
+	public void setCodigoIsis(String codigoIsis) {
 		this.codigoIsis = codigoIsis;
 	}
 

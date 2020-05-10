@@ -313,7 +313,7 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	@Override
 	public boolean isIdSet() {
 		// TODO Auto-generated method stub
-		return false;
+		return ofertasDetalleId!=null;
 	}
 
 
@@ -336,5 +336,8 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 		this.ofertasDetalleId=id;
 		
 	}
+	
+	
+	
 
 }
