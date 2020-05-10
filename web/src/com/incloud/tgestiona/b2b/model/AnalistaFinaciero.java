@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "analista_financiero",schema="oferta")
 //@Audited
 //@AuditTable("_audi_analista_finaciero")
-public class AnalistaFinaciero extends BaseDomain implements Identifiable<Integer>, Serializable {
+public class AnalistaFinaciero extends BaseDomain implements Identifiable<Integer>   {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(AnalistaFinaciero.class.getName());
 
@@ -46,44 +46,12 @@ public class AnalistaFinaciero extends BaseDomain implements Identifiable<Intege
 	
 	@Column(name = "activo")
 	private Boolean activo;
+	
 
-	@Override
-	public String entityClassName() {
-		return AnalistaFinaciero.class.getSimpleName();
-	}
-
-	// -- [id] ------------------------
-
-		public Integer getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public AnalistaFinaciero id(Integer id) {
-		setId(id);
-		return this;
-	}
-
-	@Override
-	@Transient
-	public boolean isIdSet() {
-		return id != null;
-	}
-
-	/**
-	 * Apply the default values.
-	 */
-	public AnalistaFinaciero withDefaults() {
-		return this;
-	}
 
 	/**
 	 * Equals implementation using a business key.
-	 */
+	
 	@Override
 	public boolean equals(Object other) {
 		return this == other || (other instanceof AnalistaFinaciero && hashCode() == other.hashCode());
@@ -95,7 +63,7 @@ public class AnalistaFinaciero extends BaseDomain implements Identifiable<Intege
 	public int hashCode() {
 		return identifiableHashBuilder.hash(log, this);
 	}
-
+ */
 	/**
 	 * Construct a readable string representation for this AnalistaFinaciero
 	 * instance.
@@ -107,5 +75,17 @@ public class AnalistaFinaciero extends BaseDomain implements Identifiable<Intege
 		return MoreObjects.toStringHelper(this) //
 				.add("id", getId()) //
 				.toString();
+	}
+
+	@Override
+	public boolean isIdSet() {
+		// TODO Auto-generated method stub
+		return id != null;
+	}
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

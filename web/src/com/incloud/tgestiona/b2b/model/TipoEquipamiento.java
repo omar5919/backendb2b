@@ -49,11 +49,11 @@ public class TipoEquipamiento  extends BaseDomain implements Identifiable<Intege
 	@Override
 	public Integer getId() {
 		// TODO Auto-generated method stub
-		return null;
+		return tipoEquipamientoId;
 	}
 	@Override
 	public void setId(Integer id) {
-		// TODO Auto-generated method stub
+		this.tipoEquipamientoId=id;
 		
 	}
 }

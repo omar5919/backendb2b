@@ -54,12 +54,12 @@ public class EquipamientoMarca  extends BaseDomain implements Identifiable<Integ
 	@Override
 	public Integer getId() {
 		// TODO Auto-generated method stub
-		return null;
+		return equipamientoMarcaId;
 	}
 
 	@Override
 	public void setId(Integer id) {
-		// TODO Auto-generated method stub
+		this.equipamientoMarcaId=id;
 		
 	}
 	

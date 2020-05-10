@@ -50,13 +50,12 @@ public class ViaAcceso   extends BaseDomain implements Identifiable<Integer>, Se
 	@Override
 	public Integer getId() {
 		// TODO Auto-generated method stub
-		return null;
+		return via_acceso_id;
 	}
 
 	@Override
 	public void setId(Integer id) {
-		// TODO Auto-generated method stub
-		
+		this.via_acceso_id=id;
 	}
 
 	@Override

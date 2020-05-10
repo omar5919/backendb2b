@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -15,7 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "ofertas", schema = "oferta")
-public class Ofertas extends BaseDomain {
+public class Ofertas extends BaseDomain implements Identifiable<Integer>, Serializable  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -141,4 +143,22 @@ public class Ofertas extends BaseDomain {
     public boolean isIdSet() {
         return oferta_id != null;
     }
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		return oferta_id;
+	}
+
+	@Override
+	public void setId(Integer id) {
+		this.oferta_id=id;
+		
+	}
 }

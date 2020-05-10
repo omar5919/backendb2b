@@ -2,6 +2,7 @@ package com.incloud.tgestiona.b2b.model.oferta;
 
 
 import com.incloud.tgestiona.b2b.model.ConceptosOpex;
+import com.incloud.tgestiona.b2b.model.Identifiable;
 import com.incloud.tgestiona.b2b.model.Moneda;
 import com.incloud.tgestiona.b2b.model.Preventa;
 import com.incloud.tgestiona.domain.BaseDomain;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
@@ -19,7 +21,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Entity
 @Table(name = "ofertas_opex",schema = "oferta")
-public class OfertasOpex extends BaseDomain {
+public class OfertasOpex extends BaseDomain implements Identifiable<Integer>, Serializable  {
 
 	
     @Id
@@ -84,6 +86,30 @@ public class OfertasOpex extends BaseDomain {
 	public boolean isIdSet() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		return ofertaOpexId;
+	}
+
+
+
+	@Override
+	public void setId(Integer id) {
+		this.ofertaOpexId=id;
+		
 	}
 
     

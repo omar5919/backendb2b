@@ -42,12 +42,12 @@ public class Preventa extends BaseDomain implements Identifiable<Integer>, Seria
 	@Override
 	public Integer getId() {
 		// TODO Auto-generated method stub
-		return null;
+		return preventa_id;
 	}
 
 	@Override
 	public void setId(Integer id) {
-		// TODO Auto-generated method stub
+		this.preventa_id=id;
 		
 	}
 

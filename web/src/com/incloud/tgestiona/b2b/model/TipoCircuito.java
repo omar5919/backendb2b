@@ -25,7 +25,7 @@ import com.sun.istack.NotNull;
 @Table(name = "tipo_circuito",schema="oferta")
 //@Audited
 //@AuditTable("_audi_tipo_circuito")
-public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, Serializable {
+public class TipoCircuito extends BaseDomain  {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(TipoCircuito.class.getName());
 
@@ -38,21 +38,23 @@ public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, S
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tipo_circuito_id" ,nullable = true, precision = 10)
 	private Integer id;
+	
+
+	@Column(name = "jerarquia")
 	private Integer jerarquia;
-	private String descTipoCd;
+	
+
+	@Column(name = "descripcion")
+	private String descripcion;
 	
 
 	 @Column(name = "codigo_isis")
-    private boolean codigoIsis;
+     private boolean codigoIsis;
 	
 	 @Column(name = "activo")
-	    private boolean activo;
+	 private boolean activo;
 
-	@Override
-	public String entityClassName() {
-		return TipoCircuito.class.getSimpleName();
-	}
-
+ 
 	// -- [id] ------------------------
 
 	/*@Override
@@ -60,19 +62,7 @@ public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, S
 	@GeneratedValue(strategy = SEQUENCE, generator = "seq_tipo_circuito")
 	@Id
 	@SequenceGenerator(name = "seq_tipo_circuito", sequenceName = "seq_tipo_circuito", allocationSize = 1)*/
-	public Integer getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public TipoCircuito id(Integer id) {
-		setId(id);
-		return this;
-	}
+ 
 
 	@Override
 	@Transient
@@ -81,9 +71,7 @@ public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, S
 	}
 	// -- [jerarquia] ------------------------
 
-	@Digits(integer = 10, fraction = 0)
-	@NotNull
-	@Column(name = "jerarquia", nullable = false, precision = 10)
+
 	public Integer getJerarquia() {
 		return jerarquia;
 	}
@@ -98,19 +86,16 @@ public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, S
 	}
 	// -- [descTipoCd] ------------------------
 
-	@NotEmpty(message = "{message.tipoCircuito.descTipoCd.requerido}")
-	@Size(max = 50, message = "{message.tipoCircuito.descTipoCd.sizeMax} {max} {message.caracter}")
-	@Column(name = "descripcion", nullable = false, length = 50)
-	public String getDescTipoCd() {
-		return descTipoCd;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDescTipoCd(String descTipoCd) {
-		this.descTipoCd = descTipoCd;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
-	public TipoCircuito descTipoCd(String descTipoCd) {
-		setDescTipoCd(descTipoCd);
+	public TipoCircuito descTipoCd(String descripcion) {
+		setDescripcion(descripcion);
 		return this;
 	}
 
@@ -142,17 +127,7 @@ public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, S
 	/**
 	 * Equals implementation using a business key.
 	 */
-	@Override
-	public boolean equals(Object other) {
-		return this == other || (other instanceof TipoCircuito && hashCode() == other.hashCode());
-	}
 
-	private IdentifiableHashBuilder identifiableHashBuilder = new IdentifiableHashBuilder();
-
-	@Override
-	public int hashCode() {
-		return identifiableHashBuilder.hash(log, this);
-	}
 
 	/**
 	 * Construct a readable string representation for this TipoCircuito instance.
@@ -164,7 +139,17 @@ public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, S
 		return MoreObjects.toStringHelper(this) //
 				.add("id", getId()) //
 				.add("jerarquia", getJerarquia()) //
-				.add("descTipoCd", getDescTipoCd()) //
+				.add("descTipoCd", getDescripcion()) //
 				.toString();
+	}
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }

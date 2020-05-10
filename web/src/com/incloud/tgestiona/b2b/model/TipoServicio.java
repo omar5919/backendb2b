@@ -23,7 +23,7 @@ import com.incloud.tgestiona.domain.BaseDomain;
 @Table(name = "tipo_servicio",schema="oferta")
 //@Audited
 //@AuditTable("_audi_tipo_servicio")
-public class TipoServicio extends BaseDomain implements Identifiable<Integer>, Serializable {
+public class TipoServicio extends BaseDomain  implements Identifiable<Integer> {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(TipoServicio.class.getName());
 
@@ -54,31 +54,11 @@ public class TipoServicio extends BaseDomain implements Identifiable<Integer>, S
 	@Column(name = "activo" )
 	private Boolean activo;
 	
-	@Override
-	public String entityClassName() {
-		return TipoServicio.class.getSimpleName();
-	}
+ 
 
 	// -- [id] ------------------------
-
-	/*@Override
-	@Column(name = "tipo_servicio_id", precision = 10)
-	@GeneratedValue(strategy = SEQUENCE, generator = "seq_tipo_servicio")
-	@Id
-	@SequenceGenerator(name = "seq_tipo_servicio", sequenceName = "seq_tipo_servicio", allocationSize = 1)*/
-	public Integer getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public TipoServicio id(Integer id) {
-		setId(id);
-		return this;
-	}
+ 
+ 
 
 	@Override
 	@Transient
@@ -86,6 +66,14 @@ public class TipoServicio extends BaseDomain implements Identifiable<Integer>, S
 		return id != null;
 	}
 	// -- [codigoIsis] ------------------------
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	@NotEmpty(message = "{message.tipoServicio.codigoIsis.requerido}")
 	@Size(max = 15, message = "{message.tipoServicio.codigoIsis.sizeMax} {max} {message.caracter}")
@@ -166,17 +154,7 @@ public class TipoServicio extends BaseDomain implements Identifiable<Integer>, S
 	/**
 	 * Equals implementation using a business key.
 	 */
-	@Override
-	public boolean equals(Object other) {
-		return this == other || (other instanceof TipoServicio && hashCode() == other.hashCode());
-	}
-
-	private IdentifiableHashBuilder identifiableHashBuilder = new IdentifiableHashBuilder();
-
-	@Override
-	public int hashCode() {
-		return identifiableHashBuilder.hash(log, this);
-	}
+ 
 
 	/**
 	 * Construct a readable string representation for this TipoServicio instance.
@@ -190,5 +168,11 @@ public class TipoServicio extends BaseDomain implements Identifiable<Integer>, S
 				.add("codigoIsis", getCodigoIsis()) //
 				.add("descripcion", getDescripcion()) //
 				.toString();
+	}
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

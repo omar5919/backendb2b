@@ -22,7 +22,7 @@ import com.incloud.tgestiona.domain.BaseDomain;
 @Table(name = "tipo_proyecto",schema="oferta")
 //@Audited
 //@AuditTable("_audi_tipo_proyecto")
-public class TipoProyecto extends BaseDomain implements Identifiable<Integer>, Serializable {
+public class TipoProyecto extends BaseDomain implements Identifiable<Integer> {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(TipoProyecto.class.getName());
 
@@ -42,10 +42,6 @@ public class TipoProyecto extends BaseDomain implements Identifiable<Integer>, S
 	@Column(name = "activo" )
 	private Boolean activo;
 
-	@Override
-	public String entityClassName() {
-		return TipoProyecto.class.getSimpleName();
-	}
 
 	// -- [id] ------------------------
 
@@ -54,24 +50,20 @@ public class TipoProyecto extends BaseDomain implements Identifiable<Integer>, S
 	@GeneratedValue(strategy = SEQUENCE, generator = "seq_tipo_proyecto")
 	@Id
 	@SequenceGenerator(name = "seq_tipo_proyecto", sequenceName = "seq_tipo_proyecto", allocationSize = 1)*/
-	public Integer getId() {
-		return id;
-	}
 
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public TipoProyecto id(Integer id) {
-		setId(id);
-		return this;
-	}
 	
 	
 
 	public Boolean getActivo() {
 		return activo;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public void setActivo(Boolean activo) {
@@ -110,17 +102,7 @@ public class TipoProyecto extends BaseDomain implements Identifiable<Integer>, S
 	/**
 	 * Equals implementation using a business key.
 	 */
-	@Override
-	public boolean equals(Object other) {
-		return this == other || (other instanceof TipoProyecto && hashCode() == other.hashCode());
-	}
 
-	private IdentifiableHashBuilder identifiableHashBuilder = new IdentifiableHashBuilder();
-
-	@Override
-	public int hashCode() {
-		return identifiableHashBuilder.hash(log, this);
-	}
 
 	/**
 	 * Construct a readable string representation for this TipoProyecto instance.
@@ -133,5 +115,11 @@ public class TipoProyecto extends BaseDomain implements Identifiable<Integer>, S
 				.add("id", getId()) //
 				.add("descripcion", getDescripcion()) //
 				.toString();
+	}
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

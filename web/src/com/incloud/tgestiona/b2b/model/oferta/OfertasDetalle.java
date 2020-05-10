@@ -1,5 +1,6 @@
 package com.incloud.tgestiona.b2b.model.oferta;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -17,6 +18,7 @@ import com.incloud.tgestiona.b2b.model.Departamento;
 import com.incloud.tgestiona.b2b.model.Distrito;
 import com.incloud.tgestiona.b2b.model.EquipamientoCondicion;
 import com.incloud.tgestiona.b2b.model.EquipamientoMarca;
+import com.incloud.tgestiona.b2b.model.Identifiable;
 import com.incloud.tgestiona.b2b.model.Moneda;
 import com.incloud.tgestiona.b2b.model.Provincia;
 import com.incloud.tgestiona.b2b.model.TipoCircuito;
@@ -33,7 +35,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "ofertas_detalle",schema = "oferta")
-public class OfertasDetalle extends BaseDomain{
+public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>, Serializable {
 
 	
 	
@@ -293,14 +295,14 @@ public class OfertasDetalle extends BaseDomain{
 	 private TipoCircuito tipoCircuito;
 	
 	 
-	@ManyToOne
-	@JoinColumn(name = "departamento_id")
-	private Departamento departamento;
+	//@ManyToOne
+	//@JoinColumn(name = "departamento_id")
+	//private Departamento departamento;
 	
  
-	 @ManyToOne
-	 @JoinColumn(name = "provincia_id")
-	 private Provincia provincia;
+	// @ManyToOne
+	// @JoinColumn(name = "provincia_id")
+	// private Provincia provincia;
 	
  
 	 @ManyToOne	 
@@ -312,6 +314,27 @@ public class OfertasDetalle extends BaseDomain{
 	public boolean isIdSet() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		return ofertasDetalleId;
+	}
+
+
+	@Override
+	public void setId(Integer id) {
+		this.ofertasDetalleId=id;
+		
 	}
 
 }

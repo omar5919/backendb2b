@@ -23,7 +23,7 @@ import com.incloud.tgestiona.domain.BaseDomain;
 @Table(name = "accion_isis",schema="oferta")
 //@Audited
 //@AuditTable("_audi_accion_isis")
-public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Serializable {
+public class AccionIsis extends BaseDomain  implements Identifiable<Integer> {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(AccionIsis.class.getName());
 
@@ -63,33 +63,9 @@ public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Ser
 		this.activo = activo;
 	}
 
-
-	@Override
-	public String entityClassName() {
-		return AccionIsis.class.getSimpleName();
-	}
-
-	// -- [id] ------------------------
-
-	/*@Override
-	@Column(name = "accion_isis_id", precision = 10)
-	@GeneratedValue(strategy = SEQUENCE, generator = "seq_accion_isis")
-	@Id
-	@SequenceGenerator(name = "seq_accion_isis", sequenceName = "seq_accion_isis", allocationSize = 1)
-	*/
-	public Integer getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public AccionIsis id(Integer id) {
-		setId(id);
-		return this;
-	}
+ 
+	
+	
 
 	@Override
 	@Transient
@@ -98,6 +74,14 @@ public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Ser
 	}
 
 	// -- [descripcion] ------------------------
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getDescripcion() {
 		return descripcion;
@@ -111,28 +95,8 @@ public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Ser
 		setDescripcion(descripcion);
 		return this;
 	}
-
-	/**
-	 * Apply the default values.
-	 */
-	public AccionIsis withDefaults() {
-		return this;
-	}
-
-	/**
-	 * Equals implementation using a business key.
-	 */
-	@Override
-	public boolean equals(Object other) {
-		return this == other || (other instanceof AccionIsis && hashCode() == other.hashCode());
-	}
-
-	private IdentifiableHashBuilder identifiableHashBuilder = new IdentifiableHashBuilder();
-
-	@Override
-	public int hashCode() {
-		return identifiableHashBuilder.hash(log, this);
-	}
+ 
+ 
 
 	/**
 	 * Construct a readable string representation for this AccionIsis instance.
@@ -146,5 +110,11 @@ public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Ser
 				
 				.add("descripcion", getDescripcion()) //
 				.toString();
+	}
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

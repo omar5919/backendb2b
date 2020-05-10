@@ -23,7 +23,7 @@ import com.incloud.tgestiona.domain.BaseDomain;
 @Table(name = "complejidad",schema="oferta")
 //@Audited
 //@AuditTable("_audi_complejidad")
-public class Complejidad extends BaseDomain implements Identifiable<Integer>, Serializable {
+public class Complejidad extends BaseDomain implements Identifiable<Integer> {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(Complejidad.class.getName());
 
@@ -38,8 +38,11 @@ public class Complejidad extends BaseDomain implements Identifiable<Integer>, Se
     @Column(name = "complejidad_id", updatable = false, nullable = false)
 	private Integer id;
     
+
+	@Column(name = "codigo_isis")
 	private String complejidadCodigo;
 	
+	@Column(name = "descripcion" )
 	private String complejidadTipologiaDescrip;
 	
 	@Column(name = "activo")
@@ -47,27 +50,13 @@ public class Complejidad extends BaseDomain implements Identifiable<Integer>, Se
 	
 	
 
-	@Override
-	public String entityClassName() {
-		return Complejidad.class.getSimpleName();
-	}
+
 
 	// -- [id] ------------------------
 
 
-	public Integer getId() {
-		return id;
-	}
 
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
-	public Complejidad id(Integer id) {
-		setId(id);
-		return this;
-	}
 
 	@Override
 	@Transient
@@ -76,9 +65,17 @@ public class Complejidad extends BaseDomain implements Identifiable<Integer>, Se
 	}
 	// -- [complejidadCodigo] ------------------------
 
-	@NotEmpty(message = "{message.complejidad.complejidadCodigo.requerido}")
-	@Size(max = 5, message = "{message.complejidad.complejidadCodigo.sizeMax} {max} {message.caracter}")
-	@Column(name = "codigo_isis", nullable = false, length = 5)
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
 	public String getComplejidadCodigo() {
 		return complejidadCodigo;
 	}
@@ -93,8 +90,7 @@ public class Complejidad extends BaseDomain implements Identifiable<Integer>, Se
 	}
 	// -- [complejidadTipologiaDescrip] ------------------------
 
-	@Size(max = 50, message = "{message.complejidad.complejidadTipologiaDescrip.sizeMax} {max} {message.caracter}")
-	@Column(name = "descripcion", length = 50)
+
 	public String getComplejidadTipologiaDescrip() {
 		return complejidadTipologiaDescrip;
 	}
@@ -128,17 +124,7 @@ public class Complejidad extends BaseDomain implements Identifiable<Integer>, Se
 	/**
 	 * Equals implementation using a business key.
 	 */
-	@Override
-	public boolean equals(Object other) {
-		return this == other || (other instanceof Complejidad && hashCode() == other.hashCode());
-	}
 
-	private IdentifiableHashBuilder identifiableHashBuilder = new IdentifiableHashBuilder();
-
-	@Override
-	public int hashCode() {
-		return identifiableHashBuilder.hash(log, this);
-	}
 
 	/**
 	 * Construct a readable string representation for this Complejidad instance.
@@ -152,5 +138,12 @@ public class Complejidad extends BaseDomain implements Identifiable<Integer>, Se
 				.add("complejidadCodigo", getComplejidadCodigo()) //
 				.add("complejidadTipologiaDescrip", getComplejidadTipologiaDescrip()) //
 				.toString();
+	}
+
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

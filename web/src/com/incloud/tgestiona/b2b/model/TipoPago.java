@@ -37,12 +37,12 @@ public class TipoPago extends BaseDomain implements Identifiable<Integer>, Seria
 	@Override
 	public Integer getId() {
 		// TODO Auto-generated method stub
-		return null;
+		return tipoPagoId;
 	}
 
 	@Override
 	public void setId(Integer id) {
-		// TODO Auto-generated method stub
+		this.tipoPagoId=id;
 		
 	}
 

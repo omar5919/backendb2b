@@ -41,12 +41,11 @@ public class SisegoCondicion extends BaseDomain implements Identifiable<Integer>
 	@Override
 	public Integer getId() {
 		// TODO Auto-generated method stub
-		return null;
+		return sisegoCondicionId;
 	}
 	@Override
 	public void setId(Integer id) {
-		// TODO Auto-generated method stub
-		
+		this.sisegoCondicionId=id;
 	}
 	@Override
 	public boolean isIdSet() {

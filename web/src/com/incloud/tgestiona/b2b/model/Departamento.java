@@ -55,12 +55,12 @@ public class Departamento extends BaseDomain implements Identifiable<Integer>, S
 	@Override
 	public Integer getId() {
 		// TODO Auto-generated method stub
-		return null;
+		return departamentoId;
 	}
 
 	@Override
 	public void setId(Integer id) {
-		// TODO Auto-generated method stub
+		this.departamentoId=id;
 		
 	}
 }

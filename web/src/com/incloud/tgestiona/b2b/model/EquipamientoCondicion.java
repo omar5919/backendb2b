@@ -50,12 +50,12 @@ public class EquipamientoCondicion  extends BaseDomain implements Identifiable<I
 		@Override
 		public Integer getId() {
 			// TODO Auto-generated method stub
-			return null;
+			return equipamientoCondicionId;
 		}
 
 		@Override
 		public void setId(Integer id) {
-			// TODO Auto-generated method stub
+			this.equipamientoCondicionId=id;
 			
 		}
 }

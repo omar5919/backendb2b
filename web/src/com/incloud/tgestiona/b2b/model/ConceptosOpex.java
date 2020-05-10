@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "concepto_opex",schema = "oferta")
-public class ConceptosOpex  extends BaseDomain implements Identifiable<Integer>, Serializable {
+public class ConceptosOpex  extends BaseDomain  implements Identifiable<Integer> {
 	 	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "concepto_id" , nullable = false)
@@ -45,7 +45,7 @@ public class ConceptosOpex  extends BaseDomain implements Identifiable<Integer>,
 		@Override
 		public boolean isIdSet() {
 			// TODO Auto-generated method stub
-			return false;
+			return conceptoId!=null;
 		}
 
 		@Override
@@ -57,12 +57,14 @@ public class ConceptosOpex  extends BaseDomain implements Identifiable<Integer>,
 		@Override
 		public Integer getId() {
 			// TODO Auto-generated method stub
-			return null;
+			return conceptoId;
 		}
 
 		@Override
 		public void setId(Integer id) {
-			// TODO Auto-generated method stub
+			this.conceptoId=id;
 			
 		}
+
+
 }

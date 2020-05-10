@@ -23,7 +23,7 @@ import com.incloud.tgestiona.domain.BaseDomain;
 @Table(name = "tipo_contrato",schema="oferta")
 //@Audited
 //@AuditTable("_audi_tipo_contrato")
-public class TipoContrato extends BaseDomain implements Identifiable<Integer>, Serializable {
+public class TipoContrato extends BaseDomain  {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(TipoContrato.class.getName());
 
@@ -49,27 +49,18 @@ public class TipoContrato extends BaseDomain implements Identifiable<Integer>, S
     
 
 
-	@Override
-	public String entityClassName() {
-		return TipoContrato.class.getSimpleName();
-	}
-
-	// -- [id] ------------------------
-
+ 
+ 
 
 	public Integer getId() {
 		return id;
 	}
 
-	@Override
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public TipoContrato id(Integer id) {
-		setId(id);
-		return this;
-	}
 
 	@Override
 	@Transient
@@ -112,17 +103,7 @@ public class TipoContrato extends BaseDomain implements Identifiable<Integer>, S
 	/**
 	 * Equals implementation using a business key.
 	 */
-	@Override
-	public boolean equals(Object other) {
-		return this == other || (other instanceof TipoContrato && hashCode() == other.hashCode());
-	}
-
-	private IdentifiableHashBuilder identifiableHashBuilder = new IdentifiableHashBuilder();
-
-	@Override
-	public int hashCode() {
-		return identifiableHashBuilder.hash(log, this);
-	}
+ 
 
 	/**
 	 * Construct a readable string representation for this TipoContrato instance.
