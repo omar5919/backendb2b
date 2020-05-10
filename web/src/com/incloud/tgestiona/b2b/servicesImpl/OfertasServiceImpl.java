@@ -9,17 +9,20 @@ import com.incloud.tgestiona.b2b.repository.OfertasRepository;
 import com.incloud.tgestiona.b2b.serices.OfertasService;
 import com.incloud.tgestiona.b2b.service.dto.BaseBandejaResponse;
 import com.incloud.tgestiona.b2b.service.dto.ofertaDto;
+import org.apache.commons.lang.time.DateUtils;
+import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class OfertasServiceImpl implements OfertasService {
@@ -53,8 +56,11 @@ public class OfertasServiceImpl implements OfertasService {
             if (estado != null) {
                 p = cb.and(p, cb.equal(estadoOfertas.get("id"), estado));
             }
-            if (Objects.nonNull(desde) && Objects.nonNull(hasta) && desde.before(hasta)) {
-                p = cb.and(p, cb.between(root.get("fecha_reg"), desde, hasta));
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            if(Objects.nonNull(desde) && Objects.nonNull(hasta)){
+                Expression<String> dateStringExpr = cb.function("to_char", String.class, root.get("fecha_reg"), cb.literal("YYYY-MM-DD"));
+                p = cb.and(p, cb.between(cb.lower(dateStringExpr), dateFormat.format(desde),dateFormat.format(hasta)));
             }
             cq.orderBy(cb.desc(root.get("descripcion")), cb.asc(root.get("oferta_id")));
             return p;

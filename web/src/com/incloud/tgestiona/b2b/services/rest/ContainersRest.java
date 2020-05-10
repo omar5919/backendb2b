@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +46,7 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
 
     @ApiOperation(value = "Add file to Azure Container ", produces = "application/json")
     @PostMapping(value = "/uploadToContainers", produces = APPLICATION_JSON_VALUE)
+//    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Adjunto> uploadToContainers(@RequestParam("file") MultipartFile file) throws IOException {
 
         HttpHeaders headers = new HttpHeaders();
@@ -64,6 +66,7 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
         adjunto.setRutaCatalogo(blob.getUrl());
         adjunto.setArchivoTipo(blob.getType());
         adjunto.setTipoAdjunto("1");
+        adjunto.setEstado(1);
         adjunto.setAdjuntoUsuario(user);
 
         try {
@@ -81,6 +84,7 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
 
     @ApiOperation(value = "Delete file to Azure Container ", produces = "application/json")
     @PostMapping(value = "/deleteFileContainers/{idFile}", produces = APPLICATION_JSON_VALUE)
+//    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Adjunto> deleteFileContainers(@PathVariable("idFile") @Valid String id) throws Exception {
 
         HttpHeaders headers = new HttpHeaders();
@@ -91,9 +95,12 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
         Adjunto result = adjuntoServiceImpl.findEntity(adjunto);
         if (Optional.ofNullable(result).isPresent()) {
             System.out.println(result.getId());
-            //adjuntoServiceImpl.delete(result.getId());
             blobstoreimpl.deleteFile(result);
-            adjuntoServiceImpl.delete(result.getId());
+            //ACTUALIZAR A ESTADO BORRADO
+
+            result.setEstado(2);
+
+            adjuntoServiceImpl.save(result);
             log.info("Delete file from Azure ...Id " + result.getArchivoId());
         }
 
@@ -112,17 +119,17 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
 
     @ApiOperation(value = "List file(s) from Azure Container", produces = "application/json")
     @RequestMapping(value = "/listFilesContainers", method = RequestMethod.POST, headers = "Accept=application/json")
-    ResponseEntity<List<Adjunto>> listFilesContainers()
-            throws Exception {
-        return Optional.of(new ResponseEntity<List<Adjunto>>(
-                (List<Adjunto>) adjuntoServiceImpl.findAll(),
-                HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NO_CONTENT));
+//    @CrossOrigin(origins = "http://localhost:4200")
+    ResponseEntity<List<Adjunto>> listFilesContainers() throws Exception {
+        List<Adjunto> res = (List<Adjunto>) adjuntoServiceImpl.findAll();
+        res.removeIf(p->p.getEstado() == 2);
+        return Optional.of(new ResponseEntity<List<Adjunto>>(res, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NO_CONTENT));
     }
 
     @ApiOperation(value = "Download file from Azure Container", produces = "application/json")
     @RequestMapping(value = "/downLoadFileContainers/{idFile}", method = RequestMethod.GET)
-    public void downLoadFileContainers(@PathVariable("idFile") @Valid String id,
-                                       HttpServletResponse response) throws IOException {
+//    @CrossOrigin(origins = "http://localhost:4200")
+    public void downLoadFileContainers(@PathVariable("idFile") @Valid String id, HttpServletResponse response) throws IOException {
 
         Adjunto adjunto = new Adjunto();
         adjunto.setId(Integer.parseInt(id));

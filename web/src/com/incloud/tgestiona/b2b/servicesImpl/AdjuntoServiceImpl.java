@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdjuntoServiceImpl extends JPACustomRepository<Adjunto, Integer> {
 
+
+
 }

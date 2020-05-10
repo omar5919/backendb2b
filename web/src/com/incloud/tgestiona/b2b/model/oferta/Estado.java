@@ -27,6 +27,9 @@ public class Estado extends BaseDomain implements Identifiable<Integer>, Seriali
     @Column(name = "color")
     private String color;
 
+    @Column(name = "orden")
+    private Integer orden;
+
     @Column(name = "descripcion")
     private String descripcion;
 

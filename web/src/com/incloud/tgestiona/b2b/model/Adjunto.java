@@ -179,6 +179,17 @@ public class Adjunto extends BaseDomain implements Identifiable<Integer>, Serial
     }
     // -- [adjuntoUsuario] ------------------------
 
+    @Column(name = "estado",columnDefinition = "integer default 1")
+    private Integer estado;
+
+    public void setEstado(Integer estado){
+        this.estado=estado;
+    }
+
+    public Integer getEstado(){
+        return estado;
+    }
+
     @Size(max = 30, message = "{message.adjunto.adjuntoUsuario.sizeMax} {max} {message.caracter}")
     @Column(name = "adjunto_usuario", length = 1)
     public String getAdjuntoUsuario() {
@@ -231,6 +242,7 @@ public class Adjunto extends BaseDomain implements Identifiable<Integer>, Serial
                 .add("archivoTipo", getArchivoTipo()) //
                 .add("rutaCatalogo", getRutaCatalogo()) //
                 .add("tipoAdjunto", getTipoAdjunto()) //
+                .add("estado",getEstado())
                 .add("adjuntoUsuario", getAdjuntoUsuario()) //
                 .toString();
     }

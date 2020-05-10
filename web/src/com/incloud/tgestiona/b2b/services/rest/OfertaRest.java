@@ -53,6 +53,7 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
     }
 
     @PostMapping("/anularoferta")
+//    @CrossOrigin(origins = "http://localhost:4200")
     public int AnularOferta(@RequestParam(required = false) int ofertaId,
                             @RequestParam(required = false) int usuarioId,
                             @RequestParam(required = false) String usuario) {
