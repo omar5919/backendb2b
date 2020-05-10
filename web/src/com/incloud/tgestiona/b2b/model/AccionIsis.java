@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -22,7 +23,7 @@ import com.incloud.tgestiona.domain.BaseDomain;
 @Table(name = "accion_isis",schema="oferta")
 //@Audited
 //@AuditTable("_audi_accion_isis")
-public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Serializable {
+public class AccionIsis extends BaseDomain  implements Identifiable<Integer> , Serializable{
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(AccionIsis.class.getName());
 
@@ -30,13 +31,19 @@ public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Ser
 	/* Atributos de la Entidad */
 	/***************************/
 
-	// Raw attributes
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "accion_isis_id", updatable = false, nullable = false)
 	private Integer id;
-	private Integer codigoEquivalente;
+
+	@Column(name = "descripcion")
 	private String descripcion;
+	
+	@Column(name = "codigo_isis")
 	private String codigoIsis;
+	
+	@Column(name = "activo")
 	private Boolean activo;
-	private String codTablTipo;
 	
  
 
@@ -56,65 +63,26 @@ public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Ser
 		this.activo = activo;
 	}
 
-	public String getCodTablTipo() {
-		return codTablTipo;
-	}
-
-	public void setCodTablTipo(String codTablTipo) {
-		this.codTablTipo = codTablTipo;
-	}
-
-	@Override
-	public String entityClassName() {
-		return AccionIsis.class.getSimpleName();
-	}
-
-	// -- [id] ------------------------
-
-	@Override
-	@Column(name = "accion_isis_id", precision = 10)
-	@GeneratedValue(strategy = SEQUENCE, generator = "seq_accion_isis")
-	@Id
-	@SequenceGenerator(name = "seq_accion_isis", sequenceName = "seq_accion_isis", allocationSize = 1)
-	public Integer getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public AccionIsis id(Integer id) {
-		setId(id);
-		return this;
-	}
+ 
+	
+	
 
 	@Override
 	@Transient
 	public boolean isIdSet() {
 		return id != null;
 	}
-	// -- [codigoEquivalente] ------------------------
 
-	@Digits(integer = 10, fraction = 0)
-	@Column(name = "codigo_equivalente", precision = 10)
-	public Integer getCodigoEquivalente() {
-		return codigoEquivalente;
-	}
-
-	public void setCodigoEquivalente(Integer codigoEquivalente) {
-		this.codigoEquivalente = codigoEquivalente;
-	}
-
-	public AccionIsis codigoEquivalente(Integer codigoEquivalente) {
-		setCodigoEquivalente(codigoEquivalente);
-		return this;
-	}
 	// -- [descripcion] ------------------------
 
-	@Size(max = 200, message = "{message.accionIsis.descripcion.sizeMax} {max} {message.caracter}")
-	@Column(name = "descripcion", length = 200)
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -127,28 +95,8 @@ public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Ser
 		setDescripcion(descripcion);
 		return this;
 	}
-
-	/**
-	 * Apply the default values.
-	 */
-	public AccionIsis withDefaults() {
-		return this;
-	}
-
-	/**
-	 * Equals implementation using a business key.
-	 */
-	@Override
-	public boolean equals(Object other) {
-		return this == other || (other instanceof AccionIsis && hashCode() == other.hashCode());
-	}
-
-	private IdentifiableHashBuilder identifiableHashBuilder = new IdentifiableHashBuilder();
-
-	@Override
-	public int hashCode() {
-		return identifiableHashBuilder.hash(log, this);
-	}
+ 
+ 
 
 	/**
 	 * Construct a readable string representation for this AccionIsis instance.
@@ -159,8 +107,14 @@ public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Ser
 	public String toString() {
 		return MoreObjects.toStringHelper(this) //
 				.add("id", getId()) //
-				.add("codigoEquivalente", getCodigoEquivalente()) //
+				
 				.add("descripcion", getDescripcion()) //
 				.toString();
+	}
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

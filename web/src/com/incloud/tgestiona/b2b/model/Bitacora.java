@@ -26,8 +26,8 @@ public class Bitacora extends BaseDomain implements Identifiable<Integer>, Seria
     @Column(name = "bitacora_id", updatable = false, nullable = false)
     private Integer id;
 
-    @Column(name = "responsable")
-    private String responsable;
+    @Column(name = "usuario")
+    private String nombreUsuario;
 
     @Column(name = "fecha")
     private String fecha;

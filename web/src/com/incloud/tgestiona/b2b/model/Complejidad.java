@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -19,112 +20,120 @@ import com.google.common.base.MoreObjects;
 import com.incloud.tgestiona.domain.BaseDomain;
 
 @Entity
-@Table(name = "complejidad")
+@Table(name = "complejidad",schema="oferta")
 //@Audited
 //@AuditTable("_audi_complejidad")
 public class Complejidad extends BaseDomain implements Identifiable<Integer>, Serializable {
-    private static final long serialVersionUID = 1L;
-    private static final Logger log = Logger.getLogger(Complejidad.class.getName());
+	private static final long serialVersionUID = 1L;
+	private static final Logger log = Logger.getLogger(Complejidad.class.getName());
 
-    /***************************/
-    /* Atributos de la Entidad */
-    /***************************/
+	/***************************/
+	/* Atributos de la Entidad */
+	/***************************/
 
-    // Raw attributes
-    private Integer id;
-    private String complejidadTipologiaDescrip;
+	// Raw attributes
+	private Integer id;
+	private String complejidadCodigo;
+	private String complejidadTipologiaDescrip;
 
-    @Override
-    public String entityClassName() {
-        return Complejidad.class.getSimpleName();
-    }
+	@Override
+	public String entityClassName() {
+		return Complejidad.class.getSimpleName();
+	}
 
-    // -- [id] ------------------------
+	// -- [id] ------------------------
 
-    @Override
-    @Column(name = "complejidad_id", precision = 10)
-    @GeneratedValue(strategy = SEQUENCE, generator = "seq_complejidad")
-    @Id
-    @SequenceGenerator(name = "seq_complejidad", sequenceName = "seq_complejidad", allocationSize = 1)
-    public Integer getId() {
-        return id;
-    }
+	@Override
+	@Column(name = "complejidad_id", precision = 10)
+	@GeneratedValue(strategy = SEQUENCE, generator = "seq_complejidad")
+	@Id
+	@SequenceGenerator(name = "seq_complejidad", sequenceName = "seq_complejidad", allocationSize = 1)
+	public Integer getId() {
+		return id;
+	}
 
-    @Override
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	@Override
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Complejidad id(Integer id) {
-        setId(id);
-        return this;
-    }
+	public Complejidad id(Integer id) {
+		setId(id);
+		return this;
+	}
 
-    @Override
-    @Transient
-    public boolean isIdSet() {
-        return id != null;
-    }
+	@Override
+	@Transient
+	public boolean isIdSet() {
+		return id != null;
+	}
+	// -- [complejidadCodigo] ------------------------
 
+	@NotEmpty(message = "{message.complejidad.complejidadCodigo.requerido}")
+	@Size(max = 5, message = "{message.complejidad.complejidadCodigo.sizeMax} {max} {message.caracter}")
+	@Column(name = "complejidad_codigo", nullable = false, length = 5)
+	public String getComplejidadCodigo() {
+		return complejidadCodigo;
+	}
 
-    @Column(name = "orden")
-    private Integer orden;
+	public void setComplejidadCodigo(String complejidadCodigo) {
+		this.complejidadCodigo = complejidadCodigo;
+	}
 
-    public void setOrden(Integer orden) {
-        this.orden = orden;
-    }
+	public Complejidad complejidadCodigo(String complejidadCodigo) {
+		setComplejidadCodigo(complejidadCodigo);
+		return this;
+	}
+	// -- [complejidadTipologiaDescrip] ------------------------
 
-    public Integer getOrden(){
-        return orden;
-    }
+	@Size(max = 50, message = "{message.complejidad.complejidadTipologiaDescrip.sizeMax} {max} {message.caracter}")
+	@Column(name = "complejidad_tipologia_descrip", length = 50)
+	public String getComplejidadTipologiaDescrip() {
+		return complejidadTipologiaDescrip;
+	}
 
-    @Size(max = 50, message = "{message.complejidad.complejidadTipologiaDescrip.sizeMax} {max} {message.caracter}")
-    @Column(name = "complejidad_tipologia_descrip", length = 50)
-    public String getComplejidadTipologiaDescrip() {
-        return complejidadTipologiaDescrip;
-    }
+	public void setComplejidadTipologiaDescrip(String complejidadTipologiaDescrip) {
+		this.complejidadTipologiaDescrip = complejidadTipologiaDescrip;
+	}
 
-    public void setComplejidadTipologiaDescrip(String complejidadTipologiaDescrip) {
-        this.complejidadTipologiaDescrip = complejidadTipologiaDescrip;
-    }
+	public Complejidad complejidadTipologiaDescrip(String complejidadTipologiaDescrip) {
+		setComplejidadTipologiaDescrip(complejidadTipologiaDescrip);
+		return this;
+	}
 
-    public Complejidad complejidadTipologiaDescrip(String complejidadTipologiaDescrip) {
-        setComplejidadTipologiaDescrip(complejidadTipologiaDescrip);
-        return this;
-    }
+	/**
+	 * Apply the default values.
+	 */
+	public Complejidad withDefaults() {
+		return this;
+	}
 
-    /**
-     * Apply the default values.
-     */
-    public Complejidad withDefaults() {
-        return this;
-    }
+	/**
+	 * Equals implementation using a business key.
+	 */
+	@Override
+	public boolean equals(Object other) {
+		return this == other || (other instanceof Complejidad && hashCode() == other.hashCode());
+	}
 
-    /**
-     * Equals implementation using a business key.
-     */
-    @Override
-    public boolean equals(Object other) {
-        return this == other || (other instanceof Complejidad && hashCode() == other.hashCode());
-    }
+	private IdentifiableHashBuilder identifiableHashBuilder = new IdentifiableHashBuilder();
 
-    private IdentifiableHashBuilder identifiableHashBuilder = new IdentifiableHashBuilder();
+	@Override
+	public int hashCode() {
+		return identifiableHashBuilder.hash(log, this);
+	}
 
-    @Override
-    public int hashCode() {
-        return identifiableHashBuilder.hash(log, this);
-    }
-
-    /**
-     * Construct a readable string representation for this Complejidad instance.
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this) //
-                .add("id", getId()) //
-                .add("complejidadTipologiaDescrip", getComplejidadTipologiaDescrip()) //
-                .toString();
-    }
+	/**
+	 * Construct a readable string representation for this Complejidad instance.
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this) //
+				.add("id", getId()) //
+				.add("complejidadCodigo", getComplejidadCodigo()) //
+				.add("complejidadTipologiaDescrip", getComplejidadTipologiaDescrip()) //
+				.toString();
+	}
 }

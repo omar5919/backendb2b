@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Data
@@ -12,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "cliente", schema = "oferta")
-public class Cliente extends BaseDomain implements Identifiable<Integer> {
+public class Cliente extends BaseDomain implements Identifiable<Integer>, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +38,13 @@ public class Cliente extends BaseDomain implements Identifiable<Integer> {
 
     @Column(name = "gerente_cuenta")
     private String gerente_cuenta;
+    
+    @Column(name = "segmento_negocio")
+    private String segmentoNegocio;
 
+    @Column(name = "activo")
+    private Boolean activo;
+    
     @Override
     public String entityClassName() {
         return Cliente.class.getSimpleName();

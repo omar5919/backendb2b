@@ -33,6 +33,15 @@ public class Estado extends BaseDomain implements Identifiable<Integer>, Seriali
     @Column(name = "descripcion")
     private String descripcion;
 
+    @Column(name = "codigoestado")
+    private String codigoEstado;
+
+    @Column(name = "color")
+    private String color;
+
+    @Column(name = "activo")
+    private Boolean activo;
+
     @Override
     public String entityClassName() {
         return Estado.class.getSimpleName();

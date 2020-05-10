@@ -1,5 +1,6 @@
 package com.incloud.tgestiona.b2b.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.incloud.tgestiona.b2b.model.oferta.Ofertas;
+import com.incloud.tgestiona.domain.BaseDomain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "via_acceso",schema = "oferta")
-public class ViaAcceso {
+public class ViaAcceso   extends BaseDomain implements Identifiable<Integer>, Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "via_acceso_id" ,nullable = true, precision = 10)
@@ -38,4 +40,27 @@ public class ViaAcceso {
 	
 	@Column(name = "activo" )
 	private Boolean activo ;
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		return via_acceso_id;
+	}
+
+	@Override
+	public void setId(Integer id) {
+		this.via_acceso_id=id;
+	}
+
+	@Override
+	public boolean isIdSet() {
+		// TODO Auto-generated method stub
+		return via_acceso_id!=null;
+	}
 }

@@ -27,10 +27,12 @@ public class SisegoCondicion extends BaseDomain implements Identifiable<Integer>
     @Column(name = "sisego_condicion_id" ,nullable = true, precision = 10)
 	private Integer sisegoCondicionId ;
 	
-	@Column(name = "descripcion", length = 50 )
+	@Column(name = "descripcion" )
 	private String descripcion ;
+	
 	@Column(name = "activo"  )
 	private Boolean activo ;
+	
 	@Override
 	public String entityClassName() {
 		// TODO Auto-generated method stub
@@ -39,16 +41,15 @@ public class SisegoCondicion extends BaseDomain implements Identifiable<Integer>
 	@Override
 	public Integer getId() {
 		// TODO Auto-generated method stub
-		return null;
+		return sisegoCondicionId;
 	}
 	@Override
 	public void setId(Integer id) {
-		// TODO Auto-generated method stub
-		
+		this.sisegoCondicionId=id;
 	}
 	@Override
 	public boolean isIdSet() {
 		// TODO Auto-generated method stub
-		return false;
+		return sisegoCondicionId!=null;
 	}
 }

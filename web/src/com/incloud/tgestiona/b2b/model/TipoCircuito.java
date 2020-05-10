@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -21,10 +22,10 @@ import com.incloud.tgestiona.domain.BaseDomain;
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name = "tipo_circuito")
+@Table(name = "tipo_circuito",schema="oferta")
 //@Audited
 //@AuditTable("_audi_tipo_circuito")
-public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, Serializable {
+public class TipoCircuito extends BaseDomain  implements Identifiable<Integer>, Serializable  {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(TipoCircuito.class.getName());
 
@@ -33,35 +34,35 @@ public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, S
 	/***************************/
 
 	// Raw attributes
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tipo_circuito_id" ,nullable = true, precision = 10)
 	private Integer id;
+	
+
+	@Column(name = "jerarquia")
 	private Integer jerarquia;
-	private String descTipoCd;
+	
 
-	@Override
-	public String entityClassName() {
-		return TipoCircuito.class.getSimpleName();
-	}
+	@Column(name = "descripcion")
+	private String descripcion;
+	
 
+	 @Column(name = "codigo_isis")
+     private String codigoIsis;
+	
+	 @Column(name = "activo")
+	 private boolean activo;
+
+ 
 	// -- [id] ------------------------
 
-	@Override
+	/*@Override
 	@Column(name = "tipo_circuito_id", precision = 10)
 	@GeneratedValue(strategy = SEQUENCE, generator = "seq_tipo_circuito")
 	@Id
-	@SequenceGenerator(name = "seq_tipo_circuito", sequenceName = "seq_tipo_circuito", allocationSize = 1)
-	public Integer getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public TipoCircuito id(Integer id) {
-		setId(id);
-		return this;
-	}
+	@SequenceGenerator(name = "seq_tipo_circuito", sequenceName = "seq_tipo_circuito", allocationSize = 1)*/
+ 
 
 	@Override
 	@Transient
@@ -70,9 +71,7 @@ public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, S
 	}
 	// -- [jerarquia] ------------------------
 
-	@Digits(integer = 10, fraction = 0)
-	@NotNull
-	@Column(name = "jerarquia", nullable = false, precision = 10)
+
 	public Integer getJerarquia() {
 		return jerarquia;
 	}
@@ -87,20 +86,35 @@ public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, S
 	}
 	// -- [descTipoCd] ------------------------
 
-	@NotEmpty(message = "{message.tipoCircuito.descTipoCd.requerido}")
-	@Size(max = 50, message = "{message.tipoCircuito.descTipoCd.sizeMax} {max} {message.caracter}")
-	@Column(name = "desc_tipo_cd", nullable = false, length = 50)
-	public String getDescTipoCd() {
-		return descTipoCd;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDescTipoCd(String descTipoCd) {
-		this.descTipoCd = descTipoCd;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
-	public TipoCircuito descTipoCd(String descTipoCd) {
-		setDescTipoCd(descTipoCd);
+	public TipoCircuito descTipoCd(String descripcion) {
+		setDescripcion(descripcion);
 		return this;
+	}
+
+	
+	
+	public String isCodigoIsis() {
+		return codigoIsis;
+	}
+
+	public void setCodigoIsis(String codigoIsis) {
+		this.codigoIsis = codigoIsis;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 
 	/**
@@ -113,17 +127,7 @@ public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, S
 	/**
 	 * Equals implementation using a business key.
 	 */
-	@Override
-	public boolean equals(Object other) {
-		return this == other || (other instanceof TipoCircuito && hashCode() == other.hashCode());
-	}
 
-	private IdentifiableHashBuilder identifiableHashBuilder = new IdentifiableHashBuilder();
-
-	@Override
-	public int hashCode() {
-		return identifiableHashBuilder.hash(log, this);
-	}
 
 	/**
 	 * Construct a readable string representation for this TipoCircuito instance.
@@ -135,7 +139,24 @@ public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, S
 		return MoreObjects.toStringHelper(this) //
 				.add("id", getId()) //
 				.add("jerarquia", getJerarquia()) //
-				.add("descTipoCd", getDescTipoCd()) //
+				.add("descTipoCd", getDescripcion()) //
 				.toString();
+	}
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

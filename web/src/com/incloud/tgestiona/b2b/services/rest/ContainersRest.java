@@ -39,10 +39,10 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
 
     private boolean devuelveRuntimeException = true;
 
-    @Value("${user.b2b}")
+    //@Value("${user.b2b}")
     private String user;
 
-    @Value("${portal.store.containerName}")
+    //@Value("${portal.store.containerName}")
     private String containerName;
 
     @ApiOperation(value = "Add file to Azure Container ", produces = "application/json")

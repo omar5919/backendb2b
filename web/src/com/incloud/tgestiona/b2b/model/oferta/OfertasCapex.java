@@ -3,6 +3,7 @@ package com.incloud.tgestiona.b2b.model.oferta;
 
 import com.incloud.tgestiona.b2b.model.EquipamientoCondicion;
 import com.incloud.tgestiona.b2b.model.EquipamientoMarca;
+import com.incloud.tgestiona.b2b.model.Identifiable;
 import com.incloud.tgestiona.b2b.model.Moneda;
 import com.incloud.tgestiona.b2b.model.TipoEquipamiento;
 import com.incloud.tgestiona.b2b.model.TipoPago;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 
@@ -22,7 +24,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Entity
 @Table(name = "ofertas_capex",schema = "oferta")
-public class OfertasCapex extends BaseDomain {
+public class OfertasCapex extends BaseDomain implements Identifiable<Integer>, Serializable  {
  
 
     
@@ -34,62 +36,88 @@ public class OfertasCapex extends BaseDomain {
     //@JoinColumn(name = "ofertas_id")
     //@Column(name = "oferta_id",nullable = true, precision = 10)
     //private Integer 	ofertaId;
+  
+    //@Column(name = "tipoEquipamientoId",nullable = true, precision = 10)
+    //private Integer 	tipoEquipamientoId;
     
+   
+
+    //@Column(name = "equipamiento_condicion_id",nullable = true, precision = 10)
+    //private Integer 	equipamientoCondicionId;
+    
+    @Column(name = "cantidad", precision = 10)
+    private Integer 	cantidad;
+
+    @Column(name = "antiguedad", precision = 10)
+    private Integer 	antiguedad;
+
+    //@Column(name = "equipamiento_marca_id",nullable = true, precision = 10)
+    //private Integer 	equipamientoMarcaId;
+
+    @Column(name = "modelo",  precision = 250)
+    private String	modelo;
+
+    //@JoinColumn(name = "monedaId")
+    //@Column(name = "monedaId",nullable = true, precision = 10)
+    //private Integer 	moneda_id;
+     
+
+    @Column(name = "unitario")
+    private BigDecimal 	unitario;
+
+
+    @Column(name = "total")
+    private BigDecimal 	total;
+
+    @Column(name = "activo" )
+	private Boolean activo;
+    
+    /**relaciones**/
     @ManyToOne
     @JoinColumn(name = "oferta_Id",referencedColumnName = "oferta_Id")
     private Ofertas ofertas;
     
-
-    //@Column(name = "tipoEquipamientoId",nullable = true, precision = 10)
-    //private Integer 	tipoEquipamientoId;
-    
-    
     @ManyToOne
     @JoinColumn(name = "tipo_equipamiento_id",referencedColumnName = "tipo_equipamiento_id")
     private TipoEquipamiento tipoequipamiento;
-
-    //@Column(name = "equipamiento_condicion_id",nullable = true, precision = 10)
-    //private Integer 	equipamientoCondicionId;
     
     @ManyToOne
     @JoinColumn(name = "equipamiento_condicion_id",referencedColumnName = "equipamiento_condicion_id")
     private EquipamientoCondicion equipamientoCondicion;
 
-    @Column(name = "cantidad",nullable = true, precision = 10)
-    private Integer 	cantidad;
-
-    @Column(name = "antiguedad",nullable = true, precision = 10)
-    private Integer 	antiguedad;
-
-    //@Column(name = "equipamiento_marca_id",nullable = true, precision = 10)
-    //private Integer 	equipamientoMarcaId;
-    
     @ManyToOne
     @JoinColumn(name = "equipamiento_marca_id",referencedColumnName = "equipamiento_marca_id")
     private EquipamientoMarca equipamientomarca;
-
-
-    @Column(name = "modelo_descripcion",  precision = 250)
-    private String	modeloDescripcion;
-
-    //@JoinColumn(name = "monedaId")
-    //@Column(name = "monedaId",nullable = true, precision = 10)
-    //private Integer 	moneda_id;
+    
     @ManyToOne
     @JoinColumn(name = "moneda_id",referencedColumnName = "moneda_id")
     private Moneda 	moneda;
+
     
-    @Digits(integer = 4, fraction = 5)
-    @Column(name = "unitario", precision = 12, scale = 4)
-    private BigDecimal 	unitario;
-
-    @Digits(integer = 4, fraction = 5)
-    @Column(name = "total", precision = 12, scale = 4)
-    private BigDecimal 	total;
-
 	@Override
 	public boolean isIdSet() {
 		return this.ofertaCapexId != null;
+	}
+
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		return ofertaCapexId;
+	}
+
+
+	@Override
+	public void setId(Integer id) {
+		this.ofertaCapexId=id;
+		
 	}
 	
 	

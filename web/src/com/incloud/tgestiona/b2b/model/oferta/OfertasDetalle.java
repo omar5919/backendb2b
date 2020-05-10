@@ -1,5 +1,6 @@
 package com.incloud.tgestiona.b2b.model.oferta;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -17,6 +18,7 @@ import com.incloud.tgestiona.b2b.model.Departamento;
 import com.incloud.tgestiona.b2b.model.Distrito;
 import com.incloud.tgestiona.b2b.model.EquipamientoCondicion;
 import com.incloud.tgestiona.b2b.model.EquipamientoMarca;
+import com.incloud.tgestiona.b2b.model.Identifiable;
 import com.incloud.tgestiona.b2b.model.Moneda;
 import com.incloud.tgestiona.b2b.model.Provincia;
 import com.incloud.tgestiona.b2b.model.TipoCircuito;
@@ -33,7 +35,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "ofertas_detalle",schema = "oferta")
-public class OfertasDetalle extends BaseDomain{
+public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>, Serializable {
 
 	
 	
@@ -46,14 +48,10 @@ public class OfertasDetalle extends BaseDomain{
 	
 	//@Column(name = "ofertas_id",nullable = false, precision = 10).
 	//@JoinColumn(name = "ofertas_id")
- 	//private Integer ofertaId;
-	
-	 
-   
+ 	//private Integer ofertaId;	   
 	
 	//@Column(name = "cliente_id",nullable = false, precision = 10)
 	//private Integer clienteId;
-	
 	 
 	
 	@Column(name = "secuencia")
@@ -74,8 +72,8 @@ public class OfertasDetalle extends BaseDomain{
 	//@Column(name = "distrito_id" )
 	//private String distritoId;
 
-	@Column(name = "latidud")
-	private String latidud;
+	@Column(name = "latitud")
+	private String latitud;
 	
 	@Column(name = "longitud" )
 	private String longitud;
@@ -89,8 +87,8 @@ public class OfertasDetalle extends BaseDomain{
 	@Column(name = "telefono")
 	private String telefono;
 
-	@Column(name = "tipo_cd_actual" )
-	private String tipoCdActual;
+	@Column(name = "tipo_circuito_actual" )
+	private String tipoCircuitoActual;
 	
 	@Column(name = "numero_cd_actual" )
 	private String numeroCdActual;
@@ -199,8 +197,8 @@ public class OfertasDetalle extends BaseDomain{
 	@Column(name = "caudal_video_propuesto" )
 	private String caudalVideoPropuesto;
 	
-	@Column(name = "sp_caudal_ldn_propuesto")
-	private String spCaudalLdnPropuesto;
+	@Column(name = "caudal_ldn_propuesto")
+	private String CaudalLdnPropuesto;
 
 	@Column(name = "via_acceso_id_propuesto" )
 	private Integer viaAccesoIdPropuesto;
@@ -241,18 +239,18 @@ public class OfertasDetalle extends BaseDomain{
 	@Column(name = "zona_sisego")
 	private String zonaSisego;
 	
-	@Column(name = "sisego_condicion_id" )
-	private Integer sisegoCondicionId;
+	//@Column(name = "sisego_condicion_id" )
+	//private Integer sisegoCondicionId;
 	
-	@Column(name = "antiguedad" )
-	private Integer antiguedad;
+	//@Column(name = "antiguedad" )
+	//private Integer antiguedad;
 	
 	
-	@Column(name = "antiguedad_costo")
-	private BigDecimal antiguedadCosto;
+	//@Column(name = "antiguedad_costo")
+	//private BigDecimal antiguedadCosto;
 	
-	@Column(name = "valor_residual" )
-	private BigDecimal valorResidual;
+	//@Column(name = "valor_residual" )
+	//private BigDecimal valorResidual;
 	
 	@Column(name = "dias_ejecucion" )
 	private Integer diasEjecucion;
@@ -261,18 +259,23 @@ public class OfertasDetalle extends BaseDomain{
 	@Column(name = "costo_ultima_milla" )
 	private BigDecimal costoUltimaMilla;
 	
-
-	@Column(name = "costo_transmision")
-	private BigDecimal costoTransmision;
+	
+	//@Column(name = "costo_transmision")
+	//private BigDecimal costoTransmision;
 	
 	
-	@Column(name = "costo_planta_externa" )
-	private BigDecimal costoPlantaExterna;
+	//@Column(name = "costo_planta_externa" )
+	//private BigDecimal costoPlantaExterna;
 
 
-	@Column(name = "costo_opex")
-	private BigDecimal costoOpex;
+	//@Column(name = "costo_opex")
+	//private BigDecimal costoOpex;
 
+	@Column(name = "activo" )
+	private Boolean activo;
+	
+
+	
 	
 	/** relaciones **/
 	@ManyToOne
@@ -292,14 +295,14 @@ public class OfertasDetalle extends BaseDomain{
 	 private TipoCircuito tipoCircuito;
 	
 	 
-	@ManyToOne
-	@JoinColumn(name = "departamento_id")
-	private Departamento departamento;
+	//@ManyToOne
+	//@JoinColumn(name = "departamento_id")
+	//private Departamento departamento;
 	
  
-	 @ManyToOne
-	 @JoinColumn(name = "provincia_id")
-	 private Provincia provincia;
+	// @ManyToOne
+	// @JoinColumn(name = "provincia_id")
+	// private Provincia provincia;
 	
  
 	 @ManyToOne	 
@@ -310,7 +313,31 @@ public class OfertasDetalle extends BaseDomain{
 	@Override
 	public boolean isIdSet() {
 		// TODO Auto-generated method stub
-		return false;
+		return ofertasDetalleId!=null;
 	}
+
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		return ofertasDetalleId;
+	}
+
+
+	@Override
+	public void setId(Integer id) {
+		this.ofertasDetalleId=id;
+		
+	}
+	
+	
+	
 
 }

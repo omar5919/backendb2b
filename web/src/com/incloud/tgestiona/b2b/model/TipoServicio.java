@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -19,10 +20,10 @@ import com.google.common.base.MoreObjects;
 import com.incloud.tgestiona.domain.BaseDomain;
 
 @Entity
-@Table(name = "tipo_servicio")
+@Table(name = "tipo_servicio",schema="oferta")
 //@Audited
 //@AuditTable("_audi_tipo_servicio")
-public class TipoServicio extends BaseDomain implements Identifiable<Integer>, Serializable {
+public class TipoServicio extends BaseDomain  implements Identifiable<Integer>, Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(TipoServicio.class.getName());
 
@@ -31,35 +32,33 @@ public class TipoServicio extends BaseDomain implements Identifiable<Integer>, S
 	/***************************/
 
 	// Raw attributes
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tipo_servicio_id", updatable = false, nullable = false)
 	private Integer id;
-	private String codigoIsis;
-	private String descripcion;
+	
+	@Column(name = "servicio_id" )
+	private String servicoId;
+	
 
-	@Override
-	public String entityClassName() {
-		return TipoServicio.class.getSimpleName();
-	}
+	private String descripcion;
+	private String codigoIsis;
+	
+	@Column(name = "codigo_producto_isis" )
+	private String codigoProductoIsis;
+	
+	
+	@Column(name = "satelital" )
+	private Boolean satelital;
+	
+	@Column(name = "activo" )
+	private Boolean activo;
+	
+ 
 
 	// -- [id] ------------------------
-
-	@Override
-	@Column(name = "tipo_servicio_id", precision = 10)
-	@GeneratedValue(strategy = SEQUENCE, generator = "seq_tipo_servicio")
-	@Id
-	@SequenceGenerator(name = "seq_tipo_servicio", sequenceName = "seq_tipo_servicio", allocationSize = 1)
-	public Integer getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public TipoServicio id(Integer id) {
-		setId(id);
-		return this;
-	}
+ 
+ 
 
 	@Override
 	@Transient
@@ -67,6 +66,14 @@ public class TipoServicio extends BaseDomain implements Identifiable<Integer>, S
 		return id != null;
 	}
 	// -- [codigoIsis] ------------------------
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	@NotEmpty(message = "{message.tipoServicio.codigoIsis.requerido}")
 	@Size(max = 15, message = "{message.tipoServicio.codigoIsis.sizeMax} {max} {message.caracter}")
@@ -95,6 +102,43 @@ public class TipoServicio extends BaseDomain implements Identifiable<Integer>, S
 		this.descripcion = descripcion;
 	}
 
+	
+	
+	
+	
+	
+	public String getServicoId() {
+		return servicoId;
+	}
+
+	public void setServicoId(String servicoId) {
+		this.servicoId = servicoId;
+	}
+
+	public String getCodigoProductoIsis() {
+		return codigoProductoIsis;
+	}
+
+	public void setCodigoProductoIsis(String codigoProductoIsis) {
+		this.codigoProductoIsis = codigoProductoIsis;
+	}
+
+	public Boolean getSatelital() {
+		return satelital;
+	}
+
+	public void setSatelital(Boolean satelital) {
+		this.satelital = satelital;
+	}
+
+	public Boolean getActivo() {
+		return activo;
+	}
+
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
+	}
+
 	public TipoServicio descripcion(String descripcion) {
 		setDescripcion(descripcion);
 		return this;
@@ -110,17 +154,7 @@ public class TipoServicio extends BaseDomain implements Identifiable<Integer>, S
 	/**
 	 * Equals implementation using a business key.
 	 */
-	@Override
-	public boolean equals(Object other) {
-		return this == other || (other instanceof TipoServicio && hashCode() == other.hashCode());
-	}
-
-	private IdentifiableHashBuilder identifiableHashBuilder = new IdentifiableHashBuilder();
-
-	@Override
-	public int hashCode() {
-		return identifiableHashBuilder.hash(log, this);
-	}
+ 
 
 	/**
 	 * Construct a readable string representation for this TipoServicio instance.
@@ -134,5 +168,11 @@ public class TipoServicio extends BaseDomain implements Identifiable<Integer>, S
 				.add("codigoIsis", getCodigoIsis()) //
 				.add("descripcion", getDescripcion()) //
 				.toString();
+	}
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

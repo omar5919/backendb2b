@@ -1,5 +1,7 @@
 package com.incloud.tgestiona.b2b.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "tipo_equipamiento",schema = "oferta")
-public class TipoEquipamiento  extends BaseDomain{
+public class TipoEquipamiento  extends BaseDomain implements Identifiable<Integer>, Serializable {
 	
 	
 	@Id
@@ -26,13 +28,32 @@ public class TipoEquipamiento  extends BaseDomain{
     @Column(name = "tipo_equipamiento_id" ,nullable = true, precision = 10)
 	private Integer tipoEquipamientoId  ;
 	
-	@Column(name = "descripcion", length = 25 )
+	@Column(name = "categoria_equipamiento_id"  )
+	private String categoriaEquipamientoId ;
+	
+	@Column(name = "descripcion"  )
 	private String descripcion ;
+	
 	@Column(name = "activo"  )
 	private Boolean activo ;
 	@Override
 	public boolean isIdSet() {
 		// TODO Auto-generated method stub
-		return false;
+		return tipoEquipamientoId!=null;
+	}
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		return tipoEquipamientoId;
+	}
+	@Override
+	public void setId(Integer id) {
+		this.tipoEquipamientoId=id;
+		
 	}
 }

@@ -1,5 +1,6 @@
 package com.incloud.tgestiona.b2b.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -22,14 +23,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "concepto_opex",schema = "oferta")
-public class ConceptosOpex  extends BaseDomain{
+public class ConceptosOpex  extends BaseDomain  implements Identifiable<Integer>, Serializable {
 	 	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "concepto_id" , nullable = false)
-	 	private Integer concepto_id ;
+	 	private Integer conceptoId ;
 	 	
  		@Column(name = "descripcion", length = 200 )
 		private String descripcion ;
+	 	
+ 		@Column(name = "tipo"  )
+		private String tipo ;
+
+ 		@Column(name = "factor"  )
+		private BigDecimal factor ;
+
 	 	
 		@Column(name = "activo"  )
 		private Boolean activo ;
@@ -37,6 +45,26 @@ public class ConceptosOpex  extends BaseDomain{
 		@Override
 		public boolean isIdSet() {
 			// TODO Auto-generated method stub
-			return false;
+			return conceptoId!=null;
 		}
+
+		@Override
+		public String entityClassName() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Integer getId() {
+			// TODO Auto-generated method stub
+			return conceptoId;
+		}
+
+		@Override
+		public void setId(Integer id) {
+			this.conceptoId=id;
+			
+		}
+
+
 }
