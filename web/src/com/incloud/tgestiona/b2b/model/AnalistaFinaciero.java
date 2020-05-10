@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -24,7 +25,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "analista_finaciero")
+@Table(name = "analista_financiero",schema="oferta")
 //@Audited
 //@AuditTable("_audi_analista_finaciero")
 public class AnalistaFinaciero extends BaseDomain implements Identifiable<Integer>, Serializable {
@@ -35,9 +36,14 @@ public class AnalistaFinaciero extends BaseDomain implements Identifiable<Intege
 	/* Atributos de la Entidad */
 	/***************************/
 	// Raw attributes
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "analista_financiero_id", updatable = false, nullable = false)
 	private Integer id;
+	
 	@Column(name = "nombre")
 	private String nombre;
+	
 	@Column(name = "activo")
 	private Boolean activo;
 
@@ -48,12 +54,7 @@ public class AnalistaFinaciero extends BaseDomain implements Identifiable<Intege
 
 	// -- [id] ------------------------
 
-	@Override
-	@Column(name = "analista_financiero_id", precision = 10)
-	@GeneratedValue(strategy = SEQUENCE, generator = "seq_analista_finaciero")
-	@Id
-	@SequenceGenerator(name = "seq_analista_finaciero", sequenceName = "seq_analista_finaciero", allocationSize = 1)
-	public Integer getId() {
+		public Integer getId() {
 		return id;
 	}
 

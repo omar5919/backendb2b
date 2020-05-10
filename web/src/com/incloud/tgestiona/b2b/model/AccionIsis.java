@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -30,13 +31,19 @@ public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Ser
 	/* Atributos de la Entidad */
 	/***************************/
 
-	// Raw attributes
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "accion_isis_id", updatable = false, nullable = false)
 	private Integer id;
-	private Integer codigoEquivalente;
+
+	@Column(name = "descripcion")
 	private String descripcion;
+	
+	@Column(name = "codigo_isis")
 	private String codigoIsis;
+	
+	@Column(name = "activo")
 	private Boolean activo;
-	private String codTablTipo;
 	
  
 
@@ -56,13 +63,6 @@ public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Ser
 		this.activo = activo;
 	}
 
-	public String getCodTablTipo() {
-		return codTablTipo;
-	}
-
-	public void setCodTablTipo(String codTablTipo) {
-		this.codTablTipo = codTablTipo;
-	}
 
 	@Override
 	public String entityClassName() {
@@ -71,11 +71,12 @@ public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Ser
 
 	// -- [id] ------------------------
 
-	@Override
+	/*@Override
 	@Column(name = "accion_isis_id", precision = 10)
 	@GeneratedValue(strategy = SEQUENCE, generator = "seq_accion_isis")
 	@Id
 	@SequenceGenerator(name = "seq_accion_isis", sequenceName = "seq_accion_isis", allocationSize = 1)
+	*/
 	public Integer getId() {
 		return id;
 	}
@@ -95,26 +96,9 @@ public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Ser
 	public boolean isIdSet() {
 		return id != null;
 	}
-	// -- [codigoEquivalente] ------------------------
 
-	@Digits(integer = 10, fraction = 0)
-	@Column(name = "codigo_equivalente", precision = 10)
-	public Integer getCodigoEquivalente() {
-		return codigoEquivalente;
-	}
-
-	public void setCodigoEquivalente(Integer codigoEquivalente) {
-		this.codigoEquivalente = codigoEquivalente;
-	}
-
-	public AccionIsis codigoEquivalente(Integer codigoEquivalente) {
-		setCodigoEquivalente(codigoEquivalente);
-		return this;
-	}
 	// -- [descripcion] ------------------------
 
-	@Size(max = 200, message = "{message.accionIsis.descripcion.sizeMax} {max} {message.caracter}")
-	@Column(name = "descripcion", length = 200)
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -159,7 +143,7 @@ public class AccionIsis extends BaseDomain implements Identifiable<Integer>, Ser
 	public String toString() {
 		return MoreObjects.toStringHelper(this) //
 				.add("id", getId()) //
-				.add("codigoEquivalente", getCodigoEquivalente()) //
+				
 				.add("descripcion", getDescripcion()) //
 				.toString();
 	}

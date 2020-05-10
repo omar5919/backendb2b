@@ -64,8 +64,8 @@ public class Ofertas extends BaseDomain {
     @Column(name = "diferencia_ingresos")
     private BigDecimal diferencia_ingresos;
 
-    @Column(name = "vanval")
-    private BigDecimal vanval;
+    @Column(name = "vanvai")
+    private BigDecimal vanvai;
 
     @Column(name = "payback")
     private Integer payback;
@@ -85,8 +85,7 @@ public class Ofertas extends BaseDomain {
     @Column(name = "capex")
     private BigDecimal capex;
 
-    @Column(name = "gerente_cuenta")
-    private String gerente_cuenta;
+
 
     @Column(name = "fecha_reg")
     private Date fecha_reg;
@@ -94,6 +93,14 @@ public class Ofertas extends BaseDomain {
     @Column(name = "fecha_mod")
     private Date fecha_mod;
 
+	@Column(name = "numero_caso_salesforce" )
+	private String numeroCasoSalesforce;
+	
+	@Column(name = "activo" )
+	private Boolean activo;
+	
+    
+    /*relaciones**/
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -115,12 +122,8 @@ public class Ofertas extends BaseDomain {
     private TipoProyecto tipoproyecto;
 
     @ManyToOne
-    @JoinColumn(name = "tipo_pago_id", referencedColumnName = "tipo_pago")
+    @JoinColumn(name = "tipo_pago_id", referencedColumnName = "tipo_pago_id")
     private TipoPago tipopago;
-
-    @ManyToOne
-    @JoinColumn(name = "segmento_negocio_id")
-    private SegmentoNegocio segmentonegocio;
 
     @ManyToOne
     @JoinColumn(name = "analista_financiero_id")

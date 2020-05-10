@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -19,7 +20,7 @@ import com.google.common.base.MoreObjects;
 import com.incloud.tgestiona.domain.BaseDomain;
 
 @Entity
-@Table(name = "complejidad")
+@Table(name = "complejidad",schema="oferta")
 //@Audited
 //@AuditTable("_audi_complejidad")
 public class Complejidad extends BaseDomain implements Identifiable<Integer>, Serializable {
@@ -31,9 +32,20 @@ public class Complejidad extends BaseDomain implements Identifiable<Integer>, Se
 	/***************************/
 
 	// Raw attributes
+	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "complejidad_id", updatable = false, nullable = false)
 	private Integer id;
+    
 	private String complejidadCodigo;
+	
 	private String complejidadTipologiaDescrip;
+	
+	@Column(name = "activo")
+	private Boolean activo;
+	
+	
 
 	@Override
 	public String entityClassName() {
@@ -42,11 +54,7 @@ public class Complejidad extends BaseDomain implements Identifiable<Integer>, Se
 
 	// -- [id] ------------------------
 
-	@Override
-	@Column(name = "complejidad_id", precision = 10)
-	@GeneratedValue(strategy = SEQUENCE, generator = "seq_complejidad")
-	@Id
-	@SequenceGenerator(name = "seq_complejidad", sequenceName = "seq_complejidad", allocationSize = 1)
+
 	public Integer getId() {
 		return id;
 	}
@@ -70,7 +78,7 @@ public class Complejidad extends BaseDomain implements Identifiable<Integer>, Se
 
 	@NotEmpty(message = "{message.complejidad.complejidadCodigo.requerido}")
 	@Size(max = 5, message = "{message.complejidad.complejidadCodigo.sizeMax} {max} {message.caracter}")
-	@Column(name = "complejidad_codigo", nullable = false, length = 5)
+	@Column(name = "codigo_isis", nullable = false, length = 5)
 	public String getComplejidadCodigo() {
 		return complejidadCodigo;
 	}
@@ -86,7 +94,7 @@ public class Complejidad extends BaseDomain implements Identifiable<Integer>, Se
 	// -- [complejidadTipologiaDescrip] ------------------------
 
 	@Size(max = 50, message = "{message.complejidad.complejidadTipologiaDescrip.sizeMax} {max} {message.caracter}")
-	@Column(name = "complejidad_tipologia_descrip", length = 50)
+	@Column(name = "descripcion", length = 50)
 	public String getComplejidadTipologiaDescrip() {
 		return complejidadTipologiaDescrip;
 	}
@@ -98,6 +106,16 @@ public class Complejidad extends BaseDomain implements Identifiable<Integer>, Se
 	public Complejidad complejidadTipologiaDescrip(String complejidadTipologiaDescrip) {
 		setComplejidadTipologiaDescrip(complejidadTipologiaDescrip);
 		return this;
+	}
+	
+	
+
+	public Boolean getActivo() {
+		return activo;
+	}
+
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
 	}
 
 	/**

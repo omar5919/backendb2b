@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -21,7 +22,7 @@ import com.incloud.tgestiona.domain.BaseDomain;
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name = "tipo_circuito")
+@Table(name = "tipo_circuito",schema="oferta")
 //@Audited
 //@AuditTable("_audi_tipo_circuito")
 public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, Serializable {
@@ -33,9 +34,19 @@ public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, S
 	/***************************/
 
 	// Raw attributes
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tipo_circuito_id" ,nullable = true, precision = 10)
 	private Integer id;
 	private Integer jerarquia;
 	private String descTipoCd;
+	
+
+	 @Column(name = "codigo_isis")
+    private boolean codigoIsis;
+	
+	 @Column(name = "activo")
+	    private boolean activo;
 
 	@Override
 	public String entityClassName() {
@@ -44,11 +55,11 @@ public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, S
 
 	// -- [id] ------------------------
 
-	@Override
+	/*@Override
 	@Column(name = "tipo_circuito_id", precision = 10)
 	@GeneratedValue(strategy = SEQUENCE, generator = "seq_tipo_circuito")
 	@Id
-	@SequenceGenerator(name = "seq_tipo_circuito", sequenceName = "seq_tipo_circuito", allocationSize = 1)
+	@SequenceGenerator(name = "seq_tipo_circuito", sequenceName = "seq_tipo_circuito", allocationSize = 1)*/
 	public Integer getId() {
 		return id;
 	}
@@ -89,7 +100,7 @@ public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, S
 
 	@NotEmpty(message = "{message.tipoCircuito.descTipoCd.requerido}")
 	@Size(max = 50, message = "{message.tipoCircuito.descTipoCd.sizeMax} {max} {message.caracter}")
-	@Column(name = "desc_tipo_cd", nullable = false, length = 50)
+	@Column(name = "descripcion", nullable = false, length = 50)
 	public String getDescTipoCd() {
 		return descTipoCd;
 	}
@@ -101,6 +112,24 @@ public class TipoCircuito extends BaseDomain implements Identifiable<Integer>, S
 	public TipoCircuito descTipoCd(String descTipoCd) {
 		setDescTipoCd(descTipoCd);
 		return this;
+	}
+
+	
+	
+	public boolean isCodigoIsis() {
+		return codigoIsis;
+	}
+
+	public void setCodigoIsis(boolean codigoIsis) {
+		this.codigoIsis = codigoIsis;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 
 	/**

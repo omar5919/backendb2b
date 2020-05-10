@@ -36,7 +36,13 @@ public class Cliente extends BaseDomain implements Identifiable<Integer> {
 
     @Column(name = "gerente_cuenta")
     private String gerente_cuenta;
+    
+    @Column(name = "segmento_negocio")
+    private String segmentoNegocio;
 
+    @Column(name = "activo")
+    private Boolean activo;
+    
     @Override
     public String entityClassName() {
         return Cliente.class.getSimpleName();
