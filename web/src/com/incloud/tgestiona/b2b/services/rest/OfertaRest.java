@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/oferta")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
 
     private static final String DATE_PATTERN = "yyyy/MM/dd";
@@ -26,7 +27,6 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
     }
 
     @GetMapping("/obtenerofertas")
-//    @CrossOrigin(origins = "http://localhost:4200")
     public BaseBandejaResponse<List<ofertaDto>> obtenerofertas(@RequestParam(required = false) String codoportunidad,
                                                                @RequestParam(required = false) String cliente,
                                                                @RequestParam(required = false) String descripcion,
@@ -53,7 +53,6 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
     }
 
     @PostMapping("/anularoferta")
-//    @CrossOrigin(origins = "http://localhost:4200")
     public int AnularOferta(@RequestParam(required = false) int ofertaId,
                             @RequestParam(required = false) int usuarioId,
                             @RequestParam(required = false) String usuario) {

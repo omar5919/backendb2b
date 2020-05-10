@@ -18,8 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.*;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +27,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/api/Containers")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
 
     private final Logger log = LoggerFactory.getLogger(ContainersRest.class);
@@ -46,7 +47,6 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
 
     @ApiOperation(value = "Add file to Azure Container ", produces = "application/json")
     @PostMapping(value = "/uploadToContainers", produces = APPLICATION_JSON_VALUE)
-//    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Adjunto> uploadToContainers(@RequestParam("file") MultipartFile file) throws IOException {
 
         HttpHeaders headers = new HttpHeaders();
@@ -119,7 +119,6 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
 
     @ApiOperation(value = "List file(s) from Azure Container", produces = "application/json")
     @RequestMapping(value = "/listFilesContainers", method = RequestMethod.POST, headers = "Accept=application/json")
-//    @CrossOrigin(origins = "http://localhost:4200")
     ResponseEntity<List<Adjunto>> listFilesContainers() throws Exception {
         List<Adjunto> res = (List<Adjunto>) adjuntoServiceImpl.findAll();
         res.removeIf(p->p.getEstado() == 2);
@@ -128,7 +127,6 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
 
     @ApiOperation(value = "Download file from Azure Container", produces = "application/json")
     @RequestMapping(value = "/downLoadFileContainers/{idFile}", method = RequestMethod.GET)
-//    @CrossOrigin(origins = "http://localhost:4200")
     public void downLoadFileContainers(@PathVariable("idFile") @Valid String id, HttpServletResponse response) throws IOException {
 
         Adjunto adjunto = new Adjunto();
