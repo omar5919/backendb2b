@@ -51,7 +51,7 @@ public class Distrito extends BaseDomain implements Identifiable<Integer>, Seria
 	@Override
 	public boolean isIdSet() {
 		// TODO Auto-generated method stub
-		return false;
+		return distritoId!=null;
 	}
 
 	@Override

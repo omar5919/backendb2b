@@ -42,7 +42,7 @@ public class EquipamientoMarca  extends BaseDomain implements Identifiable<Integ
 	@Override
 	public boolean isIdSet() {
 		// TODO Auto-generated method stub
-		return false;
+		return equipamientoMarcaId!=null;
 	}
 
 	@Override

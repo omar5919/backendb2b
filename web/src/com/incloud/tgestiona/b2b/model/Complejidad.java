@@ -23,7 +23,7 @@ import com.incloud.tgestiona.domain.BaseDomain;
 @Table(name = "complejidad",schema="oferta")
 //@Audited
 //@AuditTable("_audi_complejidad")
-public class Complejidad extends BaseDomain implements Identifiable<Integer> {
+public class Complejidad extends BaseDomain implements Identifiable<Integer>, Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(Complejidad.class.getName());
 

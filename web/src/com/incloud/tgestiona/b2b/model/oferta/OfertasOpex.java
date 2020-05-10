@@ -85,7 +85,7 @@ public class OfertasOpex extends BaseDomain implements Identifiable<Integer>, Se
 	@Override
 	public boolean isIdSet() {
 		// TODO Auto-generated method stub
-		return false;
+		return ofertaOpexId!=null;
 	}
 
 

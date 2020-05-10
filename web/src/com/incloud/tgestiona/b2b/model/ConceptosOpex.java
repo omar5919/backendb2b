@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "concepto_opex",schema = "oferta")
-public class ConceptosOpex  extends BaseDomain  implements Identifiable<Integer> {
+public class ConceptosOpex  extends BaseDomain  implements Identifiable<Integer>, Serializable {
 	 	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "concepto_id" , nullable = false)

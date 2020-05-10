@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "departamento", schema = "oferta")
-public class Departamento extends BaseDomain implements Identifiable<Integer>, Serializable  {
+public class Departamento extends BaseDomain implements Identifiable<Integer>, Serializable {
 
 
     @Id
@@ -40,11 +40,7 @@ public class Departamento extends BaseDomain implements Identifiable<Integer>, S
     @Column(name = "activo")
     private Boolean activo;
 
-	@Override
-	public boolean isIdSet() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 	@Override
 	public String entityClassName() {
@@ -62,5 +58,11 @@ public class Departamento extends BaseDomain implements Identifiable<Integer>, S
 	public void setId(Integer id) {
 		this.departamentoId=id;
 		
+	}
+
+	@Override
+	public boolean isIdSet() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

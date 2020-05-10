@@ -38,7 +38,7 @@ public class EquipamientoCondicion  extends BaseDomain implements Identifiable<I
 		@Override
 		public boolean isIdSet() {
 			// TODO Auto-generated method stub
-			return false;
+			return equipamientoCondicionId!=null;
 		}
 
 		@Override

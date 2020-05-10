@@ -46,7 +46,7 @@ public class Provincia extends BaseDomain implements Identifiable<Integer>, Seri
 	@Override
 	public boolean isIdSet() {
 		// TODO Auto-generated method stub
-		return false;
+		return provinciaId!=null;
 	}
 
 	@Override
