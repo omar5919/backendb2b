@@ -23,7 +23,7 @@ import com.incloud.tgestiona.domain.BaseDomain;
 @Table(name = "tipo_contrato",schema="oferta")
 //@Audited
 //@AuditTable("_audi_tipo_contrato")
-public class TipoContrato extends BaseDomain  {
+public class TipoContrato extends BaseDomain  implements Identifiable<Integer>, Serializable  {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(TipoContrato.class.getName());
 
@@ -116,5 +116,12 @@ public class TipoContrato extends BaseDomain  {
 				.add("id", getId()) //
 				 
 				.toString();
+	}
+
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

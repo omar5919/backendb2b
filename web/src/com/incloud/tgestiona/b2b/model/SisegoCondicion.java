@@ -50,6 +50,6 @@ public class SisegoCondicion extends BaseDomain implements Identifiable<Integer>
 	@Override
 	public boolean isIdSet() {
 		// TODO Auto-generated method stub
-		return false;
+		return sisegoCondicionId!=null;
 	}
 }

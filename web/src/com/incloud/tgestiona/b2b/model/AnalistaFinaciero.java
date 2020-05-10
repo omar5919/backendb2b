@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "analista_financiero",schema="oferta")
 //@Audited
 //@AuditTable("_audi_analista_finaciero")
-public class AnalistaFinaciero extends BaseDomain implements Identifiable<Integer>   {
+public class AnalistaFinaciero extends BaseDomain implements Identifiable<Integer> , Serializable  {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(AnalistaFinaciero.class.getName());
 

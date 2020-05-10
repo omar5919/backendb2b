@@ -61,6 +61,6 @@ public class ViaAcceso   extends BaseDomain implements Identifiable<Integer>, Se
 	@Override
 	public boolean isIdSet() {
 		// TODO Auto-generated method stub
-		return false;
+		return via_acceso_id!=null;
 	}
 }

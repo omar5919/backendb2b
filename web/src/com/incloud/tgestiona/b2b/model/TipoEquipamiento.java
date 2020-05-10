@@ -39,7 +39,7 @@ public class TipoEquipamiento  extends BaseDomain implements Identifiable<Intege
 	@Override
 	public boolean isIdSet() {
 		// TODO Auto-generated method stub
-		return false;
+		return tipoEquipamientoId!=null;
 	}
 	@Override
 	public String entityClassName() {

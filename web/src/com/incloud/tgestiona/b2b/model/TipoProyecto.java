@@ -22,7 +22,7 @@ import com.incloud.tgestiona.domain.BaseDomain;
 @Table(name = "tipo_proyecto",schema="oferta")
 //@Audited
 //@AuditTable("_audi_tipo_proyecto")
-public class TipoProyecto extends BaseDomain implements Identifiable<Integer> {
+public class TipoProyecto extends BaseDomain  implements Identifiable<Integer>, Serializable  {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(TipoProyecto.class.getName());
 

@@ -25,7 +25,7 @@ import com.sun.istack.NotNull;
 @Table(name = "tipo_circuito",schema="oferta")
 //@Audited
 //@AuditTable("_audi_tipo_circuito")
-public class TipoCircuito extends BaseDomain  {
+public class TipoCircuito extends BaseDomain  implements Identifiable<Integer>, Serializable  {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(TipoCircuito.class.getName());
 
@@ -151,5 +151,12 @@ public class TipoCircuito extends BaseDomain  {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+
+	@Override
+	public String entityClassName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
