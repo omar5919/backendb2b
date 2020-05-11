@@ -92,8 +92,8 @@ public class JPACustomRepository<T, I> implements JPACustomService<T, I> {
     public List<T> findEntityList(T req) {
         T bean = req;
         Example<T> entity = Example.of(bean);
-        Sort sort = Sort.by("id");
-        Stream<T> listaStream = this.mainrepository.findAll(entity, sort).parallelStream();
+        //Sort sort = Sort.by("id");
+        Stream<T> listaStream = this.mainrepository.findAll(entity).parallelStream();
         return listaStream.collect(Collectors.toList());
     }
 

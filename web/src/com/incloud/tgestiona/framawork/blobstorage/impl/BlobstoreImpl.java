@@ -109,7 +109,7 @@ public class BlobstoreImpl implements BlobstoreService {
         BlobServiceClient blobServiceClient = new BlobServiceClientBuilder()
                 .endpoint(endpoint).sasToken(sastoken).buildClient();
         BlobContainerClient blobClient = blobServiceClient.getBlobContainerClient(containerName);
-        BlobClient returnblobClient = blobClient.getBlobClient(archivo.getArchivoNombre());
+        BlobClient returnblobClient = blobClient.getBlobClient(archivo.getArchivo_nombre());
         if (returnblobClient.exists())
             returnblobClient.delete();
     }

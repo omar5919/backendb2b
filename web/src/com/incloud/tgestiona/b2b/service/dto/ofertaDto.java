@@ -19,6 +19,7 @@ public class ofertaDto {
     private String analistafinanciero;
     private String estado;
     private String tipoproyecto;
+    private String fase;
     private String color;
     private Date fechareg;
     private Date fechamod;

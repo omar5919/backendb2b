@@ -1,6 +1,7 @@
 package com.incloud.tgestiona.b2b.services.rest;
 
 import com.incloud.tgestiona.b2b.model.Adjunto;
+import com.incloud.tgestiona.b2b.model.Usuarios;
 import com.incloud.tgestiona.b2b.servicesImpl.AdjuntoServiceImpl;
 import com.incloud.tgestiona.framawork.blobstorage.impl.BlobStoreFile;
 import com.incloud.tgestiona.framawork.blobstorage.impl.BlobstoreImpl;
@@ -48,7 +49,8 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
     @ApiOperation(value = "Add file to Azure Container ", produces = "application/json")
     @PostMapping(value = "/uploadToContainers", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<Adjunto> uploadToContainers(@RequestParam("file") MultipartFile file,
-                                                      @PathVariable("usuario_id") @Valid String usuario_id) throws IOException {
+                                                      @RequestParam(required = false) Integer usuario_id,
+                                                      @RequestParam(required = false) Integer modulo_id) throws IOException {
 
         HttpHeaders headers = new HttpHeaders();
 
@@ -61,14 +63,18 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
         BlobStoreFile blob = blobstoreimpl.createBlobClient(filenameGenerator, file);
 
         Adjunto adjunto = new Adjunto();
-        adjunto.setArchivoId(String.valueOf(generatedLong));
-        adjunto.setCarpetaId(containerName);
-        adjunto.setArchivoNombre(blob.getName());
-        adjunto.setRutaCatalogo(blob.getUrl());
-        adjunto.setArchivoTipo(blob.getType());
-        adjunto.setTipoAdjunto("1");
+        Usuarios u = new Usuarios();
+        u.setId(usuario_id);
+        //adjunto.setArchivo_id(String.valueOf(generatedLong));
+        adjunto.setCarpeta_id("b2b-provisioner");
+        adjunto.setArchivo_nombre(blob.getName());
+        adjunto.setNombre(file.getOriginalFilename());
+        adjunto.setRuta_catalogo(blob.getUrl());
+        adjunto.setArchivo_tipo(blob.getType());
+        adjunto.setTipo_adjunto("1");
         adjunto.setEstado(1);
-        adjunto.setAdjuntoUsuario(user);
+        adjunto.setUsuario(u);
+        adjunto.setModulo_id(modulo_id);
 
         try {
             return Optional.ofNullable(adjuntoServiceImpl.save(adjunto)).map(l -> new ResponseEntity<>(l, HttpStatus.OK))
@@ -86,12 +92,12 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
     @ApiOperation(value = "Delete file to Azure Container ", produces = "application/json")
     @PostMapping(value = "/deleteFileContainers/{idFile}", produces = APPLICATION_JSON_VALUE)
 //    @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<Adjunto> deleteFileContainers(@PathVariable("idFile") @Valid String id) throws Exception {
+    public ResponseEntity<Adjunto> deleteFileContainers(@PathVariable("idFile") @Valid Integer id) throws Exception {
 
         HttpHeaders headers = new HttpHeaders();
 
         Adjunto adjunto = new Adjunto();
-        adjunto.setArchivoId(id);
+        adjunto.setAdjunto_id(id);
 
         Adjunto result = adjuntoServiceImpl.findEntity(adjunto);
         if (Optional.ofNullable(result).isPresent()) {
@@ -102,7 +108,7 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
             result.setEstado(2);
 
             adjuntoServiceImpl.save(result);
-            log.info("Delete file from Azure ...Id " + result.getArchivoId());
+            log.info("Delete file from Azure ...Id " + result.getArchivo_id());
         }
 
         try {
@@ -120,8 +126,14 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
 
     @ApiOperation(value = "List file(s) from Azure Container", produces = "application/json")
     @RequestMapping(value = "/listFilesContainers", method = RequestMethod.POST, headers = "Accept=application/json")
-    ResponseEntity<List<Adjunto>> listFilesContainers() throws Exception {
-        List<Adjunto> res = (List<Adjunto>) adjuntoServiceImpl.findAll();
+    ResponseEntity<List<Adjunto>> listFilesContainers(@RequestParam(required = false) Integer usuario_id,
+                                                      @RequestParam(required = false) Integer modulo_id) throws Exception {
+
+        Adjunto req = new Adjunto();
+        req.setModulo_id(modulo_id);
+        List<Adjunto> res = adjuntoServiceImpl.findEntityList(req);
+
+        res.removeIf(x->x.getUsuario().getId() != usuario_id);
         res.removeIf(p->p.getEstado() == 2);
         return Optional.of(new ResponseEntity<List<Adjunto>>(res, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NO_CONTENT));
     }
@@ -133,14 +145,14 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
         Adjunto adjunto = new Adjunto();
         adjunto.setId(Integer.parseInt(id));
         Adjunto result = adjuntoServiceImpl.findEntity(adjunto);
-        byte[] fileContent = blobstoreimpl.getFile(result.getArchivoNombre());
-        log.info("Download file from Azure ...Id " + result.getArchivoId());
+        byte[] fileContent = blobstoreimpl.getFile(result.getArchivo_nombre());
+        log.info("Download file from Azure ...Id " + result.getArchivo_id());
         try {
             response.setHeader("Pragma", "public");
             response.setHeader("Expires", "0");
             response.setHeader("Cache - Control", "must - revalidate, post - check = 0, pre - check = 0");
             response.setHeader("Content - type", "application - download");
-            response.addHeader("Content-disposition", "attachment;filename=" + result.getArchivoNombre());
+            response.addHeader("Content-disposition", "attachment;filename=" + result.getArchivo_nombre());
             response.setHeader("Content - Transfer - Encoding", "binary");
             OutputStream outStream = response.getOutputStream();
             outStream.write(fileContent);

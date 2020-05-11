@@ -62,6 +62,9 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	
 	@Column(name = "direccion")
 	private String direccion;
+	
+	//@Column(name = "distrito_id" )
+	//private String distritoId;
 
 	@Column(name = "latitud")
 	private String latitud;

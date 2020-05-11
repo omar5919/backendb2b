@@ -31,7 +31,7 @@ public class Ofertas extends BaseDomain implements Identifiable<Integer>, Serial
     private Integer version;
 
     @Column(name = "oportunidad")
-    private String oportunidad;
+    private String oportunidadSalesforce;
 
     @Column(name = "contacto")
     private String contacto;
@@ -87,8 +87,6 @@ public class Ofertas extends BaseDomain implements Identifiable<Integer>, Serial
     @Column(name = "capex")
     private BigDecimal capex;
 
-
-
     @Column(name = "fecha_reg")
     private Date fecha_reg;
 
@@ -103,6 +101,11 @@ public class Ofertas extends BaseDomain implements Identifiable<Integer>, Serial
 	
     
     /*relaciones**/
+	
+	@ManyToOne
+    @JoinColumn(name = "oportunidad_id")
+    private Oportunidad oportunidad;
+	
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

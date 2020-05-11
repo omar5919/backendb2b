@@ -139,7 +139,7 @@ public class TipoCircuito extends BaseDomain  implements Identifiable<Integer>, 
 		return MoreObjects.toStringHelper(this) //
 				.add("id", getId()) //
 				.add("jerarquia", getJerarquia()) //
-				.add("descTipoCd", getDescripcion()) //
+				.add("descripcion", getDescripcion()) //
 				.toString();
 	}
 

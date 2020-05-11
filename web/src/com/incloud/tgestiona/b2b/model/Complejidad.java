@@ -33,8 +33,23 @@ public class Complejidad extends BaseDomain implements Identifiable<Integer>, Se
 
 	// Raw attributes
 	private Integer id;
-	private String complejidadCodigo;
-	private String complejidadTipologiaDescrip;
+	
+	@Column(name = "codigo_isis")
+	private String codigoIsis;
+	
+	@Column(name = "descripcion")
+	private String descripcion;
+
+	   @Column(name = "activo")
+	    private Boolean activo;
+	
+	public Boolean getActivo() {
+		return activo;
+	}
+
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
+	}
 
 	@Override
 	public String entityClassName() {
@@ -67,45 +82,29 @@ public class Complejidad extends BaseDomain implements Identifiable<Integer>, Se
 	public boolean isIdSet() {
 		return id != null;
 	}
-	// -- [complejidadCodigo] ------------------------
 
-	@NotEmpty(message = "{message.complejidad.complejidadCodigo.requerido}")
-	@Size(max = 5, message = "{message.complejidad.complejidadCodigo.sizeMax} {max} {message.caracter}")
-	@Column(name = "complejidad_codigo", nullable = false, length = 5)
-	public String getComplejidadCodigo() {
-		return complejidadCodigo;
-	}
-
-	public void setComplejidadCodigo(String complejidadCodigo) {
-		this.complejidadCodigo = complejidadCodigo;
-	}
-
-	public Complejidad complejidadCodigo(String complejidadCodigo) {
-		setComplejidadCodigo(complejidadCodigo);
-		return this;
-	}
-	// -- [complejidadTipologiaDescrip] ------------------------
-
-	@Size(max = 50, message = "{message.complejidad.complejidadTipologiaDescrip.sizeMax} {max} {message.caracter}")
-	@Column(name = "complejidad_tipologia_descrip", length = 50)
-	public String getComplejidadTipologiaDescrip() {
-		return complejidadTipologiaDescrip;
-	}
-
-	public void setComplejidadTipologiaDescrip(String complejidadTipologiaDescrip) {
-		this.complejidadTipologiaDescrip = complejidadTipologiaDescrip;
-	}
-
-	public Complejidad complejidadTipologiaDescrip(String complejidadTipologiaDescrip) {
-		setComplejidadTipologiaDescrip(complejidadTipologiaDescrip);
-		return this;
-	}
 
 	/**
 	 * Apply the default values.
 	 */
 	public Complejidad withDefaults() {
 		return this;
+	}
+
+	public String getCodigoIsis() {
+		return codigoIsis;
+	}
+
+	public void setCodigoIsis(String codigoIsis) {
+		this.codigoIsis = codigoIsis;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	/**
@@ -116,12 +115,7 @@ public class Complejidad extends BaseDomain implements Identifiable<Integer>, Se
 		return this == other || (other instanceof Complejidad && hashCode() == other.hashCode());
 	}
 
-	private IdentifiableHashBuilder identifiableHashBuilder = new IdentifiableHashBuilder();
 
-	@Override
-	public int hashCode() {
-		return identifiableHashBuilder.hash(log, this);
-	}
 
 	/**
 	 * Construct a readable string representation for this Complejidad instance.
@@ -132,8 +126,8 @@ public class Complejidad extends BaseDomain implements Identifiable<Integer>, Se
 	public String toString() {
 		return MoreObjects.toStringHelper(this) //
 				.add("id", getId()) //
-				.add("complejidadCodigo", getComplejidadCodigo()) //
-				.add("complejidadTipologiaDescrip", getComplejidadTipologiaDescrip()) //
+				.add("codigoIsis", getCodigoIsis()) //
+				.add("descripcion", getDescripcion()) //
 				.toString();
 	}
 }
