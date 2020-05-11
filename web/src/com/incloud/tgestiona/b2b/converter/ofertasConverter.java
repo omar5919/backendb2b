@@ -25,7 +25,7 @@ public class ofertasConverter {
                         .analistafinanciero(s.getAnalistafinanciero().getNombre())
                         .version(s.getVersion())
                         .fase(s.getOportunidad().getFase())
-                        .oportunidad(s.getOportunidad().getDescripcion())
+                        .oportunidad(s.getOportunidad().getOportunidad_codigo())
                         .cliente(s.getCliente().getDescripcion())
                         .descripcion(s.getDescripcion())
                         .estado(s.getEstado().getDescripcion())
