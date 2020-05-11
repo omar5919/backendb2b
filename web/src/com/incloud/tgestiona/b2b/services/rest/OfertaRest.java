@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/oferta")
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
 
     private static final String DATE_PATTERN = "yyyy/MM/dd";

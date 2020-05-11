@@ -17,7 +17,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/seguridad")
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class SeguridadRest extends JPACustomRest<Usuarios, Integer> {
 
 	private final Logger log = LoggerFactory.getLogger(OfertaRest.class);

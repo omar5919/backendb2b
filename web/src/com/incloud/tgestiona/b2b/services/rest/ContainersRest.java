@@ -27,7 +27,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/api/Containers")
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
 
     private final Logger log = LoggerFactory.getLogger(ContainersRest.class);
