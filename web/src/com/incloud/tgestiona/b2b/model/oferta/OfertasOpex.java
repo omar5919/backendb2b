@@ -69,7 +69,7 @@ public class OfertasOpex extends BaseDomain implements Identifiable<Integer>, Se
     @ManyToOne
     @JoinColumn(name = "oferta_Id",referencedColumnName = "oferta_Id")
     //@Column(name = "oferta_id",nullable = true, precision = 10)
-    private Ofertas oferta;
+    private Ofertas ofertas;
 
     @ManyToOne
     @JoinColumn(name = "concepto_id",referencedColumnName = "concepto_id")
