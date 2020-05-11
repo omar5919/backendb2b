@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,6 +24,8 @@ import com.incloud.tgestiona.b2b.model.Moneda;
 import com.incloud.tgestiona.b2b.model.Provincia;
 import com.incloud.tgestiona.b2b.model.TipoCircuito;
 import com.incloud.tgestiona.b2b.model.TipoEquipamiento;
+import com.incloud.tgestiona.b2b.model.TipoServicio;
+import com.incloud.tgestiona.b2b.model.ViaAcceso;
 import com.incloud.tgestiona.domain.BaseDomain;
 
 import lombok.AllArgsConstructor;
@@ -87,8 +90,8 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	@Column(name = "numero_cd_actual" )
 	private String numeroCdActual;
 	
-	@Column(name = "tipo_servicio_id_actual" )
-	private Integer tipoServicioIdActual;
+	//@Column(name = "tipo_servicio_id_actual" )
+	//private Integer tipoServicioIdActual;
 
 	@Column(name = "bw_actual_actual" )
 	private String bwActualActual;
@@ -161,8 +164,8 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	//private Integer tipoCircuitoIdPropuesto;
 	
 
-	@Column(name = "tipo_servicio_id_propuesto")
-	private Integer tipoServicioIdPropuesto;
+	//@Column(name = "tipo_servicio_id_propuesto")
+	//private Integer tipoServicioIdPropuesto;
 	
 	@Column(name = "sva_propuesto" )
 	private String svaPropuesto;
@@ -194,8 +197,8 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	@Column(name = "caudal_ldn_propuesto")
 	private String CaudalLdnPropuesto;
 
-	@Column(name = "via_acceso_id_propuesto" )
-	private Integer viaAccesoIdPropuesto;
+	//@Column(name = "via_acceso_id_propuesto" )
+	//private Integer viaAccesoIdPropuesto;
 	
 	@Column(name = "equipo_terminal_propuesto")
 	private String equipoTerminalPropuesto;
@@ -272,6 +275,10 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	
 	
 	/** relaciones **/
+	
+	
+	
+	
 	@ManyToOne
     @JoinColumn(name = "oferta_id",referencedColumnName = "oferta_id")
     private Ofertas ofertas;
@@ -279,7 +286,7 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	 @ManyToOne
 	 @JoinColumn(name = "cliente_id",referencedColumnName = "cliente_id")
 	 private Cliente cliente;
- 
+	 
 	 @ManyToOne
 	 @JoinColumn(name = "accion_isis_id_propuesto",referencedColumnName = "accion_isis_id")
 	 private AccionIsis accionIsis;
@@ -287,7 +294,23 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 	 @ManyToOne
 	 @JoinColumn(name = "tipo_circuito_id_propuesto",referencedColumnName = "tipo_circuito_id")
 	 private TipoCircuito tipoCircuito;
+	 
+	 @ManyToOne
+		 @JoinColumn(name = "tipo_servicio_id_propuesto",referencedColumnName = "tipo_servicio_id")
+	 private TipoServicio tipoServicioPropuesto;
+	 
+	  @ManyToOne
+		 @JoinColumn(name = "tipo_servicio_id_actual",referencedColumnName = "tipo_servicio_id")
+	 private TipoServicio tipoServicioActual; 
+
+	 
+	 @ManyToOne
+	 @JoinColumn(name = "via_acceso_id_propuesto",referencedColumnName = "via_acceso_id")
+	 private ViaAcceso viaAcceso;
+
 	
+	//@Column(name = "tipo_servicio_id_actual" )
+		//private Integer tipoServicioIdActual;
 	 
 	//@ManyToOne
 	//@JoinColumn(name = "departamento_id")
