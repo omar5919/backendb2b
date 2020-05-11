@@ -28,7 +28,7 @@ public class Departamento extends BaseDomain implements Identifiable<Integer>, S
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "departamento_id", updatable = false, nullable = false)
-    private int departamentoId;
+    private Integer departamentoId;
 
     @Column(name = "codigo_departamento")
     private String codigoDepartamento;
