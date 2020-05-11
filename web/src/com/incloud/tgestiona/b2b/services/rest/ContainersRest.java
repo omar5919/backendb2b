@@ -27,7 +27,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/api/Containers")
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
 
     private final Logger log = LoggerFactory.getLogger(ContainersRest.class);
@@ -47,7 +47,8 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
 
     @ApiOperation(value = "Add file to Azure Container ", produces = "application/json")
     @PostMapping(value = "/uploadToContainers", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Adjunto> uploadToContainers(@RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<Adjunto> uploadToContainers(@RequestParam("file") MultipartFile file,
+                                                      @PathVariable("usuario_id") @Valid String usuario_id) throws IOException {
 
         HttpHeaders headers = new HttpHeaders();
 
