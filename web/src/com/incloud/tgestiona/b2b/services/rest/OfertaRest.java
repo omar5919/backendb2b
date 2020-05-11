@@ -39,7 +39,7 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
     }
 
     @PostMapping("/registraroferta")
-    public void addStudent(@RequestBody ofertaDto student) {
+    public void registrarOferta(@RequestBody ofertaDto student) {
         oServ.addOferta(student);
     }
 

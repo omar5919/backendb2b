@@ -22,13 +22,13 @@ public class Cliente extends BaseDomain implements Identifiable<Integer>, Serial
     private Integer cliente_id;
 
     @Column(name = "codigo_isis")
-    private String codigo_isis;
+    private String codigoisis;
 
     @Column(name = "descripcion")
     private String descripcion;
 
     @Column(name = "numero_identificador_fiscal")
-    private String numero_identificador_fiscal;
+    private String numeroidentificadorfiscal;
 
     @Column(name = "direccion")
     private String direccion;

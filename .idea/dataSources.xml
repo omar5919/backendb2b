@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="b2bRemoto" uuid="3dba668c-eae9-4dd9-a3e1-6258627ce288">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://b2baprovisionador.postgres.database.azure.com:5432/oferta</jdbc-url>
-    </data-source>
     <data-source source="LOCAL" name="b2b2Local" uuid="e15e898f-b293-4ee1-b7b3-f97375e9abb1">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>

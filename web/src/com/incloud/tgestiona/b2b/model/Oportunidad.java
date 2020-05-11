@@ -27,7 +27,7 @@ public class Oportunidad extends BaseDomain implements Identifiable<Integer>, Se
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "oportunidad_id", updatable = false, nullable = false)
-    private Integer oportunidad_id;
+    private Integer id;
 
     @Column(name = "descripcion", length = 255)
     private String descripcion;
@@ -36,7 +36,7 @@ public class Oportunidad extends BaseDomain implements Identifiable<Integer>, Se
     private String fase;
 
     @Column(name = "oportunidad_codigo")
-    private String oportunidad_codigo;
+    private String oportunidadcodigo;
 
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
@@ -49,16 +49,16 @@ public class Oportunidad extends BaseDomain implements Identifiable<Integer>, Se
 
     @Override
     public Integer getId() {
-        return oportunidad_id;
+        return id;
     }
 
     @Override
     public void setId(Integer id) {
-        this.oportunidad_id = id;
+        this.id = id;
     }
 
     @Override
     public boolean isIdSet() {
-        return oportunidad_id != null;
+        return id != null;
     }
 }

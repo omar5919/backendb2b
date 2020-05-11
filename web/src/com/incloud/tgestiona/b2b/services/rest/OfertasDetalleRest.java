@@ -19,20 +19,20 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 
 @RestController
 @RequestMapping("/api/ofertasDetalle")
-public class OfertasDetalleRest extends JPACustomRest<OfertasDetalle, Integer>{
-
-	
-	 private final OfertasDetalleService oServ;
+public class OfertasDetalleRest extends JPACustomRest<OfertasDetalle, Integer> {
 
 
-	    public OfertasDetalleRest(OfertasDetalleService oServ) {
-	        this.oServ = oServ;
-	    }
-	
-	@GetMapping("/obtenerOfertasDetalle")
-//  @CrossOrigin(origins = "http://localhost:4200")
-  public BaseBandejaResponse<List<OfertasDetalleDto>> obtenerOfertasDetalle(@RequestParam(required = false) Integer ofertaId,
-		  													Pageable pageable) throws Exception {
-      return oServ.getOfertasDetalle(ofertaId, pageable);
-  }
+    private final OfertasDetalleService oServ;
+
+
+    public OfertasDetalleRest(OfertasDetalleService oServ) {
+        this.oServ = oServ;
+    }
+
+    @GetMapping("/obtenerOfertasDetalle")
+    //@CrossOrigin(origins = "http://localhost:4200")
+    public BaseBandejaResponse<List<OfertasDetalleDto>> obtenerOfertasDetalle(@RequestParam(required = false) Integer ofertaId,
+                                                                              Pageable pageable) throws Exception {
+        return oServ.getOfertasDetalle(ofertaId, pageable);
+    }
 }

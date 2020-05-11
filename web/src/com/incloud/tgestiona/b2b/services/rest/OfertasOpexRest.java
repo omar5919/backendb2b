@@ -18,21 +18,21 @@ import com.incloud.tgestiona.framework.JPACustomRest;
 
 @RestController
 @RequestMapping("/api/OfertasOpex")
-public class OfertasOpexRest extends JPACustomRest<OfertasOpex, Integer>{
-
-	
-	 private final OfertasOpexService oServ;
+public class OfertasOpexRest extends JPACustomRest<OfertasOpex, Integer> {
 
 
-	    public OfertasOpexRest(OfertasOpexService oServ) {
-	        this.oServ = oServ;
-	    }
-	    
-	    
-		@GetMapping("/obtenerOfertasOpex")
-	//  @CrossOrigin(origins = "http://localhost:4200")
-	  public BaseBandejaResponse<List<OfertasOpexDto>> obtenerOfertasOpex(@RequestParam(required = false) Integer ofertaId,
-			  													Pageable pageable) throws Exception {
-	      return oServ.getOfertasOpex(ofertaId, pageable);
-	  }
+    private final OfertasOpexService oServ;
+
+
+    public OfertasOpexRest(OfertasOpexService oServ) {
+        this.oServ = oServ;
+    }
+
+
+    @GetMapping("/obtenerOfertasOpex")
+    //@CrossOrigin(origins = "http://localhost:4200")
+    public BaseBandejaResponse<List<OfertasOpexDto>> obtenerOfertasOpex(@RequestParam(required = false) Integer ofertaId,
+                                                                        Pageable pageable) throws Exception {
+        return oServ.getOfertasOpex(ofertaId, pageable);
+    }
 }

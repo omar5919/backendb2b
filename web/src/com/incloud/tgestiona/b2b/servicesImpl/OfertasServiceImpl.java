@@ -3,6 +3,7 @@ package com.incloud.tgestiona.b2b.servicesImpl;
 import com.incloud.tgestiona.b2b.converter.ofertasConverter;
 import com.incloud.tgestiona.b2b.model.Cliente;
 import com.incloud.tgestiona.b2b.model.Complejidad;
+import com.incloud.tgestiona.b2b.model.Oportunidad;
 import com.incloud.tgestiona.b2b.model.oferta.Estado;
 import com.incloud.tgestiona.b2b.model.oferta.Ofertas;
 import com.incloud.tgestiona.b2b.repository.OfertasRepository;
@@ -40,9 +41,10 @@ public class OfertasServiceImpl implements OfertasService {
             Join<Ofertas, Cliente> clienteOfertas = root.join("cliente");
             Join<Ofertas, Estado> estadoOfertas = root.join("estado");
             Join<Ofertas, Complejidad> complejidadOfertas = root.join("complejidad");
+            Join<Ofertas, Oportunidad> oportunidadOfertas = root.join("oportunidad");
 
             if (!StringUtils.isEmpty(codoportunidad)) {
-                p = cb.and(p, cb.like(root.get("oportunidad"), "%" + codoportunidad + "%"));
+                p = cb.and(p, cb.like(oportunidadOfertas.get("oportunidad_codigo"), "%" + codoportunidad + "%"));
             }
             if (!StringUtils.isEmpty(cliente)) {
                 p = cb.and(p, cb.like(clienteOfertas.get("descripcion"), "%" + cliente + "%"));
