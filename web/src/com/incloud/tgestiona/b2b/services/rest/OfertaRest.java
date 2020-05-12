@@ -47,7 +47,8 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
 
     @PostMapping("/guardaroferta")
     public int guardarOferta(@RequestBody OfertaReq o) {
-        Integer res = oRepo.guardarOferta(o.getPoferta_id(),
+        Integer res = oRepo.guardarOferta(
+                o.getPoferta_id(),
                 o.getPcliente_id(),
                 o.getPoportunidad_id(),
                 o.getPcontacto(),

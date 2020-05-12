@@ -20,6 +20,7 @@ import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -39,9 +40,9 @@ public class OfertasServiceImpl implements OfertasService {
         Page<Ofertas> pOfertas = oRepo.findAll((Specification<Ofertas>) (root, cq, cb) -> {
             Predicate p = cb.conjunction();
             Join<Ofertas, Cliente> clienteOfertas = root.join("cliente");
-            Join<Estado, Ofertas> estadoOfertas = root.join("estado");
-            Join<Complejidad, Ofertas> complejidadOfertas = root.join("complejidad");
-            Join<Oportunidad, Ofertas> oportunidadOfertas = root.join("oportunidad");
+            Join<Ofertas, Estado> estadoOfertas = root.join("estado");
+            Join<Ofertas, Complejidad> complejidadOfertas = root.join("complejidad");
+            Join<Ofertas, Oportunidad> oportunidadOfertas = root.join("oportunidad", JoinType.LEFT);
 
             if (!StringUtils.isEmpty(codoportunidad)) {
                 p = cb.and(p, cb.like(oportunidadOfertas.get("oportunidad_codigo"), "%" + codoportunidad + "%"));
