@@ -1,10 +1,15 @@
 package com.incloud.tgestiona.b2b.services.rest;
 
+import com.incloud.tgestiona.b2b.model.Usuarios;
 import com.incloud.tgestiona.b2b.model.oferta.Ofertas;
+import com.incloud.tgestiona.b2b.repository.OfertasRepository;
+import com.incloud.tgestiona.b2b.repository.SeguridadRepository;
 import com.incloud.tgestiona.b2b.serices.OfertasService;
 import com.incloud.tgestiona.b2b.service.dto.BaseBandejaResponse;
+import com.incloud.tgestiona.b2b.service.dto.OfertaReq;
 import com.incloud.tgestiona.b2b.service.dto.ofertaDto;
 import com.incloud.tgestiona.framework.JPACustomRest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +26,12 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
 
     private final OfertasService oServ;
 
-
     public OfertaRest(OfertasService oServ) {
         this.oServ = oServ;
     }
+
+    @Autowired
+    private OfertasRepository oRepo;
 
     @GetMapping("/obtenerofertas")
     public BaseBandejaResponse<List<ofertaDto>> obtenerofertas(@RequestParam(required = false) String codoportunidad,
@@ -36,6 +43,31 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
                                                                @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date hasta,
                                                                Pageable pageable) throws Exception {
         return oServ.getOfertas(codoportunidad, cliente, descripcion, complejidad, estado, desde, hasta, pageable);
+    }
+
+    @PostMapping("/guardaroferta")
+    public int guardarOferta(@RequestBody OfertaReq o) {
+        Integer res = oRepo.guardarOferta(o.getPoferta_id(),
+                o.getPcliente_id(),
+                o.getPoportunidad_id(),
+                o.getPcontacto(),
+                o.getPtelefono_contacto(),
+                o.getPcorreo_contacto(),
+                o.getPnumero_caso_salesforce(),
+                o.getPdescripcion(),
+                o.getPpreventa_id(),
+                o.getPtipo_proyecto_id(),
+                o.getPcomplejidad_id(),
+                o.getPtipo_contrato_id(),
+                o.getPtiempo_implantacion(),
+                o.getPperiodo_contrato(),
+                o.getPmoneda_id(),
+                o.getPpago_unico(),
+                o.getPpago_recurrente(),
+                o.getPpago_recurrente_actual(),
+                o.getPobservaciones(),
+                o.getPusuario());
+        return res;
     }
 
     @PostMapping("/registraroferta")

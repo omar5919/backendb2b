@@ -46,8 +46,6 @@ public class AnalistaFinaciero extends BaseDomain implements Identifiable<Intege
 	
 	@Column(name = "activo")
 	private Boolean activo;
-	
-
 
 	/**
 	 * Equals implementation using a business key.

@@ -39,9 +39,9 @@ public class OfertasServiceImpl implements OfertasService {
         Page<Ofertas> pOfertas = oRepo.findAll((Specification<Ofertas>) (root, cq, cb) -> {
             Predicate p = cb.conjunction();
             Join<Ofertas, Cliente> clienteOfertas = root.join("cliente");
-            Join<Ofertas, Estado> estadoOfertas = root.join("estado");
-            Join<Ofertas, Complejidad> complejidadOfertas = root.join("complejidad");
-            Join<Ofertas, Oportunidad> oportunidadOfertas = root.join("oportunidad");
+            Join<Estado, Ofertas> estadoOfertas = root.join("estado");
+            Join<Complejidad, Ofertas> complejidadOfertas = root.join("complejidad");
+            Join<Oportunidad, Ofertas> oportunidadOfertas = root.join("oportunidad");
 
             if (!StringUtils.isEmpty(codoportunidad)) {
                 p = cb.and(p, cb.like(oportunidadOfertas.get("oportunidad_codigo"), "%" + codoportunidad + "%"));
@@ -60,34 +60,36 @@ public class OfertasServiceImpl implements OfertasService {
             }
 
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            if(Objects.nonNull(desde) && Objects.nonNull(hasta)){
+            if (Objects.nonNull(desde) && Objects.nonNull(hasta)) {
                 Expression<String> dateStringExpr = cb.function("to_char", String.class, root.get("fecha_reg"), cb.literal("YYYY-MM-DD"));
-                p = cb.and(p, cb.between(cb.lower(dateStringExpr), dateFormat.format(desde),dateFormat.format(hasta)));
+                p = cb.and(p, cb.between(cb.lower(dateStringExpr), dateFormat.format(desde), dateFormat.format(hasta)));
             }
             cq.orderBy(cb.desc(root.get("descripcion")), cb.asc(root.get("oferta_id")));
             return p;
         }, pageable);
-        return ofertasConverter.convertToOfertaDTO(pOfertas.getContent(),pOfertas.getTotalElements());
+        return ofertasConverter.convertToOfertaDTO(pOfertas.getContent(), pOfertas.getTotalElements());
     }
 
     @Override
     public void addOferta(ofertaDto o) {
         oRepo.save(ofertasConverter.convertToOferta(o));
     }
-    
-    public int copiarOferta(Integer ofertaId,Integer usuarioId,String usuario) {
-     return	this.oRepo.copiarOferta(ofertaId,  usuarioId,  usuario);
-    	
+
+    public int copiarOferta(Integer ofertaId, Integer usuarioId, String usuario) {
+        return this.oRepo.copiarOferta(ofertaId, usuarioId, usuario);
+
     }
-    public int anularOferta(Integer ofertaId,Integer usuarioId,String usuario){
-        return	this.oRepo.anularOferta(ofertaId,  usuarioId,  usuario);
-       	
+
+    public int anularOferta(Integer ofertaId, Integer usuarioId, String usuario) {
+        return this.oRepo.anularOferta(ofertaId, usuarioId, usuario);
+
     }
-    public int versionarOferta(Integer ofertaId,Integer usuarioId,String usuario) {
-    	return this.oRepo.versionarOferta(ofertaId, usuarioId, usuario);
+
+    public int versionarOferta(Integer ofertaId, Integer usuarioId, String usuario) {
+        return this.oRepo.versionarOferta(ofertaId, usuarioId, usuario);
     }
-    
-    public  int ganarOferta(Integer ofertaId,Integer usuarioId,String usuario) {
-    	return this.oRepo.ganarOferta(ofertaId, usuarioId, usuario);
+
+    public int ganarOferta(Integer ofertaId, Integer usuarioId, String usuario) {
+        return this.oRepo.ganarOferta(ofertaId, usuarioId, usuario);
     }
 }
