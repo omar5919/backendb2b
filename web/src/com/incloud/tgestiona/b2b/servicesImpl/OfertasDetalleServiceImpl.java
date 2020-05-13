@@ -77,7 +77,7 @@ public class OfertasDetalleServiceImpl implements OfertasDetalleService  {
 	    	.direccion(s.getDireccion())
 	    	//.departamentoId(s.getDistrito().getDepartamentoId())
 	    	//.provinciaId(s.getDistrito().getProvinciaId())	
-	    	.distritoId(s.getDistrito().getDistritoId())
+	    	.distritoId(s.getDistrito().getId())
 	    	.latitud(s.getLatitud())	
 	    	.longitud(s.getLongitud())
 	    	.zoom(s.getZoom())	

@@ -1,6 +1,4 @@
-
-import javax.annotation.PostConstruct;
-
+import com.incloud.tgestiona.b2b.audit.AuditorAwareImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
@@ -18,7 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import com.incloud.tgestiona.b2b.audit.AuditorAwareImpl;
+import javax.annotation.PostConstruct;
 
 @SpringBootApplication
 @EnableAutoConfiguration

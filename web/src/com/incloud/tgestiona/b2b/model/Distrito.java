@@ -20,25 +20,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "distrito", schema = "oferta")
-public class Distrito extends BaseDomain implements Identifiable<Integer>, Serializable  {
+public class Distrito extends BaseDomain implements Identifiable<Integer>, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "distrito_id", updatable = false, nullable = false)
-    private Integer distritoId;
+    private Integer id;
 
     @Column(name = "departamento_id")
     private Integer departamentoId;
-    
+
     @Column(name = "provincia_id")
     private Integer provinciaId;
 
     @Column(name = "departamento_codigo")
     private String departamentoCodigo;
-    
+
     @Column(name = "provincia_codigo")
     private String provinciaCodigo;
-    
+
     @Column(name = "distrito_codigo")
     private String distritoCodigo;
 
@@ -48,29 +48,29 @@ public class Distrito extends BaseDomain implements Identifiable<Integer>, Seria
     @Column(name = "activo")
     private Boolean activo;
 
-	@Override
-	public boolean isIdSet() {
-		// TODO Auto-generated method stub
-		return distritoId!=null;
-	}
+    @Override
+    public boolean isIdSet() {
+        // TODO Auto-generated method stub
+        return id != null;
+    }
 
-	@Override
-	public String entityClassName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public String entityClassName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public Integer getId() {
-		// TODO Auto-generated method stub
-		return distritoId;
-	}
+    @Override
+    public Integer getId() {
+        // TODO Auto-generated method stub
+        return id;
+    }
 
-	@Override
-	public void setId(Integer id) {
-		this.distritoId=id;
-		
-	}
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
+
+    }
 }
 
 
