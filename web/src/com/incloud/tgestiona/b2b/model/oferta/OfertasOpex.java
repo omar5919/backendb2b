@@ -63,6 +63,9 @@ public class OfertasOpex extends BaseDomain implements Identifiable<Integer>, Se
     
     @Column(name = "activo")
     private Boolean activo;
+
+    @Transient
+    private Integer estado;
     
 
     /***relaciones**/

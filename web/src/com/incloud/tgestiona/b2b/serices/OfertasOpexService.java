@@ -8,7 +8,5 @@ import com.incloud.tgestiona.b2b.service.dto.BaseBandejaResponse;
 import com.incloud.tgestiona.b2b.service.dto.OfertasOpexDto;
 
 public interface OfertasOpexService {
-
-	
     BaseBandejaResponse<List<OfertasOpexDto>> getOfertasOpex(Integer ofertaId, Pageable pageable);
 }

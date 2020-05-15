@@ -70,6 +70,9 @@ public class OfertasCapex extends BaseDomain implements Identifiable<Integer>, S
     @Column(name = "activo")
     private Boolean activo;
 
+    @Transient
+    private Integer estado;
+
     /**
      * relaciones
      **/

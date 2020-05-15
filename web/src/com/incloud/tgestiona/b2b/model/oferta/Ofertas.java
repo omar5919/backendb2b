@@ -98,8 +98,7 @@ public class Ofertas extends BaseDomain implements Identifiable<Integer>, Serial
 	
 	@Column(name = "activo" )
 	private Boolean activo;
-	
-    
+
     /*relaciones**/
 	
 	@ManyToOne

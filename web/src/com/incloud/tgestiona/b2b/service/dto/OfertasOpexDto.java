@@ -16,23 +16,15 @@ import lombok.Getter;
 @Builder
 @Getter
 public class OfertasOpexDto {
-
-	
-		private Integer ofertaOpexId;
-
-	  	private Integer ofertaId;
-	  	private Integer conceptoId;
-
-	    private String nombre;
-	    private Integer cantidad;
-	    private Integer meses;
-	    private BigDecimal factor;
-
-	    private Integer 	moneda_id;
-	    private BigDecimal unitarioMensual;
-	    private BigDecimal totalMensual;
-	    private Boolean activo;
-	     
-
-	    
+    private Integer id;
+    private Boolean activo;
+	private Integer cantidad;
+	private BigDecimal factor;
+	private Integer meses;
+	private String nombre;
+	private BigDecimal totalMensual;
+	private BigDecimal unitarioMensual;
+	private Integer conceptoId;
+	private Integer moneda_id;
+    private Integer ofertaId;
 }

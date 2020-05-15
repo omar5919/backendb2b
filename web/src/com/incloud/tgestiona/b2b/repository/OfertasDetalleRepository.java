@@ -11,4 +11,6 @@ import com.incloud.tgestiona.b2b.model.oferta.OfertasDetalle;
 @Repository
 public interface OfertasDetalleRepository  extends JpaRepository<OfertasDetalle, Integer>, JpaSpecificationExecutor<OfertasDetalle>  {
 
+
+
 }

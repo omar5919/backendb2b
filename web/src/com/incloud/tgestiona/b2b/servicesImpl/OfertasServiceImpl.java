@@ -45,7 +45,7 @@ public class OfertasServiceImpl implements OfertasService {
             Join<Ofertas, Oportunidad> oportunidadOfertas = root.join("oportunidad", JoinType.LEFT);
 
             if (!StringUtils.isEmpty(codoportunidad)) {
-                p = cb.and(p, cb.like(oportunidadOfertas.get("oportunidad_codigo"), "%" + codoportunidad + "%"));
+                p = cb.and(p, cb.like(oportunidadOfertas.get("oportunidadcodigo"), "%" + codoportunidad + "%"));
             }
             if (!StringUtils.isEmpty(cliente)) {
                 p = cb.and(p, cb.like(clienteOfertas.get("descripcion"), "%" + cliente + "%"));

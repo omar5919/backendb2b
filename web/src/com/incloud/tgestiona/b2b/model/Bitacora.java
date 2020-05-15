@@ -32,6 +32,9 @@ public class Bitacora extends BaseDomain implements Identifiable<Integer>, Seria
     @Column(name = "fecha")
     private String fecha;
 
+    @Column(name = "modulo")
+    private String modulo;
+
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuarios usuario;

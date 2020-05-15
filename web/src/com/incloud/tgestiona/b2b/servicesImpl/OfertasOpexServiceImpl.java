@@ -22,59 +22,54 @@ import com.incloud.tgestiona.b2b.serices.OfertasOpexService;
 import com.incloud.tgestiona.b2b.service.dto.BaseBandejaResponse;
 import com.incloud.tgestiona.b2b.service.dto.OfertasDetalleDto;
 import com.incloud.tgestiona.b2b.service.dto.OfertasOpexDto;
+
 @Service
-public class OfertasOpexServiceImpl  implements OfertasOpexService {
+public class OfertasOpexServiceImpl implements OfertasOpexService {
 
-	 private final OfertasOpexRepository oRepo;
+    private final OfertasOpexRepository oRepo;
 
-	    public OfertasOpexServiceImpl(OfertasOpexRepository oRepo) {
-	        this.oRepo = oRepo;
-	    }
-	
-	
-	public  BaseBandejaResponse<List<OfertasOpexDto>> getOfertasOpex(Integer ofertaId, Pageable pageable){
-		Page<OfertasOpex> pOfertasOpex = oRepo.findAll((Specification<OfertasOpex>) (root, cq, cb) -> {
+    public OfertasOpexServiceImpl(OfertasOpexRepository oRepo) {
+        this.oRepo = oRepo;
+    }
+
+
+    public BaseBandejaResponse<List<OfertasOpexDto>> getOfertasOpex(Integer ofertaId, Pageable pageable) {
+        Page<OfertasOpex> pOfertasOpex = oRepo.findAll((Specification<OfertasOpex>) (root, cq, cb) -> {
             Predicate p = cb.conjunction();
             Join<OfertasOpex, Ofertas> OfertasOpexOfertas = root.join("ofertas");
             Join<OfertasOpex, ConceptosOpex> OfertasOpexConceptosOpex = root.join("conceptosOpex");
             Join<OfertasOpex, Moneda> OfertasOpexMoneda = root.join("moneda");
-          //Join<OfertasDetalle, TipoServicio> OfertasDetalleTipoServicio = root.join("",JoinType.LEFT_OUTER_JOIN);
-          
-            
+            //Join<OfertasDetalle, TipoServicio> OfertasDetalleTipoServicio = root.join("",JoinType.LEFT_OUTER_JOIN);
             if (!StringUtils.isEmpty(ofertaId)) {
                 p = cb.and(p, cb.equal(OfertasOpexOfertas.get("oferta_id"), ofertaId));
             }
-            
-           cq.orderBy( cb.asc(root.get("ofertaOpexId")));
-           return p;
-       }, pageable);
+            p = cb.and(p, cb.equal(root.get("activo"), true));
+            cq.orderBy(cb.asc(root.get("ofertaOpexId")));
+            return p;
+        }, pageable);
+        return CargarDtoOfertaOpex(pOfertasOpex.getContent(), pOfertasOpex.getTotalElements());//ofertasConverter.convertToOfertaDTO(pOfertas.getContent(),pOfertas.getTotalElements());
+    }
 
-
-       return CargarDtoOfertaOpex(pOfertasOpex.getContent(),pOfertasOpex.getTotalElements()) ;//ofertasConverter.convertToOfertaDTO(pOfertas.getContent(),pOfertas.getTotalElements());
-
-	}
-	
-	private  BaseBandejaResponse<List<OfertasOpexDto>>  CargarDtoOfertaOpex(List<OfertasOpex>  list,long total) {
-		 BaseBandejaResponse<List<OfertasOpexDto>> oDto = new BaseBandejaResponse<>();
-	        oDto.setMsj("200");
-	        oDto.setRows(total);
-	   	 List<OfertasOpexDto> ol = list.stream().map(s ->
-	   	OfertasOpexDto.builder()
-				   		.ofertaOpexId(s.getId())
-					    .ofertaId(s.getOfertas().getId() )
-					    .conceptoId(s.getConceptosOpex().getId())
-					    .cantidad(s.getCantidad())
-					    .factor(s.getFactor())
-					    .meses(s.getMeses())
-					    .nombre(s.getNombre())
-				        .totalMensual(s.getTotalMensual())
-				        .unitarioMensual(s.getUnitarioMensual())
-				        .activo(s.getActivo())
-				        .moneda_id(s.getMoneda().getId())
-              	  .build()
-              	  ).collect(Collectors.toList());
-		 
-		  oDto.setData(ol);
-	        return oDto;	
-	}
+    private BaseBandejaResponse<List<OfertasOpexDto>> CargarDtoOfertaOpex(List<OfertasOpex> list, long total) {
+        BaseBandejaResponse<List<OfertasOpexDto>> oDto = new BaseBandejaResponse<>();
+        oDto.setMsj("200");
+        oDto.setRows(total);
+        List<OfertasOpexDto> ol = list.stream().map(s ->
+                OfertasOpexDto.builder()
+                        .id(s.getId())
+                        .ofertaId(s.getOfertas().getId())
+                        .conceptoId(s.getConceptosOpex().getId())
+                        .cantidad(s.getCantidad())
+                        .factor(s.getFactor())
+                        .meses(s.getMeses())
+                        .nombre(s.getNombre())
+                        .totalMensual(s.getTotalMensual())
+                        .unitarioMensual(s.getUnitarioMensual())
+                        .activo(s.getActivo())
+                        .moneda_id(s.getMoneda().getId())
+                        .build()
+        ).collect(Collectors.toList());
+        oDto.setData(ol);
+        return oDto;
+    }
 }

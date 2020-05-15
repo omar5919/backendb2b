@@ -3,15 +3,7 @@ package com.incloud.tgestiona.b2b.model.oferta;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.incloud.tgestiona.b2b.model.AccionIsis;
 import com.incloud.tgestiona.b2b.model.Cliente;
@@ -255,6 +247,8 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     @Column(name = "costo_ultima_milla")
     private BigDecimal costoUltimaMilla;
 
+    @Transient
+    private Integer estado;
 
     //@Column(name = "costo_transmision")
     //private BigDecimal costoTransmision;
