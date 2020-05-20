@@ -5,7 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.incloud.tgestiona.b2b.repository.DistritoRepository;
-import com.incloud.tgestiona.b2b.service.dto.distritoDto;
+import com.incloud.tgestiona.b2b.repository.OfertasDetalleRepository;
+import com.incloud.tgestiona.b2b.service.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,9 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.incloud.tgestiona.b2b.model.oferta.OfertasDetalle;
 import com.incloud.tgestiona.b2b.serices.OfertasDetalleService;
-import com.incloud.tgestiona.b2b.service.dto.BaseBandejaResponse;
-import com.incloud.tgestiona.b2b.service.dto.OfertasDetalleDto;
-import com.incloud.tgestiona.b2b.service.dto.ofertaDto;
 import com.incloud.tgestiona.framework.JPACustomRest;
 
 @RestController
@@ -30,6 +28,9 @@ public class OfertasDetalleRest extends JPACustomRest<OfertasDetalle, Integer> {
 
     @Autowired
     private DistritoRepository dRepo;
+
+    @Autowired
+    private OfertasDetalleRepository odRepo;
 
     @GetMapping("/obtenerOfertasDetalle")
     public BaseBandejaResponse<List<OfertasDetalleDto>> obtenerOfertasDetalle(@RequestParam(required = false) Integer ofertaId,
@@ -50,8 +51,11 @@ public class OfertasDetalleRest extends JPACustomRest<OfertasDetalle, Integer> {
     }
 
     @PostMapping("/guardarservicios")
-    public int guardarservicios(@RequestBody List<OfertasDetalle> servicioslist) {
-        return 0;
+    public List<Integer> guardarservicios(@RequestBody List<OfertaDetalleDto> servicios) {
+        List<Integer> res = new ArrayList<>();
+        for (OfertaDetalleDto e: servicios) {
+            res.add(odRepo.guardarServicio());
+        }
+        return res;
     }
-
 }

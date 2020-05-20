@@ -1,28 +1,14 @@
 package com.incloud.tgestiona.b2b.model.oferta;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-
-import javax.persistence.*;
-
-import com.incloud.tgestiona.b2b.model.AccionIsis;
-import com.incloud.tgestiona.b2b.model.Cliente;
-import com.incloud.tgestiona.b2b.model.Departamento;
-import com.incloud.tgestiona.b2b.model.Distrito;
-import com.incloud.tgestiona.b2b.model.EquipamientoCondicion;
-import com.incloud.tgestiona.b2b.model.EquipamientoMarca;
-import com.incloud.tgestiona.b2b.model.Identifiable;
-import com.incloud.tgestiona.b2b.model.Moneda;
-import com.incloud.tgestiona.b2b.model.Provincia;
-import com.incloud.tgestiona.b2b.model.TipoCircuito;
-import com.incloud.tgestiona.b2b.model.TipoEquipamiento;
-import com.incloud.tgestiona.b2b.model.TipoServicio;
-import com.incloud.tgestiona.b2b.model.ViaAcceso;
+import com.incloud.tgestiona.b2b.model.*;
 import com.incloud.tgestiona.domain.BaseDomain;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 
 @Data
@@ -32,21 +18,10 @@ import lombok.NoArgsConstructor;
 @Table(name = "ofertas_detalle", schema = "oferta")
 public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>, Serializable {
 
-
-    // Raw attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ofertas_detalle_id", updatable = false, nullable = false)
     private Integer ofertasDetalleId;
-
-
-    //@Column(name = "ofertas_id",nullable = false, precision = 10).
-    //@JoinColumn(name = "ofertas_id")
-    //private Integer ofertaId;
-
-    //@Column(name = "cliente_id",nullable = false, precision = 10)
-    //private Integer clienteId;
-
 
     @Column(name = "secuencia")
     private Integer secuencia;
@@ -56,9 +31,6 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 
     @Column(name = "direccion")
     private String direccion;
-
-    //@Column(name = "distrito_id" )
-    //private String distritoId;
 
     @Column(name = "latitud")
     private String latitud;
@@ -75,14 +47,8 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     @Column(name = "telefono")
     private String telefono;
 
-    @Column(name = "tipo_circuito_actual")
-    private String tipoCircuitoActual;
-
     @Column(name = "numero_cd_actual")
     private String numeroCdActual;
-
-    //@Column(name = "tipo_servicio_id_actual" )
-    //private Integer tipoServicioIdActual;
 
     @Column(name = "bw_actual_actual")
     private String bwActualActual;
@@ -107,7 +73,6 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 
     @Column(name = "caudal_ldn_actual")
     private String caudalLdnActual;
-
 
     @Column(name = "ultima_milla_actual")
     private Integer ultimaMillaActual;
@@ -148,16 +113,6 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     @Column(name = "oferta_isis_propuesto")
     private String ofertaIsisPropuesto;
 
-    //@Column(name = "accion_id_propuesto" , precision = 10)
-    //private Integer accionIdPropuesto;
-
-    //@Column(name = "tipo_circuito_id_propuesto"  , precision = 10)
-    //private Integer tipoCircuitoIdPropuesto;
-
-
-    //@Column(name = "tipo_servicio_id_propuesto")
-    //private Integer tipoServicioIdPropuesto;
-
     @Column(name = "sva_propuesto")
     private String svaPropuesto;
 
@@ -187,9 +142,6 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 
     @Column(name = "caudal_ldn_propuesto")
     private String CaudalLdnPropuesto;
-
-    //@Column(name = "via_acceso_id_propuesto" )
-    //private Integer viaAccesoIdPropuesto;
 
     @Column(name = "equipo_terminal_propuesto")
     private String equipoTerminalPropuesto;
@@ -227,19 +179,6 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     @Column(name = "zona_sisego")
     private String zonaSisego;
 
-    //@Column(name = "sisego_condicion_id" )
-    //private Integer sisegoCondicionId;
-
-    //@Column(name = "antiguedad" )
-    //private Integer antiguedad;
-
-
-    //@Column(name = "antiguedad_costo")
-    //private BigDecimal antiguedadCosto;
-
-    //@Column(name = "valor_residual" )
-    //private BigDecimal valorResidual;
-
     @Column(name = "dias_ejecucion")
     private Integer diasEjecucion;
 
@@ -250,25 +189,8 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     @Transient
     private Integer estado;
 
-    //@Column(name = "costo_transmision")
-    //private BigDecimal costoTransmision;
-
-
-    //@Column(name = "costo_planta_externa" )
-    //private BigDecimal costoPlantaExterna;
-
-
-    //@Column(name = "costo_opex")
-    //private BigDecimal costoOpex;
-
     @Column(name = "activo")
     private Boolean activo;
-
-
-    /**
-     * relaciones
-     **/
-
 
     @ManyToOne
     @JoinColumn(name = "oferta_id", referencedColumnName = "oferta_id")
@@ -284,7 +206,11 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
 
     @ManyToOne
     @JoinColumn(name = "tipo_circuito_id_propuesto", referencedColumnName = "tipo_circuito_id")
-    private TipoCircuito tipoCircuito;
+    private TipoCircuito tipocircuitopropuesto;
+
+    @ManyToOne
+    @JoinColumn(name = "tipo_circuito_id_actual")
+    private TipoCircuito tipocircuitoactual;
 
     @ManyToOne
     @JoinColumn(name = "tipo_servicio_id_propuesto", referencedColumnName = "tipo_servicio_id")
@@ -294,29 +220,27 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     @JoinColumn(name = "tipo_servicio_id_actual", referencedColumnName = "tipo_servicio_id")
     private TipoServicio tipoServicioActual;
 
-
     @ManyToOne
     @JoinColumn(name = "via_acceso_id_propuesto", referencedColumnName = "via_acceso_id")
     private ViaAcceso viaAcceso;
 
-
-    //@Column(name = "tipo_servicio_id_actual" )
-    //private Integer tipoServicioIdActual;
-
-    //@ManyToOne
-    //@JoinColumn(name = "departamento_id")
-    //private Departamento departamento;
-
-
-    // @ManyToOne
-    // @JoinColumn(name = "provincia_id")
-    // private Provincia provincia;
-
+    @ManyToOne
+    @JoinColumn(name = "medio_acceso_id")
+    private MedioAcceso medio;
 
     @ManyToOne
     @JoinColumn(name = "distrito_id")
     private Distrito distrito;
 
+    //TIPO SEDE
+    @ManyToOne
+    @JoinColumn(name = "tipo_enlace_id")
+    private Tipoenlace tipoenlace;
+
+    //MODO
+    @ManyToOne
+    @JoinColumn(name="condicion_enlace_id")
+    private Condicionenlace condicionenlace;
 
     @Override
     public boolean isIdSet() {
@@ -324,13 +248,11 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
         return ofertasDetalleId != null;
     }
 
-
     @Override
     public String entityClassName() {
         // TODO Auto-generated method stub
         return null;
     }
-
 
     @Override
     public Integer getId() {
@@ -338,12 +260,9 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
         return ofertasDetalleId;
     }
 
-
     @Override
     public void setId(Integer id) {
         this.ofertasDetalleId = id;
 
     }
-
-
 }

@@ -282,30 +282,33 @@
 		</plugins>
 	</build>
 
-	<!-- <build> <finalName>b2bbackend</finalName> <sourceDirectory>src</sourceDirectory> 
-		<plugins> <plugin> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-maven-plugin</artifactId> 
-		<executions> <execution> <id>build-info</id> <goals> <goal>build-info</goal> 
-		</goals> </execution> </executions> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
-		<artifactId>maven-compiler-plugin</artifactId> <configuration> <source>1.8</source> 
-		<target>1.8</target> </configuration> </plugin> <plugin> <artifactId>maven-compiler-plugin</artifactId> 
-		<configuration> <source>1.8</source> <target>1.8</target> </configuration> 
-		</plugin> <plugin> <groupId>com.microsoft.azure</groupId> <artifactId>azure-webapp-maven-plugin</artifactId> 
-		<version>1.8.0</version> <configuration> <schemaVersion>V2</schemaVersion> 
-		<resourceGroup>web</resourceGroup> <appName>web</appName> <region>westeurope</region> 
-		<pricingTier>P1V2</pricingTier> <runtime> <os>linux</os> <javaVersion>jre8</javaVersion> 
-		<webContainer>jre8</webContainer> </runtime> <appSettings> <property> <name>JAVA_OPTS</name> 
-		<value>-Dserver.port=80</value> </property> </appSettings> <deployment> <resources> 
-		<resource> <directory>${project.basedir}/target</directory> <includes> <include>*.jar</include> 
-		</includes> </resource> </resources> </deployment> </configuration> </plugin> 
-		<plugin> <groupId>com.microsoft.azure</groupId> <artifactId>azure-webapp-maven-plugin</artifactId> 
-		<version>1.9.0</version> <configuration> <schemaVersion>V2</schemaVersion> 
-		<resourceGroup>web-1584128232515-rg</resourceGroup> <appName>web-1584128232515</appName> 
-		<pricingTier>P1v2</pricingTier> <region>westeurope</region> <runtime> <os>linux</os> 
-		<javaVersion>jre8</javaVersion> <webContainer>TOMCAT 8.5</webContainer> </runtime> 
-		<deployment> <resources> <resource> <directory>${project.basedir}/target</directory> 
-		<includes> <include>*.war</include> </includes> </resource> </resources> 
-		</deployment> </configuration> </plugin> <plugin> <artifactId>maven-war-plugin</artifactId> 
-		<configuration> <warSourceDirectory>WebContent</warSourceDirectory> </configuration> 
-		</plugin> </plugins> </build> -->
-
+<!--	<build>-->
+<!--		<finalName>b2bbackend</finalName>-->
+<!--		<sourceDirectory>src</sourceDirectory>-->
+<!--		<plugins> <plugin> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--		<executions> <execution> <id>build-info</id> <goals> <goal>build-info</goal>-->
+<!--		</goals> </execution> </executions> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId>-->
+<!--		<artifactId>maven-compiler-plugin</artifactId> <configuration> <source>1.8</source>-->
+<!--		<target>1.8</target> </configuration> </plugin> <plugin> <artifactId>maven-compiler-plugin</artifactId>-->
+<!--		<configuration> <source>1.8</source> <target>1.8</target> </configuration>-->
+<!--		</plugin> <plugin> <groupId>com.microsoft.azure</groupId> <artifactId>azure-webapp-maven-plugin</artifactId>-->
+<!--		<version>1.8.0</version> <configuration> <schemaVersion>V2</schemaVersion>-->
+<!--		<resourceGroup>web</resourceGroup> <appName>web</appName> <region>westeurope</region>-->
+<!--		<pricingTier>P1V2</pricingTier> <runtime> <os>linux</os> <javaVersion>jre8</javaVersion>-->
+<!--		<webContainer>jre8</webContainer> </runtime>-->
+<!--				<appSettings><property><name>JAVA_OPTS</name>-->
+<!--		<value>-Dserver.port=80</value> </property></appSettings><deployment><resources>-->
+<!--		<resource><directory>${project.basedir}/target</directory><includes><include>*.jar</include>-->
+<!--		</includes></resource></resources></deployment></configuration></plugin>-->
+<!--		<plugin> <groupId>com.microsoft.azure</groupId> <artifactId>azure-webapp-maven-plugin</artifactId>-->
+<!--		<version>1.9.0</version><configuration> <schemaVersion>V2</schemaVersion>-->
+<!--		<resourceGroup>web-1584128232515-rg</resourceGroup> <appName>web-1584128232515</appName>-->
+<!--		<pricingTier>P1v2</pricingTier> <region>westeurope</region> <runtime> <os>linux</os>-->
+<!--		<javaVersion>jre8</javaVersion> <webContainer>TOMCAT 8.5</webContainer> </runtime>-->
+<!--		<deployment> <resources> <resource> <directory>${project.basedir}/target</directory>-->
+<!--		<includes> <include>*.war</include></includes> </resource> </resources>-->
+<!--		</deployment> </configuration> </plugin> <plugin> <artifactId>maven-war-plugin</artifactId>-->
+<!--		<configuration><warSourceDirectory>WebContent</warSourceDirectory> </configuration>-->
+<!--		</plugin></plugins>-->
+<!--	</build>-->
 </project>
