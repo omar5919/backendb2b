@@ -35,7 +35,8 @@ public class Swagger2UiConfiguration {
 
 		Docket docket = new Docket(DocumentationType.SWAGGER_2)
 				// .pathMapping("/api")
-				.select().apis(RequestHandlerSelectors.basePackage("com.incloud.tgestiona.b2b.services.rest"))
+				.select()
+				.apis(RequestHandlerSelectors.basePackage("com.incloud.tgestiona.b2b.services.rest"))
 				.paths(PathSelectors.any())
 				// .apis(RequestHandlerSelectors.any()).paths(PathSelectors.any())
 				.build().apiInfo(apiInfo()).genericModelSubstitutes(ResponseEntity.class);

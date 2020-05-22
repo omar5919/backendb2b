@@ -7,11 +7,13 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.JoinColumn;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.SetJoin;
 
+import com.incloud.tgestiona.b2b.model.*;
 import org.hibernate.sql.JoinType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,9 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.incloud.tgestiona.b2b.converter.ofertasConverter;
-import com.incloud.tgestiona.b2b.model.Cliente;
-import com.incloud.tgestiona.b2b.model.Distrito;
-import com.incloud.tgestiona.b2b.model.TipoServicio;
 import com.incloud.tgestiona.b2b.model.oferta.Ofertas;
 import com.incloud.tgestiona.b2b.model.oferta.OfertasDetalle;
 import com.incloud.tgestiona.b2b.repository.OfertasDetalleRepository;
@@ -46,18 +45,13 @@ public class OfertasDetalleServiceImpl implements OfertasDetalleService {
             Join<OfertasDetalle, Ofertas> OfertasDetalleOfertas = root.join("ofertas");
             Join<OfertasDetalle, Cliente> OfertasDetalleCliente = root.join("cliente");
             Join<OfertasDetalle, Distrito> OfertasDetalleDistrito = root.join("distrito");
+
             //Join<OfertasDetalle, TipoServicio> OfertasDetalleTipoServicio = root.join("",JoinType.LEFT_OUTER_JOIN);
-
-
-            if (!StringUtils.isEmpty(ofertaId)) {
-                p = cb.and(p, cb.equal(OfertasDetalleOfertas.get("oferta_id"), ofertaId));
-            }
-
+            if (!StringUtils.isEmpty(ofertaId)) p = cb.and(p, cb.equal(OfertasDetalleOfertas.get("oferta_id"), ofertaId));
+            p = cb.and(p, cb.equal(root.get("activo"), true));
             cq.orderBy(cb.asc(root.get("ofertasDetalleId")));
             return p;
         }, pageable);
-
-
         return CargarDtoOfertaDetalle(pOfertasDetalle.getContent(), pOfertasDetalle.getTotalElements());//ofertasConverter.convertToOfertaDTO(pOfertas.getContent(),pOfertas.getTotalElements());
     }
 
@@ -73,16 +67,22 @@ public class OfertasDetalleServiceImpl implements OfertasDetalleService {
                         .clienteId(s.getCliente().getId())
                         .secuencia(s.getSecuencia())
                         .nombreSede(s.getNombreSede())
+                        .nrotipoCircuitoActual(s.getNumero_circuito_actual())
+                        .servicioActual_medio(s.getMedioactual() == null ? 0 :s.getMedioactual().getId())
+                        .servicioActual_otro(s.getOtrosEquiposActual())
+                        .servicioPropuesto_tiposede(s.getTipoenlace() == null ? 0 : s.getTipoenlace().getId())
+                        .servicioPropuesto_modo(s.getCondicionenlace() == null ? 0 : s.getCondicionenlace().getId())
+                        .servicioPropuesto_nrocircuito(s.getNumero_circuito_propuesto())
+                        .servicioPropuesto_medio(s.getMediopropuesto() == null ? 0 : s.getMediopropuesto().getId())
                         .direccion(s.getDireccion())
-                        //.departamentoId(s.getDistrito().getDepartamentoId())
-                        //.provinciaId(s.getDistrito().getProvinciaId())
                         .distritoId(s.getDistrito().getId())
+                        .ubigeo(s.getUbigeo())
                         .latitud(s.getLatitud())
                         .longitud(s.getLongitud())
                         .zoom(s.getZoom())
                         .contacto(s.getContacto())
                         .telefono(s.getTelefono())
-                        .tipoCircuitoActual(s.getTipocircuitoactual().getDescripcion())
+                        .tipoCircuitoActual(s.getTipocircuitoactual().getId())
                         .numeroCdActual(s.getNumeroCdActual())
                         .tipoServicioIdActual((s.getTipoServicioActual() == null ? 0 : s.getTipoServicioActual().getId()))
                         .bwActualActual(s.getBwActualActual())
@@ -94,9 +94,7 @@ public class OfertasDetalleServiceImpl implements OfertasDetalleService {
                         .caudalVideoActual(s.getCaudalVideoActual())
                         .caudalLdnActual(s.getCaudalLdnActual())
                         .ultimaMillaActual(s.getUltimaMillaActual())
-
                         .routerSwitchActual(s.getRouterSwitchActual())
-
                         .dteActual(s.getDteActual())
                         .equipo_adicional_actual(s.getEquipo_adicional_actual())
                         .equipoTerminalActual(s.getEquipoTerminalActual())
@@ -108,11 +106,9 @@ public class OfertasDetalleServiceImpl implements OfertasDetalleService {
                         .facturacion_actual(s.getFacturacion_actual())
                         .vrf_actual(s.getVrf_actual())
                         .ofertaIsisPropuesto(s.getOfertaIsisPropuesto())
-
                         .accionIsisIdPropuesto((s.getAccionIsis() == null ? 0 : s.getAccionIsis().getId()))
                         .tipoCircuitoIdPropuesto((s.getTipocircuitopropuesto() == null ? 0 : s.getTipocircuitopropuesto().getId()))
                         .tipoServicioIdPropuesto((s.getTipoServicioPropuesto() == null ? 0 : s.getTipoServicioPropuesto().getId()))
-
                         .svaPropuesto(s.getSvaPropuesto())
                         .descripcionSvaPropuesto(s.getDescripcionSvaPropuesto())
                         .bwPropuesto(s.getBwPropuesto())
@@ -123,15 +119,15 @@ public class OfertasDetalleServiceImpl implements OfertasDetalleService {
                         .caudalVozPropuesto(s.getCaudalVozPropuesto())
                         .caudalVideoPropuesto(s.getCaudalVideoPropuesto())
                         .CaudalLdnPropuesto(s.getCaudalLdnPropuesto())
-
                         .viaAccesoIdPropuesto((s.getViaAcceso() == null ? 0 : s.getViaAcceso().getId()))
-
                         .equipoTerminalPropuesto(s.getEquipoTerminalPropuesto())
                         .routerPropuesto(s.getRouterPropuesto())
                         .equipoStockPropuesto(s.getEquipoStockPropuesto())
                         .fechaLlegadaPropuesto(s.getFechaLlegadaPropuesto())
                         .otrosEquiposPropuesto(s.getOtrosEquiposPropuesto())
                         .componentesPropuesto(s.getComponentesPropuesto())
+                        .costoUltimaMilla(s.getCostoUltimaMilla())
+                        .diasEjecucion(s.getDiasEjecucion())
                         .vrfPropuesto(s.getVrfPropuesto())
                         .detalleAccionEnlacePropuesto(s.getDetalleAccionEnlacePropuesto())
                         .observacionesPropuesto(s.getObservacionesPropuesto())
@@ -140,7 +136,6 @@ public class OfertasDetalleServiceImpl implements OfertasDetalleService {
                         .zonaSisego(s.getZonaSisego())/* */
                         .build()
         ).collect(Collectors.toList());
-
         oDto.setData(ol);
         return oDto;
     }

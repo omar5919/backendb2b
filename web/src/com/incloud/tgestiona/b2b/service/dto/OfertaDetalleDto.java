@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class OfertaDetalleDto {
     private Boolean activo;
-    
+    private Integer idcliente;
     private Integer id;
     private String sede;
     private String direccion;
@@ -66,4 +66,8 @@ public class OfertaDetalleDto {
     private String zona;
     private BigDecimal ultima;
     private Integer dias;
+    private String ubigeo;
+
+    private Integer idoferta;
+
 }

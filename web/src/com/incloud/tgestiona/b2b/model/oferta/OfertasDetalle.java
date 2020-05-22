@@ -47,10 +47,13 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     @Column(name = "telefono")
     private String telefono;
 
+    @Column(name = "ubigeo")
+    private String ubigeo;
+
     @Column(name = "numero_cd_actual")
     private String numeroCdActual;
 
-    @Column(name = "bw_actual_actual")
+    @Column(name = "bw_actual")
     private String bwActualActual;
 
     @Column(name = "caudal_bronce_actual")
@@ -77,7 +80,7 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     @Column(name = "ultima_milla_actual")
     private Integer ultimaMillaActual;
 
-    @Column(name = "router_switch_actual")
+    @Column(name = "router_actual")
     private String routerSwitchActual;
 
     @Column(name = "dte_actual")
@@ -128,6 +131,12 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     @Column(name = "caudal_plata_propuesto")
     private String caudalPlataPropuesto;
 
+    @Column(name = "numero_circuito_actual")
+    private String numero_circuito_actual;
+
+    @Column(name = "numero_circuito_propuesto")
+    private String numero_circuito_propuesto;
+
     @Column(name = "caudal_oro_propuesto")
     private String caudalOroPropuesto;
 
@@ -155,7 +164,10 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     @Column(name = "fecha_llegada_propuesto")
     private String fechaLlegadaPropuesto;
 
-    @Column(name = "otros_equipos_propuesto")
+    @Column(name = "otros_actual")
+    private String otrosEquiposActual;
+
+    @Column(name = "otros_propuesto")
     private String otrosEquiposPropuesto;
 
     @Column(name = "componentes_propuesto")
@@ -225,8 +237,12 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     private ViaAcceso viaAcceso;
 
     @ManyToOne
-    @JoinColumn(name = "medio_acceso_id")
-    private MedioAcceso medio;
+    @JoinColumn(name = "medio_acceso_id_actual")
+    private MedioAcceso medioactual;
+
+    @ManyToOne
+    @JoinColumn(name = "medio_acceso_id_propuesto")
+    private MedioAcceso mediopropuesto;
 
     @ManyToOne
     @JoinColumn(name = "distrito_id")

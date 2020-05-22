@@ -10,9 +10,65 @@ import com.incloud.tgestiona.b2b.model.oferta.Ofertas;
 import com.incloud.tgestiona.b2b.model.oferta.OfertasDetalle;
 
 import java.math.BigDecimal;
+import java.util.stream.Stream;
 
 @Repository
 public interface OfertasDetalleRepository  extends JpaRepository<OfertasDetalle, Integer>, JpaSpecificationExecutor<OfertasDetalle>  {
     @Procedure("sp_guardar_servicio")
-    int guardarServicio();
+    int guardarServicio(
+            Integer pofertaid,
+            Boolean pactivo,
+            Integer pid,
+            String psede,
+            String pdireccion,
+            Integer piddistrito,
+            String plat,
+            String plon,
+            String pcontacto,
+            String ptelefono,
+            Integer pidcircuito,
+            String pcircuito,
+            Integer pidservicio,
+            Integer pidmedio,
+            String pbwactual,
+            String pldnactual,
+            String pvozactual,
+            String pvideoactual,
+            String pplatiniumactual,
+            String poroactual,
+            String pplataactual,
+            String pbronceactual,
+            String pequipo,
+            String prouter,
+            String potros,
+            BigDecimal pfacturacion,
+            Integer pidaccionisis,
+            Integer pidtiposede,
+            Integer pidmodo,
+            Integer pidcircuito2,
+            String pcircuito2,
+            Integer pidservicio2,
+            Integer pidmedio2,
+            String psva,
+            String psvadescripcion,
+            String pbwpropuesto,
+            String pldnpropuesto,
+            String pvozpropuesto,
+            String pvideopropuesto,
+            String pplatiniumpropuesto,
+            String poropropuesto,
+            String pplatapropuesto,
+            String pbroncepropuesto,
+            String pequipo2,
+            String prouter2,
+            String potros2,
+            BigDecimal pprecio,
+            String pobservaciones,
+            String pofertaisis,
+            String psisego,
+            String pzona,
+            BigDecimal pultima,
+            Integer pdias,
+            String pubigeo
+    );
 }

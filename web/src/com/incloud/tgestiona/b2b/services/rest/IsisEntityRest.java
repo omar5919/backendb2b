@@ -27,10 +27,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.incloud.tgestiona.b2b.repository.ClienteIsisRepository;
 import com.incloud.tgestiona.b2b.repository.EquipoIsisRepository;
@@ -42,7 +39,8 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/IsisEntity")
-public class IsisEntityRest extends JPACustomRest<T, Integer> {
+//@CrossOrigin(origins = "http://localhost:4200")
+public class IsisEntityRest{
     private T entity;
 
     private final Logger log = LoggerFactory.getLogger(IsisEquipo.class);
@@ -68,11 +66,7 @@ public class IsisEntityRest extends JPACustomRest<T, Integer> {
         IsisEquipo _equipo = null;
         /**/
         if (entityInputParam.getUrl() == null) {
-            String errorDevuelve = this.devuelveErrorHeaders(bindingResult, errors);
-            if (this.devuelveRuntimeException) {
-                throw new RuntimeException(errorDevuelve);
-            }
-            headers.add("errors", errorDevuelve);
+            headers.add("errors", "");
             return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
         }
 
@@ -129,11 +123,7 @@ public class IsisEntityRest extends JPACustomRest<T, Integer> {
         try {
             return Optional.ofNullable(entityOutDto).map(l -> new ResponseEntity<>(l, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NO_CONTENT));
         } catch (Exception e) {
-            if (this.devuelveRuntimeException) {
-                String error = getMensageErrorExceptionDebug(e);
-                throw new RuntimeException(error);
-            }
-            headers = this.devuelveErrorHeaders(e);
+            headers.add("errors", "");
             return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
         }
     }
