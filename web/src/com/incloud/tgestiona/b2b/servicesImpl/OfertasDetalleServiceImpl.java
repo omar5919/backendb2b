@@ -56,7 +56,7 @@ public class OfertasDetalleServiceImpl implements OfertasDetalleService {
     }
 
 
-    private BaseBandejaResponse<List<OfertasDetalleDto>> CargarDtoOfertaDetalle(List<OfertasDetalle> list, long total) {
+    private BaseBandejaResponse<List<OfertasDetalleDto>> CargarDtoOfertaDetalle(List<OfertasDetalle> list, Long total) {
         BaseBandejaResponse<List<OfertasDetalleDto>> oDto = new BaseBandejaResponse<>();
         oDto.setMsj("200");
         oDto.setRows(total);
@@ -82,7 +82,7 @@ public class OfertasDetalleServiceImpl implements OfertasDetalleService {
                         .zoom(s.getZoom())
                         .contacto(s.getContacto())
                         .telefono(s.getTelefono())
-                        .tipoCircuitoActual(s.getTipocircuitoactual().getId())
+                        .tipoCircuitoActual(s.getTipocircuitoactual() == null ? 0 : s.getTipocircuitoactual().getId())
                         .numeroCdActual(s.getNumeroCdActual())
                         .tipoServicioIdActual((s.getTipoServicioActual() == null ? 0 : s.getTipoServicioActual().getId()))
                         .bwActualActual(s.getBwActualActual())
