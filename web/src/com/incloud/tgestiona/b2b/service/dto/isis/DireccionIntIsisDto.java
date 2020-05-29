@@ -8,18 +8,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DireccionIntIsisDto {
-    private String numero_proyecto_isis;
-    private String version_oferta;
+    private String proyecto;
+    private String version;
     private Integer sec_grupo;
-    private Integer secuencia_direccion;
-    private String departamento_codigo;
-    private String provincia_codigo;
-    private String codigo_ciudad;
-    private String distrito_codigo;
+    private Integer sec_direccion;
+    private String cod_departamento;
+    private String cod_provincia;
+    private String cod_ciudad;
+    private String cod_distrito;
 
-    private String urbanizacion;
-    private String via;
-    private String codigo_direccion;
+    private String cod_urbanizacion;
+    private String cod_via;
+    private String codigo;
     private String direccion;
     private String numero;
     private String manzana;

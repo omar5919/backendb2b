@@ -13,4 +13,8 @@ public class ResponseDto {
     Integer transaccion;
     Integer error_bd;
     String mensaje_transaccion;
+    String exceptionId;
+    String exceptionText;
+    String moreInfo;
+    String userMessage;
 }

@@ -8,17 +8,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DatosGeneralesIntIsisDto {
-    private String codigo_proyecto_sdio;
-    private String numero_proyecto_isis;
-    private String version_oferta;
-    private String codigo_cliente;
-    private String codigo_facturacion;
+    private String ofe_sdio;
+   // private String numero_proyecto_isis;
+   // private String version_oferta;
+    private String cod_cliente;
+    private String cod_fact;
     private String descripcion;
-    private String codigo_oportunidad;
+    
+    private String cod_oportunidad;
     private String tipo_oportunidad;
     private String contacto;
     private String telefono;
     private String moneda;
-    private String tipo_contrato;
-    private String usuario_sdio;
+    private String tipo;
+    private String usuario;
 }

@@ -1,5 +1,7 @@
 package com.incloud.tgestiona.b2b.service.dto.isis;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TargetIntIsisDto {
-    private String numero_proyecto_isis;
-    private String version_oferta;
-    private float pago_unico;
-    private float pago_recurrente;
+    private String proyecto;
+    private String version;
+    private BigDecimal pago_unico;
+    private BigDecimal pago_recurrente;
 }

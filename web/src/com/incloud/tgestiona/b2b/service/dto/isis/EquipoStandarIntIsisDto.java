@@ -8,14 +8,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EquipoStandarIntIsisDto {
-    private String numero_proyecto_sdio;
-    private String version_oferta;
+    private String proyecto;
+    private String version;
     private Integer sec_grupo;
     private Integer sec_direccion;
-    private Integer sec_producto;
-    private String producto;
-    private String destino;
+    private Integer sec_prod;
+    private String cod_prod;
     private String tipo_equipo;
-    private String codigo_equipo_std;
-    private Integer anio_contrato;
+    private String servicio;
+    private Integer anos_de_contrato;
+    private Integer cantidad;
 }

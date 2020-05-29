@@ -8,17 +8,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ImplantacionNoStandarIntIsisDto {
-    private String numero_proyecto_sdio;
-    private String version_oferta;
-    private Integer sec_grupo;
+    private String proyecto;
+    private String version;
+    private Integer sec_grupo; 
     private Integer sec_direccion;
-    private Integer sec_producto;
-    private String producto;
-    private String tipo_compra;
-    private String codigo;
+    private Integer sec_prod;
+    private String cod_prod;
+    private String tipo_estudio;
+    private String codigo_sisego;
     private String descripcion;
     private Integer cantidad;
     private Integer moneda;
     private String codigo_tarifa;
-    private String seq_tarifa;
+    private Integer secuencia_tarifa;
 }

@@ -8,26 +8,29 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GrupoParametrosIntIsisDto {
-    private String numero_proyecto_isis;
-    private String version_oferta;
+    private String proyecto;
+    private String version;
     private Integer cantidad;
     private Integer sec_grupo;
     private String grupo;
     private Integer sec_direccion;
     private String direccion;
-    private Integer sec_producto;
-    private String producto;
-    private String tipo_ambito;
+    private Integer sec_prod;
+    private String cod_prod;
+    
+    private String tipo_servicio;///ambito
+    
     private String servicio;
-    private String tipo_servicio;
-    private String accion;
-    private String acceso;
-    private String via_acceso;
+    private String tipo_de_servicio;
+    private String accion_isis;
+    private String bw;
+    private String medio_acceso;
     private String caudal_ldn;
-    private String voz;
-    private String video;
-    private String platinum;
-    private String plata;
-    private String bronce;
-    private String tipo_cd;
+    private String caudal_voz;
+    private String caudal_video;
+    private String caudal_platinum;
+    private String caudal_oro;
+    private String caudal_plata;
+    private String caudal_bronce;
+    private String tipo_de_cd;
 }
