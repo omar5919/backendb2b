@@ -107,7 +107,8 @@ public class IsisRest {
 	        objRpt = EnviarTarifario(oferta_id, nombre_sede);  
 	        objRpt = EnviarDireccion(oferta_id, nombre_sede);  
 	        
-        
+	        objRpt.getBody().setProyecto(Integer.parseInt(oferta_isis.toString()));
+	        objRpt.getBody().setVersion(Integer.parseInt(version_isis.toString()));
           }
 		return objRpt.getBody();
         
