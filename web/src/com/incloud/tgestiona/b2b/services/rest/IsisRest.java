@@ -95,9 +95,9 @@ public class IsisRest {
 	        	objRpt = EnviarCabeceraDatosGenerales(oferta_id);
 	        	oferta_isis = objRpt.getBody().getProyecto().toString();
 	        	version_isis = objRpt.getBody().getVersion().toString();
-	        	 
+	        	 //log.info(oferta_isis);
 	        } 
-  	        
+	        log.info("<== Codigo Isis Generado ==> " +  oferta_isis);
 	        objRpt = EnviarGrupoParametros(oferta_id, nombre_sede, oferta_isis, version_isis);
 	        
 	        objRpt = EnviarEquipoEstandar(oferta_id, nombre_sede); 
@@ -129,9 +129,7 @@ public class IsisRest {
 		        	_dGenerales.setMoneda((String)obj[10]);
 		        	_dGenerales.setTipo((String)obj[11]);
 		        	_dGenerales.setUsuario((String)obj[12]);
-	            //datosGenerales.add(_dGenerales );
 		        	RptObj	=  EnviarTrama(_dGenerales,urlCabecera);///-->> cabecera
-	          ////recuperar los datos enviados por api isis para grabarlos
 	        }      
     	return RptObj;
     }
