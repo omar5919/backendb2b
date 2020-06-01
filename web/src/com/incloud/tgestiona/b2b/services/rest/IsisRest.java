@@ -42,11 +42,11 @@ public class IsisRest {
     
     
     @PostMapping("/enviartrama")
-    public ResponseDto Enviar(@RequestParam Integer oferta_id) throws JsonProcessingException {
+    public ResponseDto enviar(@RequestParam Integer oferta_id) throws JsonProcessingException {
     	 ResponseDto result;
         try {
            
-            return  OfertaPorSede(oferta_id);
+            return  ofertaPorSede(oferta_id);
         } catch (final HttpClientErrorException e) {
             if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
                 ObjectMapper mapper = new ObjectMapper();
@@ -62,7 +62,7 @@ public class IsisRest {
     }
 
  
-    private static <T> ResponseEntity<ResponseDto> EnviarTrama(T req, String url) {
+    private static <T> ResponseEntity<ResponseDto> enviarTrama(T req, String url) {
         RestTemplate restTemplate = new RestTemplate();
         MultiValueMap<String, String> headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
@@ -75,48 +75,45 @@ public class IsisRest {
         
     }
     
-    public  ResponseDto OfertaPorSede(Integer oferta_id) {
-    	ResponseEntity<ResponseDto> objRpt = null;
-        ResponseDto result;
-        String oferta_isis = null;
-        String version_isis = "";
+    public  ResponseDto ofertaPorSede(Integer ofertaId) {
+    	ResponseEntity<ResponseDto> objRpt = null ;
+        String ofertaIsis = "";
+        String versionIsis = "";
    
-        String nombre_sede = null;
-        Integer sede_id = 0;
+        String nombreSede = "";
+        Integer sedeId = 0;
        
-        List<Object[]> _ofertaPorGrupoSede = iRepo.ofertaPorGrupoSede(oferta_id);
+        List<Object[]> _ofertaPorGrupoSede = iRepo.ofertaPorGrupoSede(ofertaId);
         for (Object[] obj : _ofertaPorGrupoSede) {
-            sede_id = (Integer) obj[2];
-            nombre_sede = (String) obj[3];
-            oferta_isis = (String) obj[4];
+        	sedeId = (Integer) obj[2];
+            nombreSede = (String) obj[3];
+            ofertaIsis = (String) obj[4];
   	        
-	        if(oferta_isis.equals("")) {//--- valida si no hay una oferta isis  
-	        
-	        	objRpt = EnviarCabeceraDatosGenerales(oferta_id);
-	        	oferta_isis = objRpt.getBody().getProyecto().toString();
-	        	version_isis = objRpt.getBody().getVersion().toString();
-	        	 //log.info(oferta_isis);
+	        if(ofertaIsis.equals("")) {//--- valida si no hay una oferta isis  	        
+	        	objRpt = enviarCabeceraDatosGenerales(ofertaId);
+	        	ofertaIsis = objRpt.getBody().getProyecto().toString();
+	        	versionIsis = objRpt.getBody().getVersion().toString();
 	        } 
-	        log.info("<== Codigo Isis Generado ==> " +  oferta_isis);
-	        objRpt = EnviarGrupoParametros(oferta_id, nombre_sede, oferta_isis, version_isis);
+	        log.info("<== Codigo Isis Generado ==> " +  ofertaIsis);
+	        objRpt = enviarGrupoParametros(ofertaId, nombreSede, ofertaIsis, versionIsis);
 	        
-	        objRpt = EnviarEquipoEstandar(oferta_id, nombre_sede); 
-	        objRpt = EnviarEquipoNoEstandar(oferta_id, nombre_sede);  
-	        objRpt = EnviarImplantacionNoEstandar(oferta_id, nombre_sede);  
-	        objRpt = EnviarTarget(oferta_id, nombre_sede);  
-	        objRpt = EnviarTarifario(oferta_id, nombre_sede);  
-	        objRpt = EnviarDireccion(oferta_id, nombre_sede);  
+	        objRpt = enviarEquipoEstandar(ofertaId, nombreSede); 
+	        objRpt = enviarEquipoNoEstandar(ofertaId, nombreSede);  
+	        objRpt = enviarImplantacionNoEstandar(ofertaId, nombreSede);  
+	        objRpt = enviarTarget(ofertaId, nombreSede);  
+	        objRpt = enviarTarifario(ofertaId, nombreSede);  
+	        objRpt = enviarDireccion(ofertaId, nombreSede);  
 	        
-	        objRpt.getBody().setProyecto(Integer.parseInt(oferta_isis.toString()));
-	        objRpt.getBody().setVersion(Integer.parseInt(version_isis.toString()));
+	        objRpt.getBody().setProyecto(Integer.parseInt(ofertaIsis.toString().trim()== "" ? "0":ofertaIsis.toString()));
+	        objRpt.getBody().setVersion(Integer.parseInt(versionIsis.toString().trim() == "" ? "1" :versionIsis.toString()));
           }
 		return objRpt.getBody();
         
     }
     
-    private ResponseEntity<ResponseDto> EnviarCabeceraDatosGenerales(Integer oferta_id) {
+    private ResponseEntity<ResponseDto> enviarCabeceraDatosGenerales(Integer ofertaId) {
     	ResponseEntity<ResponseDto> RptObj = null;
-    	 List<Object[]> _datosGenerales = iRepo.datosGenerales(oferta_id);
+    	 List<Object[]> _datosGenerales = iRepo.datosGenerales(ofertaId);
 	        for (Object[] obj : _datosGenerales) {
 	        	DatosGeneralesIntIsisDto _dGenerales = new DatosGeneralesIntIsisDto();
 		        	_dGenerales.setOfe_sdio((String)obj[0]);
@@ -130,14 +127,14 @@ public class IsisRest {
 		        	_dGenerales.setMoneda((String)obj[10]);
 		        	_dGenerales.setTipo((String)obj[11]);
 		        	_dGenerales.setUsuario((String)obj[12]);
-		        	RptObj	=  EnviarTrama(_dGenerales,urlCabecera);///-->> cabecera
+		        	RptObj	=  enviarTrama(_dGenerales,urlCabecera);///-->> cabecera
 	        }      
     	return RptObj;
     }
     
-    private ResponseEntity<ResponseDto> EnviarGrupoParametros(Integer oferta_id,String nombre_sede,String oferta_isis,String version_isis){
+    private ResponseEntity<ResponseDto> enviarGrupoParametros(Integer ofertaId,String nombreSede,String oferta_isis,String versionIsis){
     	ResponseEntity<ResponseDto> RptObj = null; 
-    	List<Object[]> _grupoParametros = iRepo.gruposParametros(oferta_id, nombre_sede, oferta_isis, version_isis);
+    	List<Object[]> _grupoParametros = iRepo.gruposParametros(ofertaId, nombreSede, oferta_isis, versionIsis);
 	        for (Object[] obj : _grupoParametros) {
 	        	GrupoParametrosIntIsisDto _gParamGrupo = new GrupoParametrosIntIsisDto();
 	        	_gParamGrupo.setProyecto((String)obj[0]);
@@ -163,14 +160,14 @@ public class IsisRest {
 	        	_gParamGrupo.setCaudal_plata((String)obj[20]);
 	        	_gParamGrupo.setCaudal_bronce((String)obj[21]);
 	        	_gParamGrupo.setTipo_de_cd((String)obj[22]);
-	        	RptObj	= EnviarTrama(_gParamGrupo,urlGrupos);///-->> grupo - parametros
+	        	RptObj	= enviarTrama(_gParamGrupo,urlGrupos);///-->> grupo - parametros
 	        }
 	        return RptObj;
     }
 
-    private ResponseEntity<ResponseDto> EnviarEquipoEstandar(Integer oferta_id,String nombre_sede) {
+    private ResponseEntity<ResponseDto> enviarEquipoEstandar(Integer ofertaId,String nombreSede) {
     	ResponseEntity<ResponseDto> RptObj = null; 
-        List<Object[]> _equipoStandar = iRepo.equipoEstandar(oferta_id, nombre_sede);
+        List<Object[]> _equipoStandar = iRepo.equipoEstandar(ofertaId, nombreSede);
         for (Object[] obj : _equipoStandar) {
         	EquipoStandarIntIsisDto _eEstandar = new EquipoStandarIntIsisDto();
         	_eEstandar.setProyecto((String)obj[0]);
@@ -184,15 +181,15 @@ public class IsisRest {
         	_eEstandar.setAnos_de_contrato((Integer)obj[8]);
         	_eEstandar.setCantidad((Integer)obj[9]);
         	
-        	RptObj = EnviarTrama(_eEstandar,urlEquipoEstandar);///-->> equipo estandar
+        	RptObj = enviarTrama(_eEstandar,urlEquipoEstandar);///-->> equipo estandar
         }
 
     	return RptObj;
     }
     
-    private ResponseEntity<ResponseDto> EnviarEquipoNoEstandar(Integer oferta_id,String nombre_sede) {
+    private ResponseEntity<ResponseDto> enviarEquipoNoEstandar(Integer ofertaId,String nombreSede) {
     	ResponseEntity<ResponseDto> RptObj = null; 
-    	List<Object[]> _equipoNoStandar = iRepo.equipoNoEstandar(oferta_id, nombre_sede);
+    	List<Object[]> _equipoNoStandar = iRepo.equipoNoEstandar(ofertaId, nombreSede);
         for (Object[] obj : _equipoNoStandar) {
         	  EquipoNoStandarIntIsisDto _eNEstandar = new EquipoNoStandarIntIsisDto();
               _eNEstandar.setProyecto((String)obj[0]);
@@ -206,15 +203,15 @@ public class IsisRest {
               _eNEstandar.setDescripcion((String)obj[8]);
               _eNEstandar.setAnos_de_contrato((Integer)obj[9]);
 
-              RptObj =  EnviarTrama(_eNEstandar,urlEquipoNoEstandar);///-->> equipo  non estandar
+              RptObj =  enviarTrama(_eNEstandar,urlEquipoNoEstandar);///-->> equipo  non estandar
 
         }
     	return RptObj;
     }
 
-    private ResponseEntity<ResponseDto>   EnviarImplantacionNoEstandar(Integer oferta_id,String nombre_sede) {
+    private ResponseEntity<ResponseDto>   enviarImplantacionNoEstandar(Integer ofertaId,String nombreSede) {
     	ResponseEntity<ResponseDto> RptObj = null; 
-    	 List<Object[]> _ImplantacionNoStandar = iRepo.implantacionNoEstandar(oferta_id, nombre_sede);
+    	 List<Object[]> _ImplantacionNoStandar = iRepo.implantacionNoEstandar(ofertaId, nombreSede);
 	        for (Object[] obj : _ImplantacionNoStandar) {
 	        	ImplantacionNoStandarIntIsisDto _iNEstandar = new ImplantacionNoStandarIntIsisDto();
 	        	_iNEstandar.setProyecto((String)obj[0]);
@@ -231,15 +228,15 @@ public class IsisRest {
 	        	_iNEstandar.setCodigo_tarifa((String)obj[11]);
 	        	_iNEstandar.setSecuencia_tarifa(12);
 	
-	        	RptObj = EnviarTrama(_iNEstandar,urlImplmentacionNoEstandar);///-->> implamtacion no estandar
+	        	RptObj = enviarTrama(_iNEstandar,urlImplmentacionNoEstandar);///-->> implamtacion no estandar
 	            
 	        }
 	     	return RptObj;
     }
   
-    private ResponseEntity<ResponseDto>   EnviarTarget(Integer oferta_id,String nombre_sede) {
+    private ResponseEntity<ResponseDto>   enviarTarget(Integer ofertaId,String nombreSede) {
     	ResponseEntity<ResponseDto> RptObj = null; 
-    	 List<Object[]> _target = iRepo.target(oferta_id, nombre_sede);
+    	 List<Object[]> _target = iRepo.target(ofertaId, nombreSede);
 	        for (Object[] obj : _target) {
 	        	TargetIntIsisDto _targetd = new TargetIntIsisDto();
 	        	_targetd.setProyecto((String)obj[0]);
@@ -247,17 +244,17 @@ public class IsisRest {
 	        	_targetd.setPago_unico((BigDecimal)obj[2]);
 	        	_targetd.setPago_recurrente((BigDecimal)obj[3]);
 	        	
-	        	RptObj =	EnviarTrama(_targetd,urlTarget);///-->> target
+	        	RptObj =	enviarTrama(_targetd,urlTarget);///-->> target
 	        	
 	        }
 
 	     	return RptObj;
     }
 
-    private ResponseEntity<ResponseDto>    EnviarTarifario(Integer oferta_id,String nombre_sede) {
+    private ResponseEntity<ResponseDto> enviarTarifario(Integer ofertaId,String nombreSede) {
       	 
     	ResponseEntity<ResponseDto> RptObj = null; 
-        List<Object[]> _tarifario = iRepo.tarifario(oferta_id, nombre_sede);
+        List<Object[]> _tarifario = iRepo.tarifario(ofertaId, nombreSede);
         for (Object[] obj : _tarifario) {
         	TarifarioIntIsisDto _tarifariod = new TarifarioIntIsisDto();
         	_tarifariod.setProyecto((String)obj[0]);
@@ -277,17 +274,17 @@ public class IsisRest {
         	_tarifariod.setDestino((String)obj[14]);
         	_tarifariod.setOrigen_concepto((String)obj[15]);
 
-        	RptObj=EnviarTrama(_tarifariod,urlPresupuesto);///-->> tarifario
+        	RptObj=enviarTrama(_tarifariod,urlPresupuesto);///-->> tarifario
         	
         }
      	return RptObj;
    	
    }
 
-    private ResponseEntity<ResponseDto>    EnviarDireccion(Integer oferta_id,String nombre_sede) {
+    private ResponseEntity<ResponseDto> enviarDireccion(Integer ofertaId,String nombreSede) {
     	ResponseEntity<ResponseDto> RptObj = null;  
        
-        List<Object[]> _direccion = iRepo.direccion(oferta_id, nombre_sede);
+        List<Object[]> _direccion = iRepo.direccion(ofertaId, nombreSede);
         for (Object[] obj : _direccion) {
         	DireccionIntIsisDto _Direcciond = new DireccionIntIsisDto();
         	_Direcciond.setProyecto((String)obj[0]);
@@ -308,7 +305,7 @@ public class IsisRest {
         	_Direcciond.setPiso((String)obj[15]);
         	_Direcciond.setInterior((String)obj[16]);
 
-        	RptObj =	EnviarTrama(_Direcciond,urlDireccion);///-->> direccion
+        	RptObj =	enviarTrama(_Direcciond,urlDireccion);///-->> direccion
         }
         
    	return RptObj;
