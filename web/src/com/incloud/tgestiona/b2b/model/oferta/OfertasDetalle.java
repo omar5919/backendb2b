@@ -125,6 +125,9 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     @Column(name = "bw_propuesto")
     private String bwPropuesto;
 
+    @Column(name = "condicion_servicio")
+    private Integer condicion_servicio;
+
     @Column(name = "caudal_bronce_propuesto")
     private String caudalBroncePropuesto;
 

@@ -42,4 +42,7 @@ public interface OfertasRepository extends JpaRepository<Ofertas, Integer>, JpaS
 
     @Procedure("sp_ganar_oferta")
     int ganarOferta(Integer poferta_id, Integer pusuario_id, String pusuario);
+
+    @Procedure("sp_derivar_oferta")
+    String derivarOferta(Integer poferta_id, Integer pusuario_id, Integer pestado,Integer panalistafinanciero_id);
 }

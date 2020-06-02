@@ -85,6 +85,7 @@ public class OfertasDetalleDto {
     private String zonaSisego;
     private Integer diasEjecucion;
     private BigDecimal costoUltimaMilla;
+    private Integer condicion_servicio;
     private Boolean activo;
 
     //NUMERO DE CIRCUITO ACTUAL

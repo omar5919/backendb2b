@@ -42,42 +42,33 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
     private OfertasRepository oRepo;
 
     @GetMapping("/obtenerofertas")
-    public BaseBandejaResponse<List<ofertaDto>> obtenerofertas(@RequestParam(required = false) String codoportunidad,
-                                                               @RequestParam(required = false) String cliente,
-                                                               @RequestParam(required = false) String descripcion,
-                                                               @RequestParam(required = false) Integer complejidad,
-                                                               @RequestParam(required = false) Integer estado,
-                                                               @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date desde,
-                                                               @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date hasta,
-                                                               Pageable pageable) throws Exception {
-        return oServ.getOfertas(codoportunidad, cliente, descripcion, complejidad, estado, desde, hasta, pageable);
-    }
-
-    @GetMapping("/getofertas")
-    public BaseBandejaResponse<List<ofertaDto>> getofertas(@RequestParam(required = false) String codoportunidad,
-                                                           @RequestParam(required = false) String cliente,
-                                                           @RequestParam(required = false) String descripcion,
-                                                           @RequestParam(required = false) Integer complejidad,
-                                                           @RequestParam(required = false) Integer estado,
-                                                           @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date desde,
-                                                           @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date hasta,
-                                                           Pageable p) throws Exception {
-
-        Query query = entityManager.createNativeQuery("select * from oferta.sp_obtener_ofertas(?1,?2,?3,?4,?5,?6,?7,?8,?9);")
-                .setParameter(1, new TypedParameterValue(StandardBasicTypes.STRING, codoportunidad))
-                .setParameter(2, new TypedParameterValue(StandardBasicTypes.STRING, cliente))
-                .setParameter(3, new TypedParameterValue(StandardBasicTypes.STRING, descripcion))
-                .setParameter(4, new TypedParameterValue(StandardBasicTypes.INTEGER, complejidad))
-                .setParameter(5, new TypedParameterValue(StandardBasicTypes.INTEGER, estado))
-                .setParameter(6, desde, TemporalType.TIMESTAMP)
-                .setParameter(7, hasta, TemporalType.TIMESTAMP)
-                .setParameter(8, p.getPageNumber())
-                .setParameter(9, p.getPageSize());
+    public BaseBandejaResponse<List<ofertaDto>> obtenerOfertas(
+            @RequestParam(required = false) Integer usuarioid,
+            @RequestParam(required = false) Boolean visualizartodo,
+            @RequestParam(required = false) String codoportunidad,
+            @RequestParam(required = false) String cliente,
+            @RequestParam(required = false) String descripcion,
+            @RequestParam(required = false) Integer complejidad,
+            @RequestParam(required = false) Integer estado,
+            @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date desde,
+            @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date hasta,
+            Pageable p) throws Exception {
+        Query query = entityManager.createNativeQuery("select * from oferta.sp_obtener_ofertas(?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11);")
+                .setParameter(1, new TypedParameterValue(StandardBasicTypes.INTEGER, usuarioid))
+                .setParameter(2, new TypedParameterValue(StandardBasicTypes.BOOLEAN, visualizartodo))
+                .setParameter(3, new TypedParameterValue(StandardBasicTypes.STRING, codoportunidad))
+                .setParameter(4, new TypedParameterValue(StandardBasicTypes.STRING, cliente))
+                .setParameter(5, new TypedParameterValue(StandardBasicTypes.STRING, descripcion))
+                .setParameter(6, new TypedParameterValue(StandardBasicTypes.INTEGER, complejidad))
+                .setParameter(7, new TypedParameterValue(StandardBasicTypes.INTEGER, estado))
+                .setParameter(8, desde, TemporalType.TIMESTAMP)
+                .setParameter(9, hasta, TemporalType.TIMESTAMP)
+                .setParameter(10, p.getPageNumber())
+                .setParameter(11, p.getPageSize());
         List<Object[]> res = (List<Object[]>) query.getResultList();
-
         BaseBandejaResponse<List<ofertaDto>> oDto = new BaseBandejaResponse<>();
         oDto.setMsj("200");
-        oDto.setRows(Long.parseLong(res.get(0)[16].toString()));
+        oDto.setRows(res.size() > 0 ? Long.parseLong(res.get(0)[16].toString()) : 0);
         List<ofertaDto> ol = res.stream().map(s ->
                 ofertaDto.builder()
                         .id(Long.parseLong(s[0].toString()))
@@ -99,7 +90,6 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
                         .build()
         ).collect(Collectors.toList());
         oDto.setData(ol);
-
         return oDto;
     }
 
@@ -129,18 +119,11 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
         return res;
     }
 
-    @PostMapping("/registraroferta")
-    public void registrarOferta(@RequestBody ofertaDto student) {
-        oServ.addOferta(student);
-    }
-
     @PostMapping("/copiaroferta")
     public int CopiarOferta(@RequestParam(required = false) int ofertaId,
                             @RequestParam(required = false) int usuarioId,
                             @RequestParam(required = false) String usuario) {
-
         return oServ.copiarOferta(ofertaId, usuarioId, usuario);
-
     }
 
     @PostMapping("/anularoferta")
@@ -149,16 +132,13 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
                             @RequestParam(required = false) String usuario) {
         int respuesta = oServ.anularOferta(ofertaId, usuarioId, usuario);
         return respuesta;
-
     }
 
     @PostMapping("/versionaroferta")
     public int versionarOferta(@RequestParam(required = false) int ofertaId,
                                @RequestParam(required = false) int usuarioId,
                                @RequestParam(required = false) String usuario) {
-
         return oServ.versionarOferta(ofertaId, usuarioId, usuario);
-
     }
 
     @PostMapping("/ganaroferta")
@@ -166,6 +146,29 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
                            @RequestParam(required = false) int usuarioId,
                            @RequestParam(required = false) String usuario) {
         return this.oServ.ganarOferta(ofertaId, usuarioId, usuario);
+    }
+
+    @PostMapping("/_derivaroferta")
+    public String derivarOferta(@RequestParam(required = false) Integer ofertaId,
+                                @RequestParam(required = false) Integer usuarioId
+    ) {
+        //PASAR A ESTADO 'DERIVADO A AF'
+        return this.oServ.derivarOferta(ofertaId, usuarioId, 3, null);
+    }
+
+    @PostMapping("/_asignaraf")
+    public String asignaraf(@RequestParam(required = false) Integer ofertaId,
+                            @RequestParam(required = false) Integer usuarioId,
+                            @RequestParam(required = false) Integer analistafinancieroId) {
+        //PASAR A ESADO 'ANALISIS FINACIERO'
+        return this.oServ.derivarOferta(ofertaId, usuarioId, 4, analistafinancieroId);
+    }
+
+    @PostMapping("/_devolverpv")
+    public String devolverpv(@RequestParam(required = false) Integer ofertaId,
+                             @RequestParam(required = false) Integer usuarioId) {
+        //PASAR A ESTADO 'DEVUELTO A PV'
+        return this.oServ.derivarOferta(ofertaId, usuarioId, 5, null);
     }
 
 }

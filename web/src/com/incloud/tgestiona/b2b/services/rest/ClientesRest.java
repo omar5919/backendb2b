@@ -28,4 +28,7 @@ public class ClientesRest extends JPACustomRest<Cliente, Integer> {
         List<Cliente> res = cRepo.findByDescripcionContainingOrNumeroidentificadorfiscalContainingOrCodigoisisContaining(search,search,search);
         return res;
     }
+
+
+
 }

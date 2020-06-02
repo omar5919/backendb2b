@@ -18,6 +18,8 @@ public class OfertasCapexDto {
     private BigDecimal total;
     private BigDecimal unitario;
     private Integer condicion;
+    private Integer instalacion;
+    private String proveedor;
     private Integer marca;
     private Integer moneda;
     private Integer tipo;

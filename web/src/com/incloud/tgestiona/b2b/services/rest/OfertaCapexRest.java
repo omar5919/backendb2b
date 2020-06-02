@@ -37,7 +37,9 @@ public class OfertaCapexRest  extends JPACustomRest<OfertasCapex, Integer> {
                     e.getMarca(),
                     e.getMoneda(),
                     e.getTipo(),
-                    e.getIdoferta()
+                    e.getIdoferta(),
+                    e.getProveedor(),
+                    e.getInstalacion()
             ));
         }
         return res;

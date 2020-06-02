@@ -91,7 +91,7 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
 
     @ApiOperation(value = "Delete file to Azure Container ", produces = "application/json")
     @PostMapping(value = "/deleteFileContainers/{idFile}", produces = APPLICATION_JSON_VALUE)
-    //@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Adjunto> deleteFileContainers(@PathVariable("idFile") @Valid Integer id) throws Exception {
 
         HttpHeaders headers = new HttpHeaders();

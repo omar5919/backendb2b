@@ -69,6 +69,7 @@ public interface OfertasDetalleRepository  extends JpaRepository<OfertasDetalle,
             String pzona,
             BigDecimal pultima,
             Integer pdias,
-            String pubigeo
+            String pubigeo,
+            Integer pcondicion_servicio
     );
 }

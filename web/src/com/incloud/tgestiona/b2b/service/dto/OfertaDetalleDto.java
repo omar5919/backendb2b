@@ -67,6 +67,7 @@ public class OfertaDetalleDto {
     private BigDecimal ultima;
     private Integer dias;
     private String ubigeo;
+    private Integer condicion_servicio;
 
     private Integer idoferta;
 

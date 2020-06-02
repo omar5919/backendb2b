@@ -82,6 +82,7 @@ public class OfertasDetalleServiceImpl implements OfertasDetalleService {
                         .zoom(s.getZoom())
                         .contacto(s.getContacto())
                         .telefono(s.getTelefono())
+                        .condicion_servicio(s.getCondicion_servicio())
                         .tipoCircuitoActual(s.getTipocircuitoactual() == null ? 0 : s.getTipocircuitoactual().getId())
                         .numeroCdActual(s.getNumeroCdActual())
                         .tipoServicioIdActual((s.getTipoServicioActual() == null ? 0 : s.getTipoServicioActual().getId()))

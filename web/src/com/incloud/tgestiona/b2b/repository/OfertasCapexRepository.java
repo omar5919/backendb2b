@@ -24,6 +24,8 @@ public interface OfertasCapexRepository  extends JpaRepository<OfertasCapex, Int
             Integer pmarca_id,
             Integer pmoneda_id,
             Integer ptipo_id,
-            Integer poferta_id
+            Integer poferta_id,
+            String pproveedor,
+            Integer pinstalacion
     );
 }

@@ -107,7 +107,8 @@ public class OfertasDetalleRest extends JPACustomRest<OfertasDetalle, Integer> {
                     e.getZona(),
                     e.getUltima(),
                     e.getDias(),
-                    e.getUbigeo()
+                    e.getUbigeo(),
+                    e.getCondicion_servicio()
             ));
             System.out.println("");
         }

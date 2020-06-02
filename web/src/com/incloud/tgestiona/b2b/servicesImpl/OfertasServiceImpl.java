@@ -83,7 +83,6 @@ public class OfertasServiceImpl implements OfertasService {
 
     public int anularOferta(Integer ofertaId, Integer usuarioId, String usuario) {
         return this.oRepo.anularOferta(ofertaId, usuarioId, usuario);
-
     }
 
     public int versionarOferta(Integer ofertaId, Integer usuarioId, String usuario) {
@@ -92,5 +91,9 @@ public class OfertasServiceImpl implements OfertasService {
 
     public int ganarOferta(Integer ofertaId, Integer usuarioId, String usuario) {
         return this.oRepo.ganarOferta(ofertaId, usuarioId, usuario);
+    }
+
+    public String derivarOferta(Integer ofertaId, Integer usuarioId, Integer estadoId,Integer analistafinancieroId) {
+        return this.oRepo.derivarOferta(ofertaId,usuarioId,estadoId,analistafinancieroId);
     }
 }
