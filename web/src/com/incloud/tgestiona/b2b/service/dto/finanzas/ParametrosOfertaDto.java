@@ -1,7 +1,6 @@
 package com.incloud.tgestiona.b2b.service.dto.finanzas;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,15 +9,13 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class FlujocajaDto {
+public class ParametrosOfertaDto {
+    private Integer parametro_oferta_id;
+    private Integer oferta_id;
+    private Integer parametro_id;
     private Integer concepto_id;
-    private Integer periodo;
-    private Integer anio;
-    private Integer mes;
-    private BigDecimal montosoles;
-    private BigDecimal montodolares;
+    private String descripcion;
     private String nombre;
-    private String parametros;
-    private Character grupo;
+    private BigDecimal valor;
+    private Integer usuario_id;
 }
