@@ -12,6 +12,9 @@ public interface FinanzasRepository extends JpaRepository<FlujoCaja, Integer> {
     @Query(value = "select * from finanzas.sp_obtener_flujocaja(:poferta_id);", nativeQuery = true)
     List<Object[]> obtenerFlujoCaja(@Param("poferta_id") Integer poferta_id);
 
+    @Query(value = "select * from finanzas.sp_obtener_matriz_escalamiento();", nativeQuery = true)
+    List<Object[]> obtenerMatrizEscalamiento();
+
     @Query(value = "select * from finanzas.sp_obtener_parametros();", nativeQuery = true)
     List<Object[]> obtenerParametros();
 
@@ -34,4 +37,16 @@ public interface FinanzasRepository extends JpaRepository<FlujoCaja, Integer> {
 
     @Query(value = "select * from finanzas.sp_obtener_cmi(:poferta_id);", nativeQuery = true)
     List<Object[]> obtenerCmi(@Param("poferta_id") Integer poferta_id);
+
+    @Query(value = "select * from finanzas.sp_guardar_matriz_escalamiento(:pmatriz_escalamiento_id,:paprobador,:pfullcontracvalue,:pvanvaimayor,:pvanvaimenor,:ppaybackmayor,:ppaybackmenor,:pusuario_id);", nativeQuery = true)
+    Integer guardarmatrizescalamiento(
+            @Param("pmatriz_escalamiento_id") Integer pmatriz_escalamiento_id,
+            @Param("paprobador") String paprobador,
+            @Param("pfullcontracvalue") BigDecimal pfullcontracvalue,
+            @Param("pvanvaimayor") BigDecimal pvanvaimayor,
+            @Param("pvanvaimenor") BigDecimal pvanvaimenor,
+            @Param("ppaybackmayor") BigDecimal ppaybackmayor,
+            @Param("ppaybackmenor") BigDecimal ppaybackmenor,
+            @Param("pusuario_id") Integer pusuario_id
+    );
 }

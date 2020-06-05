@@ -85,6 +85,12 @@ public class OfertasDetalleDto {
     private String zonaSisego;
     private Integer diasEjecucion;
     private BigDecimal costoUltimaMilla;
+
+    private BigDecimal transmision;
+    private BigDecimal planta_externa;
+    private Integer residual_antig;
+    private BigDecimal residual_antig_costo;
+
     private Integer condicion_servicio;
     private Boolean activo;
 

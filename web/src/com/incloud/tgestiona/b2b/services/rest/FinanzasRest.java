@@ -1,10 +1,7 @@
 package com.incloud.tgestiona.b2b.services.rest;
 
 import com.incloud.tgestiona.b2b.repository.FinanzasRepository;
-import com.incloud.tgestiona.b2b.service.dto.finanzas.CmiDto;
-import com.incloud.tgestiona.b2b.service.dto.finanzas.FlujocajaDto;
-import com.incloud.tgestiona.b2b.service.dto.finanzas.ParametrosDto;
-import com.incloud.tgestiona.b2b.service.dto.finanzas.ParametrosOfertaDto;
+import com.incloud.tgestiona.b2b.service.dto.finanzas.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +33,25 @@ public class FinanzasRest {
                 .nombre((String) s[6])
                 .parametros((String) s[7])
                 .grupo((Character) s[8])
+                .build()
+        ).collect(Collectors.toList());
+        return res;
+    }
+
+
+
+    @GetMapping("/obtenermatrizescalamiento")
+    public List<MatrizEscalamientoDto> obtenerMatrizEscalamiento(@RequestParam(required = false) Integer oferta_id) {
+        List<MatrizEscalamientoDto> res = new ArrayList<>();
+        List<Object[]> matriz_list = fRepo.obtenerMatrizEscalamiento();
+        res = matriz_list.stream().map(s -> MatrizEscalamientoDto.builder()
+                .matriz_escalamiento_id((Integer) s[0])
+                .aprobador((String) s[1])
+                .fullcontracvalue((BigDecimal) s[2])
+                .vanvaimayor((BigDecimal) s[3])
+                .vanvaimenor((BigDecimal) s[4])
+                .paybackmayor((BigDecimal) s[5])
+                .paybackmenor((BigDecimal) s[6])
                 .build()
         ).collect(Collectors.toList());
         return res;
@@ -78,6 +94,11 @@ public class FinanzasRest {
                 .build()
         ).collect(Collectors.toList());
         return res;
+    }
+
+    @PostMapping("/guardarmatrizescalamiento")
+    public Integer guardarmatrizescalamiento(@RequestBody(required = false) MatrizEscalamientoDto req) {
+        return fRepo.guardarmatrizescalamiento(req.getMatriz_escalamiento_id(),req.getAprobador(),req.getFullcontracvalue(),req.getVanvaimayor(),req.getVanvaimenor(),req.getPaybackmayor(),req.getPaybackmenor(),1);
     }
 
 }

@@ -108,7 +108,11 @@ public class OfertasDetalleRest extends JPACustomRest<OfertasDetalle, Integer> {
                     e.getUltima(),
                     e.getDias(),
                     e.getUbigeo(),
-                    e.getCondicion_servicio()
+                    e.getCondicion_servicio(),
+                    e.getTransmision(),
+                    e.getPlanta_externa(),
+                    e.getResidual_antig(),
+                    e.getResidual_antig_costo()
             ));
             System.out.println("");
         }

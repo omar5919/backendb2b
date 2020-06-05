@@ -86,7 +86,7 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     @Column(name = "dte_actual")
     private Integer dteActual;
 
-    @Column(name = "equipoAdicionalActual")
+    @Column(name = "equipo_adicional_actual")
     private String equipo_adicional_actual;
 
     @Column(name = "equipo_terminal_actual")
@@ -197,9 +197,20 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     @Column(name = "dias_ejecucion")
     private Integer diasEjecucion;
 
-
     @Column(name = "costo_ultima_milla")
     private BigDecimal costoUltimaMilla;
+
+    @Column(name = "transmision")
+    private BigDecimal transmision;
+
+    @Column(name = "planta_externa")
+    private BigDecimal planta_externa;
+
+    @Column(name = "residual_antig")
+    private Integer residual_antig;
+
+    @Column(name = "residual_antig_costo")
+    private BigDecimal residual_antig_costo;
 
     @Transient
     private Integer estado;

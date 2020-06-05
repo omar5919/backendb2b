@@ -69,6 +69,11 @@ public class OfertaDetalleDto {
     private String ubigeo;
     private Integer condicion_servicio;
 
+    private BigDecimal transmision;
+    private BigDecimal planta_externa;
+    private Integer residual_antig;
+    private BigDecimal residual_antig_costo;
+
     private Integer idoferta;
 
 }

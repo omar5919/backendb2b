@@ -134,7 +134,11 @@ public class OfertasDetalleServiceImpl implements OfertasDetalleService {
                         .observacionesPropuesto(s.getObservacionesPropuesto())
                         .precioPropuesto(s.getPrecioPropuesto())
                         .codigoSisego(s.getCodigoSisego())
-                        .zonaSisego(s.getZonaSisego())/* */
+                        .zonaSisego(s.getZonaSisego())
+                        .transmision(s.getTransmision())
+                        .planta_externa(s.getPlanta_externa())
+                        .residual_antig(s.getResidual_antig())
+                        .residual_antig_costo(s.getResidual_antig_costo())
                         .build()
         ).collect(Collectors.toList());
         oDto.setData(ol);
