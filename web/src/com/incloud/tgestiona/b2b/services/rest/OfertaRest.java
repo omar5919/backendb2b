@@ -153,7 +153,7 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
                                 @RequestParam(required = false) Integer usuarioId
     ) {
         //PASAR A ESTADO 'DERIVADO A AF'
-        return this.oServ.derivarOferta(ofertaId, usuarioId, 3, null);
+        return this.oServ.derivarOferta(ofertaId, usuarioId, 3, null, 0);
     }
 
     @PostMapping("/_asignaraf")
@@ -161,14 +161,36 @@ public class OfertaRest extends JPACustomRest<Ofertas, Integer> {
                             @RequestParam(required = false) Integer usuarioId,
                             @RequestParam(required = false) Integer analistafinancieroId) {
         //PASAR A ESADO 'ANALISIS FINACIERO'
-        return this.oServ.derivarOferta(ofertaId, usuarioId, 4, analistafinancieroId);
+        return this.oServ.derivarOferta(ofertaId, usuarioId, 4, analistafinancieroId, 0);
     }
 
-    @PostMapping("/_devolverpv")
-    public String devolverpv(@RequestParam(required = false) Integer ofertaId,
-                             @RequestParam(required = false) Integer usuarioId) {
-        //PASAR A ESTADO 'DEVUELTO A PV'
-        return this.oServ.derivarOferta(ofertaId, usuarioId, 5, null);
+    @PostMapping("/_aprobadoaf")
+    public String aprobadoaf(@RequestParam(required = false) Integer ofertaId,
+                             @RequestParam(required = false) Integer usuarioId)
+    {
+        //PASAR A ESTADO APROBADO AF
+        return this.oServ.derivarOferta(ofertaId, usuarioId, 5, null, 0);
     }
+
+    @PostMapping("/_rechazadoaf")
+    public String rechazadoaf(@RequestParam(required = false) Integer ofertaId,
+                              @RequestParam(required = false) Integer usuarioId,
+                              @RequestParam(required = false) Integer motivoid) {
+        //RECHAZADO
+        //MOTIVO DE RECHAZO
+        //TABLA DE MOTIVO DE RECHAZO LISTAR LOS REGISTROS
+        return this.oServ.derivarOferta(ofertaId, usuarioId, 8, null, motivoid);
+    }
+
+    @PostMapping("/_estadonuevo")
+    public String estadonuevo(@RequestParam(required = false) Integer ofertaId,
+                              @RequestParam(required = false) Integer usuarioId) {
+        //RECHAZADO
+        //MOTIVO DE RECHAZO
+        //TABLA DE MOTIVO DE RECHAZO LISTAR LOS REGISTROS
+        return this.oServ.derivarOferta(ofertaId, usuarioId, 9, null, 0);
+    }
+
+    //finanzas costo especial
 
 }

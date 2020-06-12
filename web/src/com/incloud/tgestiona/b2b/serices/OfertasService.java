@@ -22,6 +22,6 @@ public interface OfertasService {
     
     int ganarOferta(Integer ofertaId,Integer usuarioId,String usuario);
 
-    String derivarOferta(Integer ofertaId,Integer usuarioId,Integer estadoId,Integer analistafinancieroId);
+    String derivarOferta(Integer ofertaId,Integer usuarioId,Integer estadoId,Integer analistafinancieroId,Integer motivoId);
 
 }

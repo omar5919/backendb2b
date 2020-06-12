@@ -30,7 +30,7 @@ public class Adjunto extends BaseDomain implements Identifiable<Integer>, Serial
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "adjunto_id", updatable = false, nullable = false)
-    private Integer adjunto_id;
+    private Integer id;
 
     @Column(name = "adjunto_usuario")
     private String adjunto_usuario;
@@ -57,7 +57,7 @@ public class Adjunto extends BaseDomain implements Identifiable<Integer>, Serial
     private String ruta_catalogo;
 
     @Column(name = "tipo_adjunto")
-    private String tipo_adjunto;
+    private Integer tipo_adjunto;
 
     @Column(name = "modulo_id")
     private Integer modulo_id;
@@ -66,23 +66,14 @@ public class Adjunto extends BaseDomain implements Identifiable<Integer>, Serial
     @JoinColumn(name = "usuario_id")
     private Usuarios usuario;
 
+
     @Override
     public String entityClassName() {
         return Adjunto.class.getSimpleName();
     }
 
     @Override
-    public Integer getId() {
-        return adjunto_id;
-    }
-
-    @Override
-    public void setId(Integer id) {
-        this.adjunto_id = id;
-    }
-
-    @Override
     public boolean isIdSet() {
-        return adjunto_id != null;
+        return id != null;
     }
 }

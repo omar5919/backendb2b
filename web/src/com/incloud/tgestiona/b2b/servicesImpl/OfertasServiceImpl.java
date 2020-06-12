@@ -93,7 +93,7 @@ public class OfertasServiceImpl implements OfertasService {
         return this.oRepo.ganarOferta(ofertaId, usuarioId, usuario);
     }
 
-    public String derivarOferta(Integer ofertaId, Integer usuarioId, Integer estadoId,Integer analistafinancieroId) {
-        return this.oRepo.derivarOferta(ofertaId,usuarioId,estadoId,analistafinancieroId);
+    public String derivarOferta(Integer ofertaId, Integer usuarioId, Integer estadoId,Integer analistafinancieroId,Integer motivoId) {
+        return this.oRepo.derivarOferta(ofertaId,usuarioId,estadoId,analistafinancieroId,motivoId);
     }
 }
