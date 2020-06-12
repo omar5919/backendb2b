@@ -1,6 +1,7 @@
 package com.incloud.tgestiona.b2b.services.rest;
 
 import com.incloud.tgestiona.b2b.model.oferta.Ofertas;
+import com.incloud.tgestiona.b2b.repository.OfertasRepository;
 import com.incloud.tgestiona.b2b.service.dto.distritoDto;
 import com.incloud.tgestiona.framework.JPACustomRest;
 import org.apache.poi.ss.usermodel.Cell;
@@ -11,6 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.jpa.TypedParameterValue;
 import org.hibernate.type.StandardBasicTypes;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Pageable;
@@ -38,13 +40,16 @@ public class ReportesRest extends JPACustomRest<Ofertas, Integer> {
     private static final String DATE_PATTERN = "yyyy/MM/dd";
     static String[] HEADERs = {"Id", "Title", "Description", "Published"};
 
+    @Autowired
+    private OfertasRepository iRepo;
+    
     @GetMapping("/ofertas")
     public ResponseEntity<Resource> obtenerofertas(@RequestParam(required = false) Integer estado,
                                                    @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date desde,
                                                    @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date hasta)
     {
 
-        Query query = entityManager.createNativeQuery("select * from oferta.sp_reporta_ofertas(?1,?2,?3);")
+        Query query = entityManager.createNativeQuery("select * from oferta.sp_reporte_ofertas(?1,?2,?3);")
                 .setParameter(1, new TypedParameterValue(StandardBasicTypes.INTEGER, estado))
                 .setParameter(2, desde, TemporalType.TIMESTAMP)
                 .setParameter(3, hasta, TemporalType.TIMESTAMP);
@@ -80,4 +85,44 @@ public class ReportesRest extends JPACustomRest<Ofertas, Integer> {
                 .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
                 .body(file);
     }
+    
+    
+    @GetMapping("/plantillaImplantacion")
+    public ResponseEntity<Resource>  plantillaImplantacion(@RequestParam(required = false) Integer ofertaId)
+    {
+    	
+        List<Object[]> res = (List<Object[]>) iRepo.plantillaImpantacion(ofertaId);
+
+        String filename = "plantillaImpantacion.xlsx";
+        InputStreamResource file = null;
+        try {
+            Workbook workbook = new XSSFWorkbook();
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            Sheet sheet = workbook.createSheet("plantillaImpantacion");
+            //int rowIdx = 0;
+            for (int i = 0; i < res.size(); i++) {            	
+                Row row = sheet.createRow(i);
+                for (int j = 0; j < res.get(i).length; j++) {
+                	if(i==0) {                		
+                		row.createCell(j).setCellValue(res.get(i)[j] != null ? (j==0? "N°":res.get(i)[j].toString()) : "");                		
+                	}else {
+                		row.createCell(j).setCellValue(res.get(i)[j] != null ? res.get(i)[j].toString() : "");
+                	}                    
+                }
+            }
+            workbook.write(out);
+            file = new InputStreamResource(new ByteArrayInputStream(out.toByteArray()));
+            
+        } catch (Exception e) {
+            System.out.println("");
+        }
+        
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(file);
+    }
+    
+    
+    
 }
