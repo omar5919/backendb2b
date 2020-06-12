@@ -91,7 +91,6 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
 
     @ApiOperation(value = "Delete file to Azure Container ", produces = "application/json")
     @PostMapping(value = "/deleteFileContainers/{idFile}", produces = APPLICATION_JSON_VALUE)
-//@CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Adjunto> deleteFileContainers(@PathVariable("idFile") @Valid Integer id) throws Exception {
 
         HttpHeaders headers = new HttpHeaders();
@@ -146,7 +145,6 @@ public class ContainersRest extends com.incloud.tgestiona.util.MessagesUtils {
         adjunto.setId(Integer.parseInt(id));
         Adjunto result = adjuntoServiceImpl.findEntity(adjunto);
         byte[] fileContent = blobstoreimpl.getFile(result.getArchivo_nombre());
-        log.info("Download file from Azure ...Id " + result.getArchivo_id());
         try {
             response.setHeader("Pragma", "public");
             response.setHeader("Expires", "0");

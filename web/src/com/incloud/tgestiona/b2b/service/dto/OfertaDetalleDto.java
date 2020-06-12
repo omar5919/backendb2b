@@ -36,6 +36,13 @@ public class OfertaDetalleDto {
     private String bronce_actual;
     private String equipo;
     private String router;
+    private Integer dte_actual;//INI NUEVAS COLUMNAS
+    private String recurso_transporte_actual;
+    private String tipo_antena_actual;
+    private Integer segmento_satelital_actual;
+    private String pozo_tierra_actual;
+    private String ups_actual;
+    private String vrf_actual;//FIN NUEVAS COLUMNAS
     private String otros;
     private BigDecimal facturacion;
     private Integer idaccionisis;
@@ -48,6 +55,11 @@ public class OfertaDetalleDto {
     private Integer idmedio2;
     private String sva;
     private String svadescripcion;
+    private Integer condicion_servicio;
+    private Date fecha_llegada_propuesto;//INI NUEVAS COLUMNAS
+    private String componentes_propuesto;
+    private String vrf_propuesto;
+    private String detalle_accion_propuesto;//FIN NUEVAS COLUMNAS
     private String bw_propuesto;
     private String ldn_propuesto;
     private String voz_propuesto;
@@ -67,7 +79,6 @@ public class OfertaDetalleDto {
     private BigDecimal ultima;
     private Integer dias;
     private String ubigeo;
-    private Integer condicion_servicio;
 
     private BigDecimal transmision;
     private BigDecimal planta_externa;

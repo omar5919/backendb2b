@@ -46,16 +46,19 @@ public class OfertasDetalleDto {
     private String caudalLdnActual;
     private Integer ultimaMillaActual;
     private String routerSwitchActual;
+
     private Integer dteActual;
-    private String equipo_adicional_actual;
-    private String equipoTerminalActual;
     private String recursoTransporteActual;
     private String tipoAntenaActual;
     private Integer segmentoSatelitalActual;
     private String pozoTierraActual;
     private String upsActual;
-    private BigDecimal facturacion_actual;
     private String vrf_actual;
+
+    private String equipo_adicional_actual;
+    private String equipoTerminalActual;
+    private BigDecimal facturacion_actual;
+
     private String ofertaIsisPropuesto;
     private Integer accionIsisIdPropuesto;
     private Integer tipoCircuitoIdPropuesto;
@@ -74,17 +77,33 @@ public class OfertasDetalleDto {
     private String equipoTerminalPropuesto;
     private String routerPropuesto;
     private String equipoStockPropuesto;
-    private String fechaLlegadaPropuesto;
+
+    private Date fechaLlegadaPropuesto;
     private String otrosEquiposPropuesto;
     private String componentesPropuesto;
     private String vrfPropuesto;
     private String detalleAccionEnlacePropuesto;
+
     private String observacionesPropuesto;
     private BigDecimal precioPropuesto;
     private String codigoSisego;
     private String zonaSisego;
     private Integer diasEjecucion;
     private BigDecimal costoUltimaMilla;
+
+    //NUEVAS COLUMNAS
+    private String dte;
+    private String recursotransporte;
+    private String tipoantena;
+    private String segmentosatelital;
+    private String segmentopozotierra;
+    private String ups;
+    private String vrf;
+
+    private String fechallegada;
+    private String componentes;
+    private String serviciopropuestovrf;
+    private String detalleaccion;
 
     private BigDecimal transmision;
     private BigDecimal planta_externa;

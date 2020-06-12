@@ -10,6 +10,7 @@ import com.incloud.tgestiona.b2b.model.oferta.Ofertas;
 import com.incloud.tgestiona.b2b.model.oferta.OfertasDetalle;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.stream.Stream;
 
 @Repository
@@ -40,6 +41,13 @@ public interface OfertasDetalleRepository  extends JpaRepository<OfertasDetalle,
             String pbronceactual,
             String pequipo,
             String prouter,
+            Integer pdte_actual,
+            String precursotransporteactual,
+            String ptipoantenaactual,
+            Integer psegmentosatelitalactual,
+            String ppozotierraactual,
+            String pupsactual,
+            String pvrfactual,
             String potros,
             BigDecimal pfacturacion,
             Integer pidaccionisis,
@@ -51,6 +59,10 @@ public interface OfertasDetalleRepository  extends JpaRepository<OfertasDetalle,
             Integer pidmedio2,
             String psva,
             String psvadescripcion,
+            Date pfechallegada,
+            String pcomponentes,
+            String pvrfpropuesto,
+            String pdetalleaccionpropuesto,
             String pbwpropuesto,
             String pldnpropuesto,
             String pvozpropuesto,

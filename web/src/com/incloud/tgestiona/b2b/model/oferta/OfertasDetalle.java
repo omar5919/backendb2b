@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 
 @Data
@@ -165,7 +166,7 @@ public class OfertasDetalle extends BaseDomain implements Identifiable<Integer>,
     private String equipoStockPropuesto;
 
     @Column(name = "fecha_llegada_propuesto")
-    private String fechaLlegadaPropuesto;
+    private Date fechaLlegadaPropuesto;
 
     @Column(name = "otros_actual")
     private String otrosEquiposActual;
