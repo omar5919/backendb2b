@@ -140,6 +140,7 @@ public class TipoServicio extends BaseDomain  implements Identifiable<Integer>, 
 	public void setActivo(Boolean activo) {
 		this.activo = activo;
 	}
+	
 	public void setgrupoSatelital(Integer grupoSatelital) {
 		this.grupoSatelital = grupoSatelital;
 	}
