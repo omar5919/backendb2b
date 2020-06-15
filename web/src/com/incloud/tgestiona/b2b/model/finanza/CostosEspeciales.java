@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 public class CostosEspeciales extends BaseDomain implements Identifiable<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "costos_especiales", updatable = false, nullable = false)
+    @Column(name = "costos_especiales_id", updatable = false, nullable = false)
     private Integer id;
 
     @Column(name = "descripcion")
