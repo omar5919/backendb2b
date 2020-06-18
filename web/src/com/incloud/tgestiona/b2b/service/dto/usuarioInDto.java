@@ -1,14 +1,9 @@
 package com.incloud.tgestiona.b2b.service.dto;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
+import lombok.*;
 @Data
-@ToString
-@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class usuarioInDto {
-	 
 	private int id;
 	private String usuario;
 	private String clave;

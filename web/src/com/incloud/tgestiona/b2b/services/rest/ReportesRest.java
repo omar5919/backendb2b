@@ -4,10 +4,7 @@ import com.incloud.tgestiona.b2b.model.oferta.Ofertas;
 import com.incloud.tgestiona.b2b.repository.OfertasRepository;
 import com.incloud.tgestiona.b2b.service.dto.distritoDto;
 import com.incloud.tgestiona.framework.JPACustomRest;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.jpa.TypedParameterValue;
@@ -38,16 +35,114 @@ import java.util.List;
 public class ReportesRest extends JPACustomRest<Ofertas, Integer> {
 
     private static final String DATE_PATTERN = "yyyy/MM/dd";
-    static String[] HEADERs = {"Id", "Title", "Description", "Published"};
+    static String[] HEADERs = {
+            "Codigo Oportunidad",
+            "Fase",
+            "Desc. Oportunidad",
+            "Codigo Cliente",
+            "RUC",
+            "Razón Social",
+            "Dirección",
+            "Gerente de Cuenta",
+            "Segmento Negocio",
+            "Codigo Oferta",
+            "Versión Oferta",
+            "Caso Salesforce",
+            "F.Ini",
+            "F.Fin",
+            "Preventa",
+            "Estado Oferta",
+            "F. Registrado",
+            "F. Pres. Gerente Cuenta",
+            "Dias Calendario PV",
+            "F. Derivado AF",
+            "F. Analista Financiero",
+            "F. Devuelto a PV",
+            "Dias Calendario AD",
+            "Contacto Cliente",
+            "Telefono",
+            "Correo",
+            "Descripción del Proyecto",
+            "Observaciones",
+            "Resultado",
+            "Aprobadores",
+            "TOTAL SEDES",
+            "TOTAL SEDES LIMA",
+            "TOTAL SEDES PROV",
+            "TOTAL SERVICIOS",
+            "TOTAL SISEGOS",
+            "TOTAL ZONA VERDE",
+            "TOTAL ZONA AMARILLA",
+            "TOTAL ZONA GRIS",
+            "Ultima Milla S/.",
+            "Tx S/.",
+            "P.E S/.",
+            "Días Ejecución Max. SISEGO",
+            "Router Total",
+            "Router Stock",
+            "Routers US$ Stock",
+            "Router ,No Stock",
+            "Routers US$ No Stock",
+            "Router Residual",
+            "Routers US$ Residual",
+            "Router Log. Inversa",
+            "Routers US$ Log. Inversa",
+            "Router Renting",
+            "Routers US$ Renting",
+            "Routers Arrendador",
+            "TODOS LOS EQUIPOS",
+            "Gestion Proyectos S/.",
+            "Asistente Proyectos S/.",
+            "…",
+            "Otros S/.",
+            "Adjuntos OTE",
+            "Adjuntos Cotizaciones",
+            "Adjuntos Otros",
+            "Fecha Registrado",
+            "Fecha Evaluado",
+            "Cantidad Derivadas",
+            "Fecha Derivado a AF",
+            "Fecha Analisis Financiero",
+            "Fecha Finanzas(Aprobado)",
+            "Fecha Finanzas(Rechazado)",
+            "Motivo",
+            "Fecha Presenta Gerente Cuenta",
+            "Fecha Ganado",
+            "Anulado",
+            "INGRESO ANUAL  (s/.)",
+            "COSTO DIRECTO ANUAL  (s/.)",
+            "OIBDA ANUAL (s/.)",
+            "CAPEX A SOLICITAR (s/.)",
+            "CAPEX NO SOLICITADO (s/.)",
+            "ARRENDAMIENTO OPERATIVO (S/.)",
+            "VAN PROYECTO (s/.)",
+            "VAN/VAI PROYECTO",
+            "MARGEN COMERCIAL ( % )",
+            "PAYBACK PROYECTO (Meses)",
+            "TIPO DE CAMBIO",
+            "CAPEX /INGRESO",
+            "FCV CON IGV (s/.)",
+            "CLEAR CHANNEL N.S.",
+            "DIGIRED",
+            "INFOINTERNET",
+            "IP ADSL",
+            "INTERNET@S",
+            "IP VPN ETHERNET",
+            "IP VPN",
+            "IP VPN INTERNACIONAL",
+            "IP VPN SATELITAL",
+            "SEGURIDAD GESTIONADA",
+            "UNIRED",
+            "VSAT"
+    };
 
     @Autowired
     private OfertasRepository iRepo;
-    
+
     @GetMapping("/ofertas")
     public ResponseEntity<Resource> obtenerofertas(@RequestParam(required = false) Integer estado,
                                                    @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date desde,
-                                                   @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date hasta)
-    {
+                                                   @RequestParam(required = false) @DateTimeFormat(pattern = DATE_PATTERN) Date hasta) {
 
         Query query = entityManager.createNativeQuery("select * from oferta.sp_reporte_ofertas(?1,?2,?3);")
                 .setParameter(1, new TypedParameterValue(StandardBasicTypes.INTEGER, estado))
@@ -63,34 +158,40 @@ public class ReportesRest extends JPACustomRest<Ofertas, Integer> {
             Sheet sheet = workbook.createSheet("Oferta1");
             Row headerRow = sheet.createRow(0);
             for (int col = 0; col < HEADERs.length; col++) {
+                CellStyle cs = workbook.createCellStyle();
+                cs.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
+                cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+                Font f = workbook.createFont();
+                f.setBold(true);
+                cs.setFont(f);
                 Cell cell = headerRow.createCell(col);
                 cell.setCellValue(HEADERs[col]);
+                cell.setCellStyle(cs);
             }
             int rowIdx = 1;
-            for (int i = 0; i < res.size(); i++) {
+            for (Object[] re : res) {
                 Row row = sheet.createRow(rowIdx++);
-                for (int j = 0; j < res.get(i).length; j++) {
-                    row.createCell(j).setCellValue(res.get(i)[j] != null ? res.get(i)[j].toString() : "");
+                for (int j = 0; j < re.length; j++) {
+                    row.createCell(j).setCellValue(re[j] != null ? re[j].toString() : "");
                 }
             }
             workbook.write(out);
             file = new InputStreamResource(new ByteArrayInputStream(out.toByteArray()));
-            
+
         } catch (Exception e) {
             System.out.println("");
         }
-        
+
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
                 .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
                 .body(file);
     }
-    
-    
+
+
     @GetMapping("/plantillaImplantacion")
-    public ResponseEntity<Resource>  plantillaImplantacion(@RequestParam(required = false) Integer ofertaId)
-    {
-    	
+    public ResponseEntity<Resource> plantillaImplantacion(@RequestParam(required = false) Integer ofertaId) {
+
         List<Object[]> res = (List<Object[]>) iRepo.plantillaImpantacion(ofertaId);
 
         String filename = "plantillaImpantacion.xlsx";
@@ -100,29 +201,28 @@ public class ReportesRest extends JPACustomRest<Ofertas, Integer> {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             Sheet sheet = workbook.createSheet("plantillaImpantacion");
             //int rowIdx = 0;
-            for (int i = 0; i < res.size(); i++) {            	
+            for (int i = 0; i < res.size(); i++) {
                 Row row = sheet.createRow(i);
                 for (int j = 0; j < res.get(i).length; j++) {
-                	if(i==0) {                		
-                		row.createCell(j).setCellValue(res.get(i)[j] != null ? (j==0? "N°":res.get(i)[j].toString()) : "");                		
-                	}else {
-                		row.createCell(j).setCellValue(res.get(i)[j] != null ? res.get(i)[j].toString() : "");
-                	}                    
+                    if (i == 0) {
+                        row.createCell(j).setCellValue(res.get(i)[j] != null ? (j == 0 ? "N°" : res.get(i)[j].toString()) : "");
+                    } else {
+                        row.createCell(j).setCellValue(res.get(i)[j] != null ? res.get(i)[j].toString() : "");
+                    }
                 }
             }
             workbook.write(out);
             file = new InputStreamResource(new ByteArrayInputStream(out.toByteArray()));
-            
+
         } catch (Exception e) {
             System.out.println("");
         }
-        
+
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
                 .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
                 .body(file);
     }
-    
-    
-    
+
+
 }

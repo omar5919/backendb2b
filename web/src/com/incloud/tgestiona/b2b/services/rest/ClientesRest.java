@@ -24,11 +24,6 @@ public class ClientesRest extends JPACustomRest<Cliente, Integer> {
 
     @GetMapping("/obtenerclientes")
     public List<Cliente> obtenerClientes(@RequestParam(required = false) String search){
-
-        List<Cliente> res = cRepo.findByDescripcionContainingOrNumeroidentificadorfiscalContainingOrCodigoisisContaining(search,search,search);
-        return res;
+        return cRepo.findByDescripcionContainingOrNumeroidentificadorfiscalContainingOrCodigoisisContaining(search,search,search);
     }
-
-
-
 }
