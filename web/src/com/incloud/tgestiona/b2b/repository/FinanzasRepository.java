@@ -49,4 +49,7 @@ public interface FinanzasRepository extends JpaRepository<FlujoCaja, Integer> {
             @Param("ppaybackmenor") BigDecimal ppaybackmenor,
             @Param("pusuario_id") Integer pusuario_id
     );
+    
+    @Query(value = "select * from finanzas.flujocaja_genera_calculos_cmi_carga(:p_oferta_id);", nativeQuery = true)
+    List<Object[]> flujocaja_genera_calculos_cmi_carga(@Param("p_oferta_id") Integer poferta_id);
 }

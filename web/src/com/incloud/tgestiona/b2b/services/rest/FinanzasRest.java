@@ -2,9 +2,21 @@ package com.incloud.tgestiona.b2b.services.rest;
 
 import com.incloud.tgestiona.b2b.repository.FinanzasRepository;
 import com.incloud.tgestiona.b2b.service.dto.finanzas.*;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,4 +113,39 @@ public class FinanzasRest {
         return fRepo.guardarmatrizescalamiento(req.getMatriz_escalamiento_id(),req.getAprobador(),req.getFullcontracvalue(),req.getVanvaimayor(),req.getVanvaimenor(),req.getPaybackmayor(),req.getPaybackmenor(),1);
     }
 
+    @GetMapping("/presupuestoCmi")
+    public ResponseEntity<Resource> presupuestoCmi(@RequestParam(required = false) Integer ofertaId) {
+
+        List<Object[]> res = (List<Object[]>) fRepo.flujocaja_genera_calculos_cmi_carga(ofertaId);
+
+        String filename = "carga_cmi.xlsx";
+        InputStreamResource file = null;
+        try {
+            Workbook workbook = new XSSFWorkbook();
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            Sheet sheet = workbook.createSheet("carga_cmi");
+            Sheet sheet1 = workbook.createSheet("carga_consolidado");
+            //int rowIdx = 0;
+            for (int i = 0; i < res.size(); i++) {
+                Row row = sheet.createRow(i);
+                for (int j = 0; j < res.get(i).length; j++) {
+                    if (i == 0) {
+                        row.createCell(j).setCellValue(res.get(i)[j] != null ?  (j == 0 ? "Item" : res.get(i)[j].toString()) : ""); //(j == 0 ? "N°" : res.get(i)[j].toString()) : "")
+                    } else {
+                        row.createCell(j).setCellValue(res.get(i)[j] != null ? res.get(i)[j].toString() : "");
+                    }
+                }
+            }
+            workbook.write(out);
+            file = new InputStreamResource(new ByteArrayInputStream(out.toByteArray()));
+
+        } catch (Exception e) {
+            System.out.println("");
+        }
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(file);
+    }
 }
