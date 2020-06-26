@@ -50,8 +50,6 @@ public class FinanzasRest {
         return res;
     }
 
-
-
     @GetMapping("/obtenermatrizescalamiento")
     public List<MatrizEscalamientoDto> obtenerMatrizEscalamiento(@RequestParam(required = false) Integer oferta_id) {
         List<MatrizEscalamientoDto> res = new ArrayList<>();
@@ -117,6 +115,7 @@ public class FinanzasRest {
     public ResponseEntity<Resource> presupuestoCmi(@RequestParam(required = false) Integer ofertaId) {
 
         List<Object[]> res = (List<Object[]>) fRepo.flujocaja_genera_calculos_cmi_carga(ofertaId);
+        List<Object[]> res1 = (List<Object[]>) fRepo.flujocaja_genera_calculos_cmi_consolidado(ofertaId);
 
         String filename = "carga_cmi.xlsx";
         InputStreamResource file = null;
@@ -125,7 +124,7 @@ public class FinanzasRest {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             Sheet sheet = workbook.createSheet("carga_cmi");
             Sheet sheet1 = workbook.createSheet("carga_consolidado");
-            //int rowIdx = 0;
+            //carga cmi;
             for (int i = 0; i < res.size(); i++) {
                 Row row = sheet.createRow(i);
                 for (int j = 0; j < res.get(i).length; j++) {
@@ -136,6 +135,18 @@ public class FinanzasRest {
                     }
                 }
             }
+            //carga consolidado;
+            for (int i = 0; i < res1.size(); i++) {
+                Row row = sheet1.createRow(i);
+                for (int j = 0; j < res1.get(i).length; j++) {
+                    if (i == 0) {
+                        row.createCell(j).setCellValue(res1.get(i)[j] != null ?  (j == 0 ? "Item" : res1.get(i)[j].toString()) : ""); //(j == 0 ? "N°" : res.get(i)[j].toString()) : "")
+                    } else {
+                        row.createCell(j).setCellValue(res1.get(i)[j] != null ? res1.get(i)[j].toString() : "");
+                    }
+                }
+            }           
+            
             workbook.write(out);
             file = new InputStreamResource(new ByteArrayInputStream(out.toByteArray()));
 

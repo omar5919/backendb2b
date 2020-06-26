@@ -52,4 +52,7 @@ public interface FinanzasRepository extends JpaRepository<FlujoCaja, Integer> {
     
     @Query(value = "select * from finanzas.flujocaja_genera_calculos_cmi_carga(:p_oferta_id);", nativeQuery = true)
     List<Object[]> flujocaja_genera_calculos_cmi_carga(@Param("p_oferta_id") Integer poferta_id);
+    
+    @Query(value = "select * from finanzas.flujocaja_genera_calculos_cmi_consolidado(:p_oferta_id);", nativeQuery = true)
+    List<Object[]> flujocaja_genera_calculos_cmi_consolidado(@Param("p_oferta_id") Integer poferta_id);
 }
